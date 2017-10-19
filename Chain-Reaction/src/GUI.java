@@ -1,12 +1,11 @@
-import com.sun.rowset.internal.Row;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -14,6 +13,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.Sphere;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 
@@ -82,17 +82,17 @@ public class GUI extends Application {
         RowConstraints row1 = new RowConstraints();
         row1.setPercentHeight(10.0);
         RowConstraints row2 = new RowConstraints();
-        row2.setPercentHeight(25.0);
+        row2.setPercentHeight(70.0/3);
         RowConstraints row3 = new RowConstraints();
-        row3.setPercentHeight(25.0);
+        row3.setPercentHeight(70.0/3);
         RowConstraints row4 = new RowConstraints();
-        row4.setPercentHeight(25.0);
+        row4.setPercentHeight(70.0/3);
         RowConstraints row5 = new RowConstraints();
-        row5.setPercentHeight(15.0);
+        row5.setPercentHeight(20.0);
         pageContents.getRowConstraints().addAll(row1,row2,row3,row4,row5);
 
         Label gameName = new Label("Chain Reaction for PC ");
-        gameName.setFont(new Font("Cambria",30));
+        gameName.setFont(Font.font("Cambria",FontWeight.BOLD,30));
 
         Label infoLabel = new Label();
 
@@ -110,22 +110,53 @@ public class GUI extends Application {
         GridPane.setHalignment(infoLabel, HPos.CENTER);
 
         Button resumeBtn = new Button("Resume Game");
+        resumeBtn.setPrefSize(200,50);
+        resumeBtn.setFont(new Font("Cambria",20));
         GridPane.setHalignment(resumeBtn, HPos.CENTER);
         pageContents.add(resumeBtn,0,1);
 
         Button playGame =  new Button("New Game");
+        playGame.setPrefSize(200,50);
+        playGame.setFont(new Font("Cambria",20));
         GridPane.setHalignment(playGame, HPos.CENTER);
         pageContents.add(playGame,1,1);
 
         Label GridSizeLabel = new Label("Grid Size");
+        GridSizeLabel.setFont(Font.font("Arial",FontWeight.BOLD,25));
         GridPane.setHalignment(GridSizeLabel, HPos.CENTER);
         pageContents.add(GridSizeLabel,0,2);
 
+
+        final ComboBox comboBox = new ComboBox();
+        comboBox.getItems().addAll("Small","Big");
+        comboBox.getSelectionModel().selectFirst();
+        comboBox.setPrefSize(200,40);
+        comboBox.setStyle("-fx-font: 20px \"Serif\";");
+        GridPane.setHalignment(comboBox, HPos.CENTER);
+        pageContents.add(comboBox,1,2);
+
+
         Label playersLabel = new Label("Players");
+        playersLabel.setFont(new Font("Arial",25));
+        playersLabel.setFont(Font.font("Arial",FontWeight.BOLD,25));
         GridPane.setHalignment(playersLabel, HPos.CENTER);
         pageContents.add(playersLabel,0,3);
 
+        ObservableList<Integer> players = FXCollections.observableArrayList(2,3,4,5,6,7,8);
+        final Spinner<Integer> spinner = new Spinner<>();
+        SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.ListSpinnerValueFactory<>(players);
+        valueFactory.setValue(2);                               // Default value
+        spinner.setValueFactory(valueFactory);
+        spinner.setPrefSize(200,40);
+        spinner.setStyle("-fx-font: 20px \"Serif\";");
+        GridPane.setHalignment(spinner, HPos.CENTER);
+        pageContents.add(spinner,1,3);
+
+
+
         Button settingsBtn = new Button("Settings");
+        settingsBtn.setPrefSize(200,50);
+        settingsBtn.setFont(new Font("Cambria",20));
         GridPane.setColumnSpan(settingsBtn,3);
         GridPane.setHalignment(settingsBtn, HPos.CENTER);
         pageContents.add(settingsBtn,0,4);
