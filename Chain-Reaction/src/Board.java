@@ -11,6 +11,10 @@ public class Board implements Serializable {
         this.grid = new Cell[this.rows][this.cols];
     }
 
+    public Cell[][] getGrid() {
+        return grid;
+    }
+
     public void explosion(){
         //code to be written
     }
