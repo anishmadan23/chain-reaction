@@ -17,7 +17,8 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 
-public class GUI extends Application {
+public class GUI extends Application 
+{
 
     public int rows=15;
     public int cols=10;
@@ -25,17 +26,20 @@ public class GUI extends Application {
 //        this.rows = rows1;
 //        this.cols = cols1;
 //    }
-    public static void main(String[] args) {
+    public static void main(String[] args) 
+    {
         launch(args);
     }
 
-    public GridPane makeGrid(){
+    public GridPane makeGrid()
+    {
         GridPane gridpane = new GridPane();
         gridpane.setAlignment(Pos.CENTER);
         ColumnConstraints[] colCons = new ColumnConstraints[cols];
         RowConstraints[] rowCons = new RowConstraints[rows];
 
-        for(int i = 0;i< cols ; i++){
+        for(int i = 0;i< cols ; i++)
+        {
             colCons[i] = new ColumnConstraints();
             colCons[i].setPercentWidth(100.0/cols);
             gridpane.getColumnConstraints().add(colCons[i]) ;
@@ -127,7 +131,7 @@ public class GUI extends Application {
         pageContents.add(GridSizeLabel,0,2);
 
 
-        final ComboBox comboBox = new ComboBox();
+        final ComboBox<String> comboBox = new ComboBox<String>();
         comboBox.getItems().addAll("Small","Big");
         comboBox.getSelectionModel().selectFirst();
         comboBox.setPrefSize(200,40);
@@ -171,7 +175,7 @@ public class GUI extends Application {
 
 //        pageContents.gridLinesVisibleProperty().set(true);
         rootpane.getChildren().addAll(pageContents);
-        scene1 = new Scene(rootpane,720,720);
+        scene1 = new Scene(rootpane,450,600);
         return scene1;
     }
 
