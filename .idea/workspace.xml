@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8c62cfdf-be90-4d2c-b70c-ff0730833b79" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Chain-Reaction/GUI.class" afterPath="$PROJECT_DIR$/out/production/Chain-Reaction/GUI.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Chain-Reaction/src/GUI.java" afterPath="$PROJECT_DIR$/Chain-Reaction/src/GUI.java" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -30,8 +29,8 @@
       <file leaf-file-name="GUI.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Chain-Reaction/src/GUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="434">
-              <caret line="150" column="54" lean-forward="false" selection-start-line="150" selection-start-column="54" selection-end-line="150" selection-end-column="54" />
+            <state relative-caret-position="254">
+              <caret line="175" column="0" lean-forward="true" selection-start-line="175" selection-start-column="0" selection-end-line="175" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -258,12 +257,12 @@
       <updated>1507650715421</updated>
       <workItem from="1507650716923" duration="3846000" />
       <workItem from="1507703828319" duration="3048000" />
-      <workItem from="1508329283632" duration="24615000" />
+      <workItem from="1508329283632" duration="26114000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="31509000" />
+    <option name="totallyTimeSpent" value="33008000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="-11" width="1368" height="780" extended-state="6" />
@@ -498,8 +497,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Chain-Reaction/src/GUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="434">
-          <caret line="150" column="54" lean-forward="false" selection-start-line="150" selection-start-column="54" selection-end-line="150" selection-end-column="54" />
+        <state relative-caret-position="254">
+          <caret line="175" column="0" lean-forward="true" selection-start-line="175" selection-start-column="0" selection-end-line="175" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

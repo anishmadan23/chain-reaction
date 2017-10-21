@@ -153,7 +153,6 @@ public class GUI extends Application {
         pageContents.add(spinner,1,3);
 
 
-
         Button settingsBtn = new Button("Settings");
         settingsBtn.setPrefSize(200,50);
         settingsBtn.setFont(new Font("Cambria",20));
@@ -183,8 +182,7 @@ public class GUI extends Application {
         scene1 = makeInitialPage();
         primaryStage.setScene(scene1);
         GridPane gridpane = makeGrid();
-        scene2 = new Scene(gridpane);
-//        primaryStage.setScene(scene2);
+        scene2 = new Scene(gridpane);//        primaryStage.setScene(scene2);
         primaryStage.show();
     }
 }
