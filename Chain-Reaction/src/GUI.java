@@ -2,6 +2,7 @@ import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Scene;
@@ -14,7 +15,10 @@ import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.Sphere;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
+
+import javax.swing.*;
 
 
 public class GUI extends Application 
@@ -69,7 +73,71 @@ public class GUI extends Application
         return gridpane;
     }
 
-    public Scene scene1,scene2;
+    public Scene scene1,scene2,scene3,scene4;      //scene3 - settings, scene4 -> Name, ColorPicker
+
+    public Scene makeNameAndColorPickerPage(){
+        GridPane nameAndColorPicker = new GridPane();
+
+        Label playerName = new Label("Player Name");
+        playerName.setFont(Font.font("Cambria",FontWeight.BOLD,20));
+        playerName.setPadding(new Insets(0,0,0,10));
+        GridPane.setHalignment(playerName,HPos.CENTER);
+        GridPane.setMargin(playerName,new Insets(20,0,0,0));
+
+        final TextField playerNameInput = new TextField();
+        playerNameInput.setPromptText("Player 1");
+        playerNameInput.getText();
+        playerNameInput.setMinHeight(40);
+        playerNameInput.setPadding(new Insets(0,20,0,0));
+        GridPane.setHalignment(playerNameInput,HPos.LEFT);
+        GridPane.setMargin(playerNameInput,new Insets(20,20,0,0));
+
+        Button saveNameBtn = new Button("Save");
+        saveNameBtn.setPrefSize(80,20);
+        saveNameBtn.setFont(new Font("Arial",12));
+        GridPane.setHalignment(saveNameBtn, HPos.LEFT);
+
+
+        Label orbColor = new Label("Colour of Orb");
+        orbColor.setFont(Font.font("Cambria",FontWeight.BOLD,20));
+        orbColor.setPadding(new Insets(0,0,0,20));
+        GridPane.setHalignment(orbColor,HPos.CENTER);
+
+        RowConstraints row1 = new RowConstraints();
+        row1.setPercentHeight(10);
+
+        RowConstraints row2 = new RowConstraints();
+        row2.setPercentHeight(5);
+
+        RowConstraints row3 = new RowConstraints();
+        row3.setPercentHeight(10);
+        
+        ColumnConstraints col1 = new ColumnConstraints();
+        col1.setPercentWidth(50);
+
+        ColumnConstraints col2 = new ColumnConstraints();
+        col2.setPercentWidth(50);
+
+        nameAndColorPicker.getRowConstraints().addAll(row1,row2,row3);
+        nameAndColorPicker.getColumnConstraints().addAll(col1,col2);
+
+        nameAndColorPicker.add(playerName,0,0);
+        nameAndColorPicker.add(playerNameInput,1,0);
+        nameAndColorPicker.add(saveNameBtn,1,1);
+        nameAndColorPicker.add(orbColor,0,2);
+
+//        GridPane.setColumnSpan(playerName,2);
+//        GridPane.setColumnSpan(playerNameInput,2);
+
+
+        ColorPicker colorPicker1 = new ColorPicker(Color.BLUE);
+//        ColorPicker colorPicker2 = new ColorPicker(Color.BLACK);
+        nameAndColorPicker.add(colorPicker1,1,2);
+
+        scene4 = new Scene(nameAndColorPicker,720,720);
+        return scene4;
+
+    }
 
     public Scene makeInitialPage(){
         StackPane rootpane = new StackPane();
@@ -164,18 +232,42 @@ public class GUI extends Application
         GridPane.setHalignment(settingsBtn, HPos.CENTER);
         pageContents.add(settingsBtn,0,4);
 
-
-
-
-
-
-
-
-
 //        pageContents.gridLinesVisibleProperty().set(true);
         rootpane.getChildren().addAll(pageContents);
-        scene1 = new Scene(rootpane,450,600);
+        scene1 = new Scene(rootpane,720,720);       //scene1 -> initial page
         return scene1;
+    }
+
+
+    public Scene makeSettingsPage(){
+        GridPane settingsView = new GridPane();
+
+        ColumnConstraints col1 = new ColumnConstraints();
+        col1.setPercentWidth(100);
+        settingsView.getColumnConstraints().add(col1);
+
+        RowConstraints[] playerRows = new RowConstraints[8];
+        for(int i = 0; i<8;i++){
+            playerRows[i] = new RowConstraints();
+            playerRows[i].setPercentHeight(100.0/8);
+            settingsView.getRowConstraints().add(playerRows[i]);
+        }
+
+
+        Label[] playerSettings = new Label[8];
+        for( int i = 0; i<8 ; i++) {
+            playerSettings[i] = new Label("Player " + (i+1) + " Settings"+"\n");
+            settingsView.add(playerSettings[i],0,i);
+            playerSettings[i].setFont(Font.font("Cambria", FontWeight.SEMI_BOLD, 20));
+            playerSettings[i].setPadding(new Insets(0,0,0,20));
+            GridPane.setFillHeight(playerSettings[i],true);
+            GridPane.setFillWidth(playerSettings[i],true);
+//            playerSettings[i].setStyle("-fx-border-color: black");
+        }
+        settingsView.setGridLinesVisible(true);
+        scene3 = new Scene(settingsView,720,720);
+
+        return scene3;
     }
 
     @Override
@@ -183,10 +275,15 @@ public class GUI extends Application
         primaryStage.setTitle("Chain Reaction");
 
 
-        scene1 = makeInitialPage();
-        primaryStage.setScene(scene1);
-        GridPane gridpane = makeGrid();
-        scene2 = new Scene(gridpane);//        primaryStage.setScene(scene2);
+//        scene1 = makeInitialPage();
+//        primaryStage.setScene(scene1);
+//        GridPane gridpane = makeGrid();
+//        scene2 = new Scene(gridpane);//        primaryStage.setScene(scene2);
+
+//        scene3 = makeSettingsPage();
+//        primaryStage.setScene(scene3);
+        scene4 = makeNameAndColorPickerPage();
+        primaryStage.setScene(scene4);
         primaryStage.show();
     }
 }
