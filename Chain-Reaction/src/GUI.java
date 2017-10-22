@@ -15,10 +15,11 @@ import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.Sphere;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
-import javax.swing.*;
+import javafx.event.ActionEvent;
+
+import javafx.scene.input.MouseEvent;
 
 
 public class GUI extends Application 
@@ -30,6 +31,15 @@ public class GUI extends Application
 //        this.rows = rows1;
 //        this.cols = cols1;
 //    }
+
+    public Scene scene1,scene2,scene3,scene4;      //scene3 - settings, scene4 -> Name, ColorPicker
+    public Button resumeBtn, playGame,settingsBtn;
+    public Stage pstage;
+    public Label[] playerSettings;
+
+
+
+
     public static void main(String[] args) 
     {
         launch(args);
@@ -73,8 +83,6 @@ public class GUI extends Application
         return gridpane;
     }
 
-    public Scene scene1,scene2,scene3,scene4;      //scene3 - settings, scene4 -> Name, ColorPicker
-
     public Scene makeNameAndColorPickerPage(){
         GridPane nameAndColorPicker = new GridPane();
 
@@ -111,7 +119,7 @@ public class GUI extends Application
 
         RowConstraints row3 = new RowConstraints();
         row3.setPercentHeight(10);
-        
+
         ColumnConstraints col1 = new ColumnConstraints();
         col1.setPercentWidth(50);
 
@@ -181,17 +189,18 @@ public class GUI extends Application
         pageContents.add(infoLabel,2,0);
         GridPane.setHalignment(infoLabel, HPos.CENTER);
 
-        Button resumeBtn = new Button("Resume Game");
+        resumeBtn = new Button("Resume Game");
         resumeBtn.setPrefSize(200,50);
         resumeBtn.setFont(new Font("Cambria",20));
         GridPane.setHalignment(resumeBtn, HPos.CENTER);
         pageContents.add(resumeBtn,0,1);
 
-        Button playGame =  new Button("New Game");
+        playGame =  new Button("New Game");
         playGame.setPrefSize(200,50);
         playGame.setFont(new Font("Cambria",20));
         GridPane.setHalignment(playGame, HPos.CENTER);
         pageContents.add(playGame,1,1);
+
 
         Label GridSizeLabel = new Label("Grid Size");
         GridSizeLabel.setFont(Font.font("Arial",FontWeight.BOLD,25));
@@ -225,12 +234,13 @@ public class GUI extends Application
         pageContents.add(spinner,1,3);
 
 
-        Button settingsBtn = new Button("Settings");
+        settingsBtn = new Button("Settings");
         settingsBtn.setPrefSize(200,50);
         settingsBtn.setFont(new Font("Cambria",20));
         GridPane.setColumnSpan(settingsBtn,3);
         GridPane.setHalignment(settingsBtn, HPos.CENTER);
         pageContents.add(settingsBtn,0,4);
+
 
 //        pageContents.gridLinesVisibleProperty().set(true);
         rootpane.getChildren().addAll(pageContents);
@@ -254,7 +264,7 @@ public class GUI extends Application
         }
 
 
-        Label[] playerSettings = new Label[8];
+        playerSettings = new Label[8];
         for( int i = 0; i<8 ; i++) {
             playerSettings[i] = new Label("Player " + (i+1) + " Settings"+"\n");
             settingsView.add(playerSettings[i],0,i);
@@ -270,20 +280,67 @@ public class GUI extends Application
         return scene3;
     }
 
+    public void ButtonClick(ActionEvent event){
+        if(event.getSource()==resumeBtn) {
+            GridPane grid  = makeGrid();
+            scene2 = new Scene(grid);
+            pstage.setScene(scene2);
+        }
+        else if(event.getSource()==playGame){
+            GridPane grid  = makeGrid();
+            scene2 = new Scene(grid);
+            pstage.setScene(scene2);
+        }
+        else if(event.getSource()==settingsBtn){
+            scene3 = makeSettingsPage();
+            pstage.setScene(scene3);
+            playerSettings[0].setOnMouseClicked(e -> LabelClick(e));
+            playerSettings[1].setOnMouseClicked(e -> LabelClick(e));
+            playerSettings[2].setOnMouseClicked(e -> LabelClick(e));
+            playerSettings[3].setOnMouseClicked(e -> LabelClick(e));
+            playerSettings[4].setOnMouseClicked(e -> LabelClick(e));
+            playerSettings[5].setOnMouseClicked(e -> LabelClick(e));
+            playerSettings[6].setOnMouseClicked(e -> LabelClick(e));
+            playerSettings[7].setOnMouseClicked(e -> LabelClick(e));
+        }
+    }
+
+    public void LabelClick(MouseEvent event){
+        scene4 = makeNameAndColorPickerPage();
+        pstage.setScene(scene4);
+    }
+
     @Override
     public void start(Stage primaryStage) {
+        pstage = primaryStage;
         primaryStage.setTitle("Chain Reaction");
+        scene1 = makeInitialPage();
+        primaryStage.setScene(scene1);
+        settingsBtn.setOnAction(event -> ButtonClick(event));
+        playGame.setOnAction(event -> ButtonClick(event));
+        resumeBtn.setOnAction(event -> ButtonClick(event));
+
+//        if(primaryStage.getScene()==scene3){
+//            playerSettings[0].setOnMouseClicked(event -> LabelClick(event));
+//            playerSettings[1].setOnMouseClicked(event -> LabelClick(event));
+//            playerSettings[2].setOnMouseClicked(event -> LabelClick(event));
+//            playerSettings[3].setOnMouseClicked(event -> LabelClick(event));
+//            playerSettings[4].setOnMouseClicked(event -> LabelClick(event));
+//            playerSettings[5].setOnMouseClicked(event -> LabelClick(event));
+//            playerSettings[6].setOnMouseClicked(event -> LabelClick(event));
+//            playerSettings[7].setOnMouseClicked(event -> LabelClick(event));
+//            playerSettings[0].setOnMouseClicked(event -> LabelClick(event));
+//        }
 
 
-//        scene1 = makeInitialPage();
-//        primaryStage.setScene(scene1);
+
 //        GridPane gridpane = makeGrid();
-//        scene2 = new Scene(gridpane);//        primaryStage.setScene(scene2);
-
+//        scene2 = new Scene(gridpane);
+//        primaryStage.setScene(scene2);
 //        scene3 = makeSettingsPage();
 //        primaryStage.setScene(scene3);
-        scene4 = makeNameAndColorPickerPage();
-        primaryStage.setScene(scene4);
-        primaryStage.show();
+//        scene4 = makeNameAndColorPickerPage();
+//        primaryStage.setScene(scene4);
+    primaryStage.show();
     }
 }

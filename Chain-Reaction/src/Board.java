@@ -1,4 +1,7 @@
 import java.io.Serializable;
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class Board implements Serializable {
     private int rows;
@@ -15,8 +18,22 @@ public class Board implements Serializable {
         return grid;
     }
 
-    public void explosion(){
-        //code to be written
+    public void explosion(int i, int j){        //requires an initial click on the cell
+        Deque<Cell> queue = new LinkedList<>();
+        Cell[][] grid = getGrid();
+        int orbCount = grid[i][j].getOrbs();
+        queue.add(new Cell(i,j,orbCount));
+        while(queue.size()!=0){
+            Cell x = queue.pop();
+
+        }
+
+
+
+
+
+
+
     }
 
 

@@ -1,10 +1,18 @@
 import java.io.Serializable;
+import java.util.LinkedList;
 
 public class Cell implements Serializable {
 
     private int orbs;
+    private int X_Coordinate;
+    private int Y_Coordinate;
 
     public Cell(int orbs1){
+        this.orbs = orbs1;
+    }
+    public Cell(int x1, int y1, int orbs1){
+        this.X_Coordinate = x1;
+        this.Y_Coordinate = y1;
         this.orbs = orbs1;
     }
 
@@ -38,4 +46,13 @@ public class Cell implements Serializable {
         return (( i==0 ) || ( j==0 ) || ( i==r-1 ) || ( j==c-1 ));
     }
 
+    private LinkedList<Cell> getOrthogonallyAdjacentCells(int i, int j,int r, int c){
+        LinkedList<Cell> OrthAdjCells = new LinkedList<>();
+        if(isCorner(i,j,r,c)){
+
+        }
+        return OrthAdjCells;
+    }
+
 }
+
