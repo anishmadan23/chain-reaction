@@ -104,9 +104,9 @@ public class Grid extends Application
     		array[(int)x-1][(int)y-1]=2;
     		list.add(sphere);
 
-    		Circle circle= new Circle(10);
+    		Circle circle= new Circle(12);
 			circle.setFill(Color.TRANSPARENT);
-			//circle.setStroke(Color.BLACK);
+			//circle.setStroke(Color.BLUE);
 			list.add(circle);
 			circle.setTranslateX(x*48+4);
 			circle.setTranslateY(y*48+36);
@@ -125,11 +125,11 @@ public class Grid extends Application
     		array[(int)x-1][(int)y-1]=3;
     		list.add(sphere);
 
-    		Circle circle= new Circle(10);
+    		Circle circle= new Circle(12);
 			circle.setFill(Color.TRANSPARENT);
 			//circle.setStroke(Color.BLACK);
 			list.add(circle);
-			circle.setTranslateX(x*48+3);
+			circle.setTranslateX(x*48);
 			circle.setTranslateY(y*48+36);
 			Rotate rotate= new Rotate();
 	        rotate.setAngle(30);
