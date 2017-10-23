@@ -1,6 +1,11 @@
 import javafx.application.Application;
+import javafx.geometry.HPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Circle;
@@ -40,12 +45,33 @@ public class Grid extends Application
 
 	@Override
 	public void start(Stage primaryStage) 
-	{
+	{	Button undoBtn  = new Button("Undo");
+		undoBtn.setPrefSize(120,40);
+		undoBtn.setFont(Font.font("Arial", FontWeight.BOLD,20));
+		undoBtn.setLayoutX(450);
+		undoBtn.setLayoutY(100);
+		list.add(undoBtn);
+
+
+		final ComboBox<String> comboBox = new ComboBox<>();
+		comboBox.setLayoutX(450);
+		comboBox.setLayoutY(300);
+		comboBox.getItems().addAll("New Game","Go to Main Menu");
+		comboBox.getSelectionModel().selectFirst();
+		comboBox.setPrefSize(150,40);
+		comboBox.setStyle("-fx-font: 15px \"Serif\";");
+		list.add(comboBox);
+
+
+
+
+
+
 		primaryStage.setTitle("MyJavaFX");
 		createGrid();
 		//createSphere();
 
-		Scene scene = new Scene(root, 450, 600);
+		Scene scene = new Scene(root, 720, 600);
 		primaryStage.setScene(scene);
 		scene.setFill(Color.BLACK);
 		// PerspectiveCamera camera = new PerspectiveCamera(true);
