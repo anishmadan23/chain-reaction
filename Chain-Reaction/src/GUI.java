@@ -1,6 +1,8 @@
+import javafx.animation.Animation;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -20,6 +22,7 @@ import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
 import javafx.scene.input.MouseEvent;
+import javafx.util.Duration;
 
 
 public class GUI extends Application 
@@ -248,6 +251,39 @@ public class GUI extends Application
         return scene1;
     }
 
+    @SuppressWarnings("Duplicates")
+    public Scene Grid_GUI(){
+        Grid g = new Grid();
+        g.createGrid();
+        scene2 = new Scene(g.root, 720, 600);
+        scene2.setFill(Color.BLACK);
+
+
+        Duration DURATION = Duration.seconds(4);
+        Animation animation;
+        scene2.setOnMouseClicked(new EventHandler<MouseEvent>()
+        {
+            @Override
+            public void handle(MouseEvent event)
+            {
+                double x=event.getSceneX();
+                double y=event.getSceneY();
+                //System.out.println(x);
+                //System.out.println(y);
+                x=x-20;
+                y=y-50;
+                x=x/50;
+                y=y/50;
+                x=Math.ceil(x);
+                y=Math.ceil(y);
+                //System.out.println((int)x+" "+(int)y);
+                g.createSphere(x,y);
+            }
+        });
+
+
+        return scene2;
+    }
 
     public Scene makeSettingsPage(){
         GridPane settingsView = new GridPane();
@@ -282,14 +318,13 @@ public class GUI extends Application
 
     public void ButtonClick(ActionEvent event){
         if(event.getSource()==resumeBtn) {
-            GridPane grid  = makeGrid();
-            scene2 = new Scene(grid);
+            scene2 = Grid_GUI();
             pstage.setScene(scene2);
         }
         else if(event.getSource()==playGame){
-            GridPane grid  = makeGrid();
-            scene2 = new Scene(grid);
+            scene2 = Grid_GUI();
             pstage.setScene(scene2);
+
         }
         else if(event.getSource()==settingsBtn){
             scene3 = makeSettingsPage();
@@ -320,27 +355,8 @@ public class GUI extends Application
         playGame.setOnAction(event -> ButtonClick(event));
         resumeBtn.setOnAction(event -> ButtonClick(event));
 
-//        if(primaryStage.getScene()==scene3){
-//            playerSettings[0].setOnMouseClicked(event -> LabelClick(event));
-//            playerSettings[1].setOnMouseClicked(event -> LabelClick(event));
-//            playerSettings[2].setOnMouseClicked(event -> LabelClick(event));
-//            playerSettings[3].setOnMouseClicked(event -> LabelClick(event));
-//            playerSettings[4].setOnMouseClicked(event -> LabelClick(event));
-//            playerSettings[5].setOnMouseClicked(event -> LabelClick(event));
-//            playerSettings[6].setOnMouseClicked(event -> LabelClick(event));
-//            playerSettings[7].setOnMouseClicked(event -> LabelClick(event));
-//            playerSettings[0].setOnMouseClicked(event -> LabelClick(event));
-//        }
 
 
-
-//        GridPane gridpane = makeGrid();
-//        scene2 = new Scene(gridpane);
-//        primaryStage.setScene(scene2);
-//        scene3 = makeSettingsPage();
-//        primaryStage.setScene(scene3);
-//        scene4 = makeNameAndColorPickerPage();
-//        primaryStage.setScene(scene4);
     primaryStage.show();
     }
 }

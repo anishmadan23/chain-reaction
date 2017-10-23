@@ -1,9 +1,7 @@
 import javafx.application.Application;
-import javafx.geometry.HPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
@@ -30,79 +28,21 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
 
 
-public class Grid extends Application 
+public class Grid
 {
 
-	Group root= new Group();
-	ObservableList<Node> list= root.getChildren();
-	int array[][]= new int[6][9];
+	Group root;
+	ObservableList<Node> list;
+	int array[][];
 
-	public static void main(String[] args) 
-	{
-	launch(args);
-	}
-
-
-	@Override
-	public void start(Stage primaryStage) 
-	{	Button undoBtn  = new Button("Undo");
-		undoBtn.setPrefSize(120,40);
-		undoBtn.setFont(Font.font("Arial", FontWeight.BOLD,20));
-		undoBtn.setLayoutX(450);
-		undoBtn.setLayoutY(100);
-		list.add(undoBtn);
-
-
-		final ComboBox<String> comboBox = new ComboBox<>();
-		comboBox.setLayoutX(450);
-		comboBox.setLayoutY(300);
-		comboBox.getItems().addAll("New Game","Go to Main Menu");
-		comboBox.getSelectionModel().selectFirst();
-		comboBox.setPrefSize(150,40);
-		comboBox.setStyle("-fx-font: 15px \"Serif\";");
-		list.add(comboBox);
-
-
-
-
-
-
-		primaryStage.setTitle("MyJavaFX");
-		createGrid();
-		//createSphere();
-
-		Scene scene = new Scene(root, 720, 600);
-		primaryStage.setScene(scene);
-		scene.setFill(Color.BLACK);
-		// PerspectiveCamera camera = new PerspectiveCamera(true);
-  //       camera.setFarClip(300 * 6);
-  //       camera.setTranslateZ(-3 * 300);
-        // scene.setCamera(camera);
-		scene.setOnMouseClicked(new EventHandler<MouseEvent>() 
-		{
-	    	@Override
-	    	public void handle(MouseEvent event) 
-	    	{
-	    		double x=event.getSceneX();
-	    		double y=event.getSceneY();
-	        	//System.out.println(x);
-	        	//System.out.println(y);
-	        	x=x-20;
-	        	y=y-50;
-	        	x=x/50;
-	        	y=y/50;
-	        	x=Math.ceil(x);
-	        	y=Math.ceil(y);
-	        	//System.out.println((int)x+" "+(int)y);
-	        	createSphere(x,y);
-	    	}
-		});
-		
-		primaryStage.show();
+	public Grid(){
+		root = new Group();
+		list = root.getChildren();
+		array = new int[6][9];
 	}
 
 	Duration DURATION = Duration.seconds(4);
-    Animation animation;	    
+    Animation animation;
 
 	Transition createTransition(Circle path, Sphere node) 
 	{
@@ -173,7 +113,23 @@ public class Grid extends Application
 	}
 
 	public void createGrid()
-	{
+	{	Button undoBtn  = new Button("Undo");
+		undoBtn.setPrefSize(120,40);
+		undoBtn.setFont(Font.font("Arial", FontWeight.BOLD,20));
+		undoBtn.setLayoutX(450);
+		undoBtn.setLayoutY(100);
+		list.add(undoBtn);
+
+
+		final ComboBox<String> comboBox = new ComboBox<>();
+		comboBox.setLayoutX(450);
+		comboBox.setLayoutY(300);
+
+		comboBox.getItems().addAll("New Game","Go to Main Menu");
+		comboBox.setValue("Options");
+		comboBox.setPrefSize(150,40);
+		comboBox.setStyle("-fx-font: 15px \"Serif\";");
+		list.add(comboBox);
 		for(int i=0; i<10; i++)
 		{
 			Line line= new Line();
