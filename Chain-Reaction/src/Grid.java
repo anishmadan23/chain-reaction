@@ -22,6 +22,7 @@ import javafx.scene.PerspectiveCamera;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.PhongMaterial;
 
 
 public class Grid extends Application 
@@ -58,15 +59,15 @@ public class Grid extends Application
 	    	{
 	    		double x=event.getSceneX();
 	    		double y=event.getSceneY();
-	        	System.out.println(x);
-	        	System.out.println(y);
+	        	//System.out.println(x);
+	        	//System.out.println(y);
 	        	x=x-20;
 	        	y=y-50;
 	        	x=x/50;
 	        	y=y/50;
 	        	x=Math.ceil(x);
 	        	y=Math.ceil(y);
-	        	System.out.println((int)x+" "+(int)y);
+	        	//System.out.println((int)x+" "+(int)y);
 	        	createSphere(x,y);
 	    	}
 		});
@@ -90,6 +91,9 @@ public class Grid extends Application
 	{
 		Sphere sphere= new Sphere();
 		sphere.setRadius(10);
+		PhongMaterial p= new PhongMaterial();
+	    p.setDiffuseColor(Color.BLUE);
+	    sphere.setMaterial(p);
 		if(array[(int)x-1][(int)y-1]==0)
 	    {
     		sphere.setTranslateX(x*48+3);
@@ -139,7 +143,7 @@ public class Grid extends Application
     		animation = new ParallelTransition(createTransition(circle, sphere));
 	    	animation.play();
 	    }
-		System.out.println(array[1][1]);
+		//System.out.println(array[1][1]);
 	}
 
 	public void createGrid()
