@@ -124,7 +124,6 @@ public class Grid
 		final ComboBox<String> comboBox = new ComboBox<>();
 		comboBox.setLayoutX(450);
 		comboBox.setLayoutY(300);
-
 		comboBox.getItems().addAll("New Game","Go to Main Menu");
 		comboBox.setValue("Options");
 		comboBox.setPrefSize(150,40);

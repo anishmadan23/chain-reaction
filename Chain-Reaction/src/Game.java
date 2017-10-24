@@ -7,15 +7,15 @@ public class Game {
     private int numberOfPlayers;
     private ArrayList<Players> playersArrayList;
     private Cell[][] gridGame;
-    private Board board;
+//    private Board board;
 
     public Game(int rows1, int cols1, int numberOfPlayers1){
         this.rows = rows1;
         this.cols = cols1;
         this.numberOfPlayers = numberOfPlayers1;
         this.playersArrayList = new ArrayList<>(this.numberOfPlayers);
-        this.board = new Board(this.rows, this.cols);
-        this.gridGame = board.getGrid();
+//        this.board = new Board(this.rows, this.cols);
+//        this.gridGame = board.getGrid();
     }
 
     public int getCols() {
@@ -34,9 +34,9 @@ public class Game {
         return playersArrayList;
     }
 
-    public Board getBoard() {
-        return board;
-    }
+//    public Board getBoard() {
+//        return board;
+//    }
 
     public Cell[][] getGridGame() {
         return gridGame;

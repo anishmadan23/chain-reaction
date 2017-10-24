@@ -1,4 +1,3 @@
-import javafx.animation.Animation;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,7 +21,7 @@ import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
 import javafx.scene.input.MouseEvent;
-import javafx.util.Duration;
+
 
 
 public class GUI extends Application 
@@ -36,7 +35,7 @@ public class GUI extends Application
 //    }
 
     public Scene scene1,scene2,scene3,scene4;      //scene3 - settings, scene4 -> Name, ColorPicker
-    public Button resumeBtn, playGame,settingsBtn;
+    public Button resumeBtn, playGame,settingsBtn,backToMenuBtn;
     public Stage pstage;
     public Label[] playerSettings;
 
@@ -146,6 +145,7 @@ public class GUI extends Application
         nameAndColorPicker.add(colorPicker1,1,2);
 
         scene4 = new Scene(nameAndColorPicker,720,720);
+        scene4.setFill(Color.BLACK);
         return scene4;
 
     }
@@ -247,11 +247,11 @@ public class GUI extends Application
 
 //        pageContents.gridLinesVisibleProperty().set(true);
         rootpane.getChildren().addAll(pageContents);
+//        rootpane.setStyle("-fx-background-color: #000;");
         scene1 = new Scene(rootpane,720,720);       //scene1 -> initial page
         return scene1;
     }
 
-    @SuppressWarnings("Duplicates")
     public Scene Grid_GUI(){
         Grid g = new Grid();
         g.createGrid();
@@ -259,8 +259,8 @@ public class GUI extends Application
         scene2.setFill(Color.BLACK);
 
 
-        Duration DURATION = Duration.seconds(4);
-        Animation animation;
+//        Duration DURATION = Duration.seconds(4);
+//        Animation animation;
         scene2.setOnMouseClicked(new EventHandler<MouseEvent>()
         {
             @Override
@@ -292,18 +292,26 @@ public class GUI extends Application
         col1.setPercentWidth(100);
         settingsView.getColumnConstraints().add(col1);
 
-        RowConstraints[] playerRows = new RowConstraints[8];
-        for(int i = 0; i<8;i++){
+        RowConstraints[] playerRows = new RowConstraints[9];
+        for(int i = 0; i<9;i++){
             playerRows[i] = new RowConstraints();
-            playerRows[i].setPercentHeight(100.0/8);
+            playerRows[i].setPercentHeight(100.0/9);
             settingsView.getRowConstraints().add(playerRows[i]);
         }
+
+        backToMenuBtn = new Button("Back To Menu");
+        backToMenuBtn.setPrefSize(150,30);
+        backToMenuBtn.setFont(new Font("Cambria",13));
+//        GridPane.setHalignment(resumeBtn, HPos.CENTER);
+        settingsView.add(backToMenuBtn,0,0);
+        GridPane.setMargin(backToMenuBtn,new Insets(0,0,0,20));
+
 
 
         playerSettings = new Label[8];
         for( int i = 0; i<8 ; i++) {
             playerSettings[i] = new Label("Player " + (i+1) + " Settings"+"\n");
-            settingsView.add(playerSettings[i],0,i);
+            settingsView.add(playerSettings[i],0,i+1);
             playerSettings[i].setFont(Font.font("Cambria", FontWeight.SEMI_BOLD, 20));
             playerSettings[i].setPadding(new Insets(0,0,0,20));
             GridPane.setFillHeight(playerSettings[i],true);
@@ -312,6 +320,7 @@ public class GUI extends Application
         }
         settingsView.setGridLinesVisible(true);
         scene3 = new Scene(settingsView,720,720);
+        scene3.setFill(Color.BLACK);
 
         return scene3;
     }
@@ -337,9 +346,18 @@ public class GUI extends Application
             playerSettings[5].setOnMouseClicked(e -> LabelClick(e));
             playerSettings[6].setOnMouseClicked(e -> LabelClick(e));
             playerSettings[7].setOnMouseClicked(e -> LabelClick(e));
+            backToMenuBtn.setOnAction(event1 -> BackToMenu(event1));
+
+
         }
     }
 
+    public void BackToMenu(ActionEvent event){
+        if(event.getSource()==backToMenuBtn){
+            scene1 = makeInitialPage();
+            pstage.setScene(scene1);
+        }
+    }
     public void LabelClick(MouseEvent event){
         scene4 = makeNameAndColorPickerPage();
         pstage.setScene(scene4);
@@ -350,6 +368,7 @@ public class GUI extends Application
         pstage = primaryStage;
         primaryStage.setTitle("Chain Reaction");
         scene1 = makeInitialPage();
+
         primaryStage.setScene(scene1);
         settingsBtn.setOnAction(event -> ButtonClick(event));
         playGame.setOnAction(event -> ButtonClick(event));
