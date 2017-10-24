@@ -277,6 +277,7 @@ public class GUI extends Application
                 x=Math.ceil(x);
                 y=Math.ceil(y);
                 //System.out.println((int)x+" "+(int)y);
+                if(x<7 && y<10)
                 g.createSphere(x,y);
             }
         });
