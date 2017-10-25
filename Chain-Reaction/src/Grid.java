@@ -33,15 +33,23 @@ public class Grid
 	Group root;
 	ObservableList<Node> list;
 	int array[][];
+
 	GUI grc = new GUI();
 	int rows = grc.rows;
 	int cols = grc.cols;
+	Cell[][] cellArray = new Cell[rows][cols];
 
 
 	public Grid(){
 		root = new Group();
 		list = root.getChildren();
 		array = new int[cols][rows];
+		for(int i = 0 ;i<rows; i++){
+			for(int j = 0;j<cols ;j++){
+				cellArray[i][j] = new Cell(0);
+			}
+		}
+
 	}
 
 	public void calculateOffsetsForGrid(){
@@ -74,7 +82,7 @@ public class Grid
         return t;
     }
 
-	public void createSphere(double x, double y)
+	public Cell[][] createSphere(double x, double y)
 	{
 		Sphere sphere= new Sphere();
 		sphere.setRadius(9);
@@ -82,10 +90,11 @@ public class Grid
 	    p.setDiffuseColor(Color.BLUE);
 	    sphere.setMaterial(p);
 		if(array[(int)x][(int)y]==0)
-	    {
+	    {	System.out.println((int)x+" "+(int)y);
     		sphere.setTranslateX((x+1)*cellSize);
 			sphere.setTranslateY((y+1)*cellSize+(cellSize/4));
     		array[(int)x][(int)y]=1;
+//    		cellArray[(int)y][(int)x].setOrbs(1);
     		list.add(sphere);
 	    }
 	    else if(array[(int)x][(int)y]==1)
@@ -93,6 +102,7 @@ public class Grid
     		sphere.setTranslateX((x+1)*cellSize);
 			sphere.setTranslateY((y+1)*cellSize+(cellSize/4));
     		array[(int)x][(int)y]=2;
+//			cellArray[(int)y][(int)x].setOrbs(2);
     		list.add(sphere);
 
     		Circle circle= new Circle(12);
@@ -114,6 +124,7 @@ public class Grid
     		sphere.setTranslateX((x+1)*cellSize);
 			sphere.setTranslateY((y+1)*cellSize+(cellSize/4));
     		array[(int)x][(int)y]=3;
+//			cellArray[(int)y][(int)x].setOrbs(3);
     		list.add(sphere);
 
     		Circle circle= new Circle(12);
@@ -131,6 +142,7 @@ public class Grid
 	    	animation.play();
 	    }
 		//System.out.println(array[1][1]);
+		return cellArray;
 	}
 
 	public void createGrid()

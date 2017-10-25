@@ -29,6 +29,7 @@ public class GUI extends Application
 
     public int rows=15;
     public int cols=10;
+    Cell[][] cellsArray = new Cell[rows][cols];
     public GUI(){
         this.rows = 15;
         this.cols = 10;
@@ -255,45 +256,57 @@ public class GUI extends Application
     public Scene Grid_GUI(){
         Grid g = new Grid();
         g.createGrid();
+        Cell c = new Cell(cellsArray);
+
+
+
         scene2 = new Scene(g.root, 720, 600);
         scene2.setFill(Color.BLACK);
 
 
 //        Duration DURATION = Duration.seconds(4);
 //        Animation animation;
-        scene2.setOnMouseClicked(new EventHandler<MouseEvent>()
-        {
-            @Override
-            public void handle(MouseEvent event)
-            {   int cellSize, xGridStart, yGridStart;
-                if(rows==9 && cols ==6){
-                    cellSize = 50;
-                    xGridStart = 20;
-                    yGridStart = 50;
-                }
-                else{
-                    cellSize = 45 ;
-                    xGridStart = 20;
-                    yGridStart = 30;
-                }
-                double x=event.getSceneX();
-                double y=event.getSceneY();
-                //System.out.println(x);
-                //System.out.println(y);
-                x=x-xGridStart;
-                y=y-yGridStart;
-                x=x/cellSize;
-                y=y/cellSize;
-                x=Math.floor(x);
-                y=Math.floor(y);
-                System.out.println((int)x+" "+(int)y);
-                if(x<cols+1 && y<rows+1)
-                g.createSphere(x,y);
-            }
-        });
-
+        scene2.setOnMouseClicked(event -> explosionEvent(event,g,c));
 
         return scene2;
+    }
+
+    public void explosionEvent(MouseEvent event,Grid g, Cell c) {
+        int cellSize, xGridStart, yGridStart;
+        if (rows == 9 && cols == 6) {
+            cellSize = 50;
+            xGridStart = 20;
+            yGridStart = 50;
+        } else {
+            cellSize = 45;
+            xGridStart = 20;
+            yGridStart = 30;
+        }
+        double x = event.getSceneX();
+        double y = event.getSceneY();
+        //System.out.println(x);
+        //System.out.println(y);
+        x = x - xGridStart;
+        y = y - yGridStart;
+        x = x / cellSize;
+        y = y / cellSize;
+        x = Math.floor(x);
+        y = Math.floor(y);
+//                System.out.println((int)x+" "+(int)y);
+        if (x < cols + 1 && y < rows + 1) {
+            c.grid = g.createSphere(x, y);
+            System.out.println("this" + (int) x + " " + (int) y);
+//            System.out.println(c.grid[2][0].getOrbs());
+            c.explosion((int) y, (int) x);
+        }
+        for(int i = 0;i<rows;i++){
+            for(int j = 0; j<cols ;j++){
+                System.out.print(c.grid[i][j].getOrbs()+" ");
+            }
+            System.out.println();
+        }
+
+
     }
 
     public Scene makeSettingsPage(){

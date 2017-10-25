@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -31,6 +32,10 @@ public class Cell implements Serializable {
         this.grid = grid1;
     }
 
+    public Cell( Cell[][] grid1) {
+        this.grid = grid1;
+    }
+
     public Cell() {
         this.orbs = 0;
     }
@@ -44,8 +49,8 @@ public class Cell implements Serializable {
     }
 
     public int getCriticalMass(int i, int j) {
-        if (isCorner(i, j))
-            return 2;
+        if (isCorner(i, j)){System.out.println("In corner");
+            return 2;}
         else if (isEdge(i, j))
             return 3;
         else
@@ -53,6 +58,7 @@ public class Cell implements Serializable {
     }
 
     private boolean isCorner(int i, int j) {
+
         return ((i == 0 && j == 0) || (i == rows - 1 && j == 0) || (i == 0 && j == cols - 1) ||
                 (i == rows - 1 && j == cols - 1));
     }
@@ -81,15 +87,21 @@ public class Cell implements Serializable {
     }
 
     public void explosion(int i, int j) {        //requires an initial click on the cell
+        System.out.println("Inside explosion "+grid[i][j].getOrbs()+" "+"Coord "+i+" "+j);
         grid[i][j].setOrbs(grid[i][j].getOrbs() + 1);
         if (grid[i][j].getOrbs() < getCriticalMass(i, j))
             return;
         else{
             grid[i][j].setOrbs(0);
             Queue<Coordinates> queue = getNeighbours(i,j);
+            ArrayList<Coordinates> a = new ArrayList<>(queue);
+            for(int f = 0;f<a.size();f++){
+                System.out.println("Neighbours "+a.get(f).getX()+" "+a.get(f).getY());
+            }
             int length = queue.size();
+            System.out.println("Size : "+length);
             for(int l = 0; l<length;l++){
-                Coordinates cxy = queue.peek();
+                Coordinates cxy = queue.poll();
                 explosion(cxy.getX(),cxy.getY());
             }
         }
