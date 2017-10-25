@@ -271,13 +271,13 @@ public class GUI extends Application
                 //System.out.println(x);
                 //System.out.println(y);
                 x=x-20;
-                y=y-50;
-                x=x/50;
-                y=y/50;
+                y=y-40;
+                x=x/40;
+                y=y/40;
                 x=Math.ceil(x);
                 y=Math.ceil(y);
                 //System.out.println((int)x+" "+(int)y);
-                if(x<7 && y<10)
+                if(x<cols+1 && y<rows+1)
                 g.createSphere(x,y);
             }
         });

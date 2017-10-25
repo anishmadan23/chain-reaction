@@ -30,10 +30,12 @@ import javafx.scene.paint.PhongMaterial;
 
 public class Grid
 {
-
+	public int cellOffset, xLeftShift, yBottomShift,xGridStart,yGridStart,cellSize;
 	Group root;
 	ObservableList<Node> list;
 	int array[][];
+	int rows = 15;
+	int cols = 10;
 
 	public Grid(){
 		root = new Group();
@@ -41,6 +43,24 @@ public class Grid
 		array = new int[6][9];
 	}
 
+	public void calculateOffsetsForGrid(){
+		if(rows == 9 && cols == 6){
+			cellSize = 50;
+			xGridStart = 20;
+			yGridStart = 40;
+			xLeftShift = 12;
+			yBottomShift = 18;
+			cellOffset = 4;
+		}
+		else{
+			cellSize = 48;
+			xGridStart = 20;
+			yGridStart = 30;
+			xLeftShift = 15;
+			yBottomShift = 24;
+			cellOffset =3;
+		}
+	}
 	Duration DURATION = Duration.seconds(4);
     Animation animation;
 
@@ -129,60 +149,66 @@ public class Grid
 		comboBox.setPrefSize(150,40);
 		comboBox.setStyle("-fx-font: 15px \"Serif\";");
 		list.add(comboBox);
-		for(int i=0; i<10; i++)
+
+		calculateOffsetsForGrid();
+
+		for(int i=0; i<rows+1; i++)
 		{
 			Line line= new Line();
 			line.setStroke(Color.BLUE);
-			line.setStartX(20); 
-			line.setStartY(50+(50*i));         
-			line.setEndX(320); 
-			line.setEndY(50+(50*i));
+			line.setStartX(xGridStart);
+			line.setStartY(yGridStart+(cellSize*i));
+			line.setEndX(xGridStart+(cellSize*cols));
+			line.setEndY(yGridStart+(cellSize*i));
 			list.add(line);
 		}
 
-		for(int i=0; i<10; i++)
+		for(int i=0; i<rows+1; i++)
 		{
 			Line line= new Line();
 			line.setStroke(Color.BLUE);
-			line.setStartX(32); 
-			line.setStartY(68+(46*i));         
-			line.setEndX(308); 
-			line.setEndY(68+(46*i));
+			line.setStartX(xGridStart+xLeftShift);
+			int effCell = cellSize - cellOffset;
+			line.setStartY(yGridStart+yBottomShift+(effCell*i));
+			line.setEndX((effCell*(cols)+(xLeftShift+xGridStart)));
+			line.setEndY(yGridStart+yBottomShift+(effCell*i));
 			list.add(line);
 		}
 
-		for(int i=0; i<7; i++)
+		for(int i=0; i<cols+1; i++)
 		{
 			Line line= new Line();
 			line.setStroke(Color.BLUE);
-			line.setStartX(20+(50*i)); 
-			line.setStartY(50);         
-			line.setEndX(20+(50*i)); 
-			line.setEndY(500);
+			line.setStartX(xGridStart+(cellSize*i));
+			line.setStartY(yGridStart);
+			line.setEndX(xGridStart+(cellSize*i));
+			line.setEndY(cellSize*(rows+1));
 			list.add(line);
 		}
 
-		for(int i=0; i<7; i++)
+		for(int i=0; i<cols+1; i++)
 		{
 			Line line= new Line();
 			line.setStroke(Color.BLUE);
-			line.setStartX(32+(46*i)); 
-			line.setStartY(68);         
-			line.setEndX(32+(46*i)); 
-			line.setEndY(482);
+			int effCell = cellSize - cellOffset;
+			line.setStartX(xGridStart+xLeftShift+(effCell*i));
+			line.setStartY(yGridStart+yBottomShift);
+			line.setEndX(xGridStart+xLeftShift+(effCell*i));
+			line.setEndY(effCell*(rows)+yGridStart+yBottomShift);
 			list.add(line);
 		}
 
-		for(int i=0; i<10; i++)
+		for(int i=0; i<rows+1; i++)
 		{
-			for(int j=0; j<7; j++)
+			for(int j=0; j<cols+1; j++)
 			{
 				Line line= new Line();
 				line.setStroke(Color.BLUE);
-				line.setStartX(20+(50*j)); 
-				line.setStartY(50+(50*i));         
-				line.setEndX(32+(46*j)); 
-				line.setEndY(68+(46*i));
+				line.setStartX(xGridStart+(cellSize*j));
+				line.setStartY(yGridStart+(cellSize*i));
+				int effCell = cellSize - cellOffset;
+				line.setEndX(xGridStart+xLeftShift+(effCell*j));
+				line.setEndY(yGridStart+yBottomShift+(effCell*i));
 				list.add(line);
 			}
 		}
