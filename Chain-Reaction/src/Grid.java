@@ -27,20 +27,21 @@ import javafx.util.Duration;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
 
-
 public class Grid
 {
 	public int cellOffset, xLeftShift, yBottomShift,xGridStart,yGridStart,cellSize;
 	Group root;
 	ObservableList<Node> list;
 	int array[][];
-	int rows = 15;
-	int cols = 10;
+	GUI grc = new GUI();
+	int rows = grc.rows;
+	int cols = grc.cols;
+
 
 	public Grid(){
 		root = new Group();
 		list = root.getChildren();
-		array = new int[6][9];
+		array = new int[cols][rows];
 	}
 
 	public void calculateOffsetsForGrid(){
@@ -50,15 +51,15 @@ public class Grid
 			yGridStart = 40;
 			xLeftShift = 12;
 			yBottomShift = 18;
-			cellOffset = 4;
+			cellOffset = 2;
 		}
 		else{
-			cellSize = 48;
+			cellSize = 45;
 			xGridStart = 20;
 			yGridStart = 30;
-			xLeftShift = 15;
-			yBottomShift = 24;
-			cellOffset =3;
+			xLeftShift = 10;
+			yBottomShift = 16;
+			cellOffset =2;	//xLeftShift, yBottomShift and CellOffset are proportional, eg XL=15,YBS=24,CO=3
 		}
 	}
 	Duration DURATION = Duration.seconds(4);
@@ -76,30 +77,30 @@ public class Grid
 	public void createSphere(double x, double y)
 	{
 		Sphere sphere= new Sphere();
-		sphere.setRadius(10);
+		sphere.setRadius(9);
 		PhongMaterial p= new PhongMaterial();
 	    p.setDiffuseColor(Color.BLUE);
 	    sphere.setMaterial(p);
-		if(array[(int)x-1][(int)y-1]==0)
+		if(array[(int)x][(int)y]==0)
 	    {
-    		sphere.setTranslateX(x*48+3);
-			sphere.setTranslateY(y*48+36);
-    		array[(int)x-1][(int)y-1]=1;
+    		sphere.setTranslateX((x+1)*cellSize);
+			sphere.setTranslateY((y+1)*cellSize+(cellSize/4));
+    		array[(int)x][(int)y]=1;
     		list.add(sphere);
 	    }
-	    else if(array[(int)x-1][(int)y-1]==1)
+	    else if(array[(int)x][(int)y]==1)
 	    {
-    		sphere.setTranslateX(x*48+12);
-			sphere.setTranslateY(y*48+36);
-    		array[(int)x-1][(int)y-1]=2;
+    		sphere.setTranslateX((x+1)*cellSize);
+			sphere.setTranslateY((y+1)*cellSize+(cellSize/4));
+    		array[(int)x][(int)y]=2;
     		list.add(sphere);
 
     		Circle circle= new Circle(12);
 			circle.setFill(Color.TRANSPARENT);
 			//circle.setStroke(Color.BLUE);
 			list.add(circle);
-			circle.setTranslateX(x*48+4);
-			circle.setTranslateY(y*48+36);
+			circle.setTranslateX((x+1)*cellSize);
+			circle.setTranslateY((y+1)*cellSize+(cellSize/4));
 			Rotate rotate= new Rotate();
 	        rotate.setAngle(30);
 	        rotate.setAxis(Rotate.X_AXIS);
@@ -108,19 +109,19 @@ public class Grid
     		animation = new ParallelTransition(createTransition(circle, sphere));
 	    	animation.play();
 	    }
-	    else if(array[(int)x-1][(int)y-1]==2)
+	    else if(array[(int)x][(int)y]==2)
 	    {
-    		sphere.setTranslateX(x*48);
-			sphere.setTranslateY(y*48+27);
-    		array[(int)x-1][(int)y-1]=3;
+    		sphere.setTranslateX((x+1)*cellSize);
+			sphere.setTranslateY((y+1)*cellSize+(cellSize/4));
+    		array[(int)x][(int)y]=3;
     		list.add(sphere);
 
     		Circle circle= new Circle(12);
 			circle.setFill(Color.TRANSPARENT);
 			//circle.setStroke(Color.BLACK);
 			list.add(circle);
-			circle.setTranslateX(x*48);
-			circle.setTranslateY(y*48+36);
+			circle.setTranslateX((x+1)*cellSize);
+			circle.setTranslateY((y+1)*cellSize+(cellSize/4));
 			Rotate rotate= new Rotate();
 	        rotate.setAngle(30);
 	        rotate.setAxis(Rotate.Y_AXIS);

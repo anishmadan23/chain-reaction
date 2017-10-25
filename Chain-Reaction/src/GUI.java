@@ -29,10 +29,10 @@ public class GUI extends Application
 
     public int rows=15;
     public int cols=10;
-//    public GUI(int rows1, int cols1){
-//        this.rows = rows1;
-//        this.cols = cols1;
-//    }
+    public GUI(){
+        this.rows = 15;
+        this.cols = 10;
+    }
 
     public Scene scene1,scene2,scene3,scene4;      //scene3 - settings, scene4 -> Name, ColorPicker
     public Button resumeBtn, playGame,settingsBtn,backToMenuBtn;
@@ -265,18 +265,28 @@ public class GUI extends Application
         {
             @Override
             public void handle(MouseEvent event)
-            {
+            {   int cellSize, xGridStart, yGridStart;
+                if(rows==9 && cols ==6){
+                    cellSize = 50;
+                    xGridStart = 20;
+                    yGridStart = 50;
+                }
+                else{
+                    cellSize = 45 ;
+                    xGridStart = 20;
+                    yGridStart = 30;
+                }
                 double x=event.getSceneX();
                 double y=event.getSceneY();
                 //System.out.println(x);
                 //System.out.println(y);
-                x=x-20;
-                y=y-40;
-                x=x/40;
-                y=y/40;
-                x=Math.ceil(x);
-                y=Math.ceil(y);
-                //System.out.println((int)x+" "+(int)y);
+                x=x-xGridStart;
+                y=y-yGridStart;
+                x=x/cellSize;
+                y=y/cellSize;
+                x=Math.floor(x);
+                y=Math.floor(y);
+                System.out.println((int)x+" "+(int)y);
                 if(x<cols+1 && y<rows+1)
                 g.createSphere(x,y);
             }
