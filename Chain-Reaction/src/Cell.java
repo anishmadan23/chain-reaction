@@ -9,8 +9,8 @@ public class Cell implements Serializable {
     private int orbs;
     private int X_Coordinate;
     private int Y_Coordinate;
-    public int rows = 9;
-    public int cols = 6;
+    public int rows = 15;
+    public int cols = 10;
     public Cell[][] grid;
 
     public Cell(int orbs1) {
@@ -34,6 +34,7 @@ public class Cell implements Serializable {
 
     public Cell( Cell[][] grid1) {
         this.grid = grid1;
+        this.orbs = 0;
     }
 
     public Cell() {
@@ -58,7 +59,6 @@ public class Cell implements Serializable {
     }
 
     private boolean isCorner(int i, int j) {
-
         return ((i == 0 && j == 0) || (i == rows - 1 && j == 0) || (i == 0 && j == cols - 1) ||
                 (i == rows - 1 && j == cols - 1));
     }
@@ -82,41 +82,38 @@ public class Cell implements Serializable {
             queue.add(new Coordinates(i - 1, j));
         if (isValidNeighbour(i, j - 1))
             queue.add(new Coordinates(i, j - 1));
-
         return queue;
     }
 
-    public void explosion(int i, int j) {        //requires an initial click on the cell
-        System.out.println("Inside explosion "+grid[i][j].getOrbs()+" "+"Coord "+i+" "+j);
-        grid[i][j].setOrbs(grid[i][j].getOrbs() + 1);
-        if (grid[i][j].getOrbs() < getCriticalMass(i, j))
+    public void explosion(int i, int j, Grid g) {        //requires an initial click on the cell
+        System.out.println("Inside explosion " + this.grid[i][j].getOrbs() + " " + "Coord " + i + " " + j);
+        this.grid[i][j].setOrbs(this.grid[i][j].getOrbs() + 1);
+        if (this.grid[i][j].getOrbs() < getCriticalMass(i, j))
+        {
+            this.grid = g.createSphere(j,i,this);
             return;
-        else{
-            grid[i][j].setOrbs(0);
-            Queue<Coordinates> queue = getNeighbours(i,j);
+        }
+        else
+        {
+//            this.grid[i][j].setOrbs(0);
+
+
+            Queue<Coordinates> queue = getNeighbours(i, j);
             ArrayList<Coordinates> a = new ArrayList<>(queue);
-            for(int f = 0;f<a.size();f++){
-                System.out.println("Neighbours "+a.get(f).getX()+" "+a.get(f).getY());
+            for (int f = 0; f < a.size(); f++) {
+                System.out.println("Neighbours " + a.get(f).getX() + " " + a.get(f).getY());
             }
             int length = queue.size();
-            System.out.println("Size : "+length);
-            for(int l = 0; l<length;l++){
+            System.out.println("Size : " + length);
+            for (int l = 0; l < length; l++) {
                 Coordinates cxy = queue.poll();
-                explosion(cxy.getX(),cxy.getY());
+                g.shiftOrbs(i,j,cxy.getX(),cxy.getY(),this);
+                this.grid[i][j].setOrbs(0);
+                explosion(cxy.getX(), cxy.getY(),g);
+
             }
+//            return grid;
         }
-
-
-
-
-//    private LinkedList<Cell> getOrthogonallyAdjacentCells(int i, int j,int r, int c){
-//        LinkedList<Cell> OrthAdjCells = new LinkedList<>();
-//        if(isCorner(i,j,r,c)){
-//
-//        }
-//        return OrthAdjCells;
-//    }
-
     }
 }
 

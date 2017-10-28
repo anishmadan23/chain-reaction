@@ -30,7 +30,9 @@ import javafx.scene.paint.PhongMaterial;
 public class Grid
 {
 	public int cellOffset, xLeftShift, yBottomShift,xGridStart,yGridStart,cellSize;
-	Group root;
+	PathTransition path1,path2,path3;
+	Group[][] root1;
+	Group root = new Group();
 	ObservableList<Node> list;
 	int array[][];
 
@@ -41,11 +43,12 @@ public class Grid
 
 
 	public Grid(){
-		root = new Group();
+		root1 = new Group[rows][cols];
 		list = root.getChildren();
 		array = new int[cols][rows];
 		for(int i = 0 ;i<rows; i++){
 			for(int j = 0;j<cols ;j++){
+				root1[i][j] = new Group();
 				cellArray[i][j] = new Cell(0);
 			}
 		}
@@ -71,78 +74,158 @@ public class Grid
 		}
 	}
 	Duration DURATION = Duration.seconds(4);
-    Animation animation;
+	Animation animation;
 
-	Transition createTransition(Circle path, Sphere node) 
+	Transition createTransition(Circle path, Sphere node)
 	{
-        PathTransition t = new PathTransition(DURATION, path, node);
-        t.setOrientation(OrientationType.ORTHOGONAL_TO_TANGENT);
-        t.setCycleCount(Timeline.INDEFINITE);
-        t.setInterpolator(Interpolator.LINEAR);
-        return t;
-    }
+		PathTransition t = new PathTransition(DURATION, path, node);
+		t.setOrientation(OrientationType.ORTHOGONAL_TO_TANGENT);
+		t.setCycleCount(Timeline.INDEFINITE);
+		t.setInterpolator(Interpolator.LINEAR);
+		return t;
+	}
 
-	public Cell[][] createSphere(double x, double y)
-	{
-		Sphere sphere= new Sphere();
+	public void shiftOrbs(int inX, int inY, int toX, int toY,Cell c){
+		{	System.out.println("Array val :"+array[inY][inX]);
+			if(array[inY][inX]>0) {
+			System.out.println("Shifting");
+			System.out.println(root1[inX][inY].getChildren().size() + " is the size");
+			System.out.println("coords are " + inX + " " + inY + " " + toX + " " + toY);
+			Node x = root1[inX][inY].getChildren().get(0);
+			root1[inX][inY].getChildren().remove(x);
+			array[inY][inX]--;
+
+//			list.remove(x);
+			x.setTranslateX((toX + 1) * cellSize);
+			x.setTranslateY((toY + 1) * cellSize + (cellSize / 4));
+		}
+		}
+	}
+
+	public Cell[][] createSphere(double x, double y,Cell c){
+		if(c.grid[(int)y][(int)x].getOrbs()==c.getCriticalMass((int)y,(int)x)-1)
+			DURATION = Duration.seconds(2);
+		else
+			DURATION = Duration.seconds(4);
+//	{	if(c.getCriticalMass((int)y,(int)x)==c.getOrbs()){
+//		list.remove(0,list.size()-1);
+//	}
+//	else ;
+//		System.out.println(list.size());
+		Sphere sphere = new Sphere();
 		sphere.setRadius(9);
-		PhongMaterial p= new PhongMaterial();
-	    p.setDiffuseColor(Color.BLUE);
-	    sphere.setMaterial(p);
-		if(array[(int)x][(int)y]==0)
-	    {	System.out.println((int)x+" "+(int)y);
-    		sphere.setTranslateX((x+1)*cellSize);
-			sphere.setTranslateY((y+1)*cellSize+(cellSize/4));
-    		array[(int)x][(int)y]=1;
-//    		cellArray[(int)y][(int)x].setOrbs(1);
-    		list.add(sphere);
-	    }
-	    else if(array[(int)x][(int)y]==1)
-	    {
-    		sphere.setTranslateX((x+1)*cellSize);
-			sphere.setTranslateY((y+1)*cellSize+(cellSize/4));
-    		array[(int)x][(int)y]=2;
-//			cellArray[(int)y][(int)x].setOrbs(2);
-    		list.add(sphere);
+		PhongMaterial p = new PhongMaterial();
+		p.setDiffuseColor(Color.BLUE);
+		sphere.setMaterial(p);
+		if (array[(int) x][(int) y] == 0) {
+			System.out.println((int) x + " " + (int) y);
+			sphere.setTranslateX((x + 1) * cellSize);
+			sphere.setTranslateY((y + 1) * cellSize + (cellSize / 4));
+			array[(int) x][(int) y] = 1;
+    		c.grid[(int)y][(int)x].setOrbs(1);
+			root1[(int)y][(int)x].getChildren().add(sphere);
 
-    		Circle circle= new Circle(12);
+		} else if (array[(int) x][(int) y] == 1 ) {
+			sphere.setTranslateX((x + 1) * cellSize);
+			sphere.setTranslateY((y + 1) * cellSize + (cellSize / 4));
+			array[(int) x][(int) y] = 2;
+			c.grid[(int)y][(int)x].setOrbs(2);
+
+			path1 = new PathTransition();
+			Circle circle = new Circle(12);
 			circle.setFill(Color.TRANSPARENT);
+			circle.setTranslateX((x + 1) * cellSize);
+			circle.setTranslateY((y + 1) * cellSize + (cellSize / 4));
+			Rotate rotate = new Rotate();
+			rotate.setAngle(180);
+			rotate.setPivotX(0);
+			rotate.setPivotY(0);
+			rotate.setAxis(Rotate.Y_AXIS);
+			circle.getTransforms().addAll(rotate);
+			path1.setNode(sphere);
+			path1.setPath(circle);
+			path1.setOrientation(OrientationType.ORTHOGONAL_TO_TANGENT);
+			path1.setInterpolator(Interpolator.LINEAR);
+
+			path1.setDuration(DURATION);
+			path1.setCycleCount(Timeline.INDEFINITE);
+
+			path1.play();
+			root1[(int)y][(int)x].getChildren().add(sphere);
+
+
+
+
+//			Circle circle = new Circle(12);
+
 			//circle.setStroke(Color.BLUE);
-			list.add(circle);
-			circle.setTranslateX((x+1)*cellSize);
-			circle.setTranslateY((y+1)*cellSize+(cellSize/4));
-			Rotate rotate= new Rotate();
-	        rotate.setAngle(30);
-	        rotate.setAxis(Rotate.X_AXIS);
-	        circle.getTransforms().addAll(rotate);
+//			root1[(int)y][(int)x].getChildren().add(circle);
+//			circle.setTranslateX((x + 1) * cellSize);
+//			circle.setTranslateY((y + 1) * cellSize + (cellSize / 4));
+//			Rotate rotate = new Rotate();
+//			rotate.setAngle(30);
+//			rotate.setAxis(Rotate.X_AXIS);
+//			circle.getTransforms().addAll(rotate);
 
-    		animation = new ParallelTransition(createTransition(circle, sphere));
-	    	animation.play();
-	    }
-	    else if(array[(int)x][(int)y]==2)
-	    {
-    		sphere.setTranslateX((x+1)*cellSize);
-			sphere.setTranslateY((y+1)*cellSize+(cellSize/4));
-    		array[(int)x][(int)y]=3;
-//			cellArray[(int)y][(int)x].setOrbs(3);
-    		list.add(sphere);
+//			animation = new ParallelTransition(createTransition(circle, sphere));
+//			animation.play();
+		} else if (array[(int) x][(int) y] == 2) {
+			sphere.setTranslateX((x + 1) * cellSize);
+			sphere.setTranslateY((y + 1) * cellSize + (cellSize / 4));
+			array[(int) x][(int) y] = 3;
+			c.grid[(int)y][(int)x].setOrbs(3);
 
-    		Circle circle= new Circle(12);
+
+			path2 = new PathTransition();
+			Circle circle = new Circle(12);
 			circle.setFill(Color.TRANSPARENT);
-			//circle.setStroke(Color.BLACK);
-			list.add(circle);
-			circle.setTranslateX((x+1)*cellSize);
-			circle.setTranslateY((y+1)*cellSize+(cellSize/4));
-			Rotate rotate= new Rotate();
-	        rotate.setAngle(30);
-	        rotate.setAxis(Rotate.Y_AXIS);
-	        circle.getTransforms().addAll(rotate);
+			circle.setTranslateX((x + 1) * cellSize);
+			circle.setTranslateY((y + 1) * cellSize + (cellSize / 4));
+			Rotate rotate = new Rotate();
+			rotate.setAngle(180);
+			rotate.setAxis(Rotate.X_AXIS);
+			rotate.setPivotX(5);
+			rotate.setPivotY(0);
+			circle.getTransforms().addAll(rotate);
+			path2.setNode(sphere);
+			path2.setPath(circle);
+			path2.setOrientation(OrientationType.ORTHOGONAL_TO_TANGENT);
+			path2.setInterpolator(Interpolator.LINEAR);
 
-    		animation = new ParallelTransition(createTransition(circle, sphere));
-	    	animation.play();
-	    }
+
+			path2.setDuration(DURATION);
+
+			path3 = path1;
+			if(DURATION==Duration.seconds(2)){
+				path1.stop();
+				path3.setDuration(DURATION);
+			}
+
+			path2.setCycleCount(Timeline.INDEFINITE);
+//			root1[(int)y][(int)x].getChildren().add(sphere);
+			path3.play();
+			path2.play();
+			root1[(int)y][(int)x].getChildren().add(sphere);
+
+//			Circle circle = new Circle(12);
+//			circle.setFill(Color.TRANSPARENT);
+//			//circle.setStroke(Color.BLACK);
+//			root1[(int)y][(int)x].getChildren().add(circle);
+//			circle.setTranslateX((x + 1) * cellSize);
+//			circle.setTranslateY((y + 1) * cellSize + (cellSize / 4));
+//			Rotate rotate = new Rotate();
+//			rotate.setAngle(30);
+//			rotate.setAxis(Rotate.Y_AXIS);
+//			circle.getTransforms().addAll(rotate);
+//
+//			animation = new ParallelTransition(createTransition(circle, sphere));
+//			animation.play();
+		}
+
+
+
 		//System.out.println(array[1][1]);
-		return cellArray;
+		return c.grid;
 	}
 
 	public void createGrid()
@@ -225,7 +308,13 @@ public class Grid
 				list.add(line);
 			}
 		}
+		for(int i=0; i<rows; i++) {
+			for (int j = 0; j < cols; j++) {
+				list.add(root1[i][j]);
+			}
+		}
 	}
 
-	
+
+
 }

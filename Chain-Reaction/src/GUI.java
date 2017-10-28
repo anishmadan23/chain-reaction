@@ -257,9 +257,14 @@ public class GUI extends Application
         Grid g = new Grid();
         g.createGrid();
         Cell c = new Cell(cellsArray);
+        for(int i =0 ;i<rows ; i++){
+            for(int j =0 ;j<cols;j++){
+                cellsArray[i][j] = new Cell(0);
+            }
+        }
 
-
-
+//        g.root.getChildren().addAll(g.root1);
+//        StackPane pane = new StackPane();
         scene2 = new Scene(g.root, 720, 600);
         scene2.setFill(Color.BLACK);
 
@@ -292,12 +297,11 @@ public class GUI extends Application
         y = y / cellSize;
         x = Math.floor(x);
         y = Math.floor(y);
-//                System.out.println((int)x+" "+(int)y);
+
         if (x < cols + 1 && y < rows + 1) {
-            c.grid = g.createSphere(x, y);
             System.out.println("this" + (int) x + " " + (int) y);
-//            System.out.println(c.grid[2][0].getOrbs());
-            c.explosion((int) y, (int) x);
+
+            c.explosion((int) y, (int) x,g);
         }
         for(int i = 0;i<rows;i++){
             for(int j = 0; j<cols ;j++){
