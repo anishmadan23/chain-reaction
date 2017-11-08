@@ -29,6 +29,8 @@ import javafx.scene.paint.PhongMaterial;
 
 public class Grid
 {
+
+	ComboBox<String> comboBox;
 	public int cellOffset, xLeftShift, yBottomShift,xGridStart,yGridStart,cellSize;
 	PathTransition path1,path2,path3;
 	Group[][] root1;
@@ -228,6 +230,7 @@ public class Grid
 		return c.grid;
 	}
 
+
 	public void createGrid()
 	{	Button undoBtn  = new Button("Undo");
 		undoBtn.setPrefSize(120,40);
@@ -236,8 +239,7 @@ public class Grid
 		undoBtn.setLayoutY(100);
 		list.add(undoBtn);
 
-
-		final ComboBox<String> comboBox = new ComboBox<>();
+		comboBox = new ComboBox<>();
 		comboBox.setLayoutX(450);
 		comboBox.setLayoutY(300);
 		comboBox.getItems().addAll("New Game","Go to Main Menu");

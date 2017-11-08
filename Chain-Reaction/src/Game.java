@@ -47,4 +47,10 @@ public class Game {
     public void undo(){
 
     }
+
+
+    public static void main(){
+        GUI g = new GUI();
+
+    }
 }
