@@ -35,19 +35,20 @@ public class Grid
 	PathTransition path1,path2,path3;
 	Group[][] root1;
 	Group root = new Group();
-	ObservableList<Node> list;
+	static ObservableList<Node> list;
 	int array[][];
 
 	GUI grc = new GUI();
 	int rows = grc.rows;
 	int cols = grc.cols;
-	Cell[][] cellArray = new Cell[rows][cols];
 
 
-	public Grid(){
+
+	public Grid(int rows, int cols){
 		root1 = new Group[rows][cols];
 		list = root.getChildren();
 		array = new int[cols][rows];
+		Cell[][] cellArray = new Cell[rows][cols];
 		for(int i = 0 ;i<rows; i++){
 			for(int j = 0;j<cols ;j++){
 				root1[i][j] = new Group();
@@ -57,7 +58,7 @@ public class Grid
 
 	}
 
-	public void calculateOffsetsForGrid(){
+	public void calculateOffsetsForGrid(int rows, int cols){
 		if(rows == 9 && cols == 6){
 			cellSize = 50;
 			xGridStart = 20;
@@ -231,7 +232,7 @@ public class Grid
 	}
 
 
-	public void createGrid()
+	public void createGrid(int rows, int cols)
 	{	Button undoBtn  = new Button("Undo");
 		undoBtn.setPrefSize(120,40);
 		undoBtn.setFont(Font.font("Arial", FontWeight.BOLD,20));
@@ -248,7 +249,7 @@ public class Grid
 		comboBox.setStyle("-fx-font: 15px \"Serif\";");
 		list.add(comboBox);
 
-		calculateOffsetsForGrid();
+		calculateOffsetsForGrid(rows,cols);
 
 		for(int i=0; i<rows+1; i++)
 		{

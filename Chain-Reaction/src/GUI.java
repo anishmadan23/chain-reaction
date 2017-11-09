@@ -27,16 +27,16 @@ import javafx.scene.input.MouseEvent;
 public class GUI extends Application
 {
 
-    public int rows=15;
-    public int cols=10;
+    public int rows=9;
+    public int cols=6;
     public int numberOfPlayers  = 2;
-    Cell[][] cellsArray = new Cell[rows][cols];
+
     public GUI() {
-        this.rows = 15;
-        this.cols = 10;
+        this.rows = 9;
+        this.cols = 6;
     }
 
-
+    ComboBox<String> comboBox;
     public Scene scene1 =null,scene2=null,scene3=null,scene4;      //scene3 - settings, scene4 -> Name, ColorPicker
     Scene[] nameAndColorPickerScenes = new Scene[8];
     public Button resumeBtn, playGame,settingsBtn,backToMenuBtn;
@@ -53,48 +53,49 @@ public class GUI extends Application
 
 
 
+
     public static void main(String[] args)
     {
         launch(args);
     }
 
-    public GridPane makeGrid()
-    {
-        GridPane gridpane = new GridPane();
-        gridpane.setAlignment(Pos.CENTER);
-        ColumnConstraints[] colCons = new ColumnConstraints[cols];
-        RowConstraints[] rowCons = new RowConstraints[rows];
-
-        for(int i = 0;i< cols ; i++)
-        {
-            colCons[i] = new ColumnConstraints();
-            colCons[i].setPercentWidth(100.0/cols);
-            gridpane.getColumnConstraints().add(colCons[i]) ;
-        }
-
-
-        for( int i =0 ; i<rows;i++){
-            rowCons[i] = new RowConstraints();
-            rowCons[i].setPercentHeight(100.0/rows);
-            gridpane.getRowConstraints().add(rowCons[i]);
-        }
-
-        Sphere[][] spheres = new Sphere[rows][cols];
-        for(int i = 0; i< rows;i++){
-            for(int j = 0 ;j<cols;j++){
-                spheres[i][j] = new Sphere(15);
-                spheres[i][j].setMaterial(new PhongMaterial(Color.BLUE));
-                gridpane.add(spheres[i][j],j,i);
-                GridPane.setHalignment(spheres[i][j], HPos.CENTER);
-                GridPane.setValignment(spheres[i][j], VPos.CENTER);
-            }
-        }
-
-        gridpane.setAlignment(Pos.CENTER);
-        gridpane.setPrefSize(720,720);
-        gridpane.gridLinesVisibleProperty().set(true);
-        return gridpane;
-    }
+//    public GridPane makeGrid()
+//    {
+//        GridPane gridpane = new GridPane();
+//        gridpane.setAlignment(Pos.CENTER);
+//        ColumnConstraints[] colCons = new ColumnConstraints[cols];
+//        RowConstraints[] rowCons = new RowConstraints[rows];
+//
+//        for(int i = 0;i< cols ; i++)
+//        {
+//            colCons[i] = new ColumnConstraints();
+//            colCons[i].setPercentWidth(100.0/cols);
+//            gridpane.getColumnConstraints().add(colCons[i]) ;
+//        }
+//
+//
+//        for( int i =0 ; i<rows;i++){
+//            rowCons[i] = new RowConstraints();
+//            rowCons[i].setPercentHeight(100.0/rows);
+//            gridpane.getRowConstraints().add(rowCons[i]);
+//        }
+//
+//        Sphere[][] spheres = new Sphere[rows][cols];
+//        for(int i = 0; i< rows;i++){
+//            for(int j = 0 ;j<cols;j++){
+//                spheres[i][j] = new Sphere(15);
+//                spheres[i][j].setMaterial(new PhongMaterial(Color.BLUE));
+//                gridpane.add(spheres[i][j],j,i);
+//                GridPane.setHalignment(spheres[i][j], HPos.CENTER);
+//                GridPane.setValignment(spheres[i][j], VPos.CENTER);
+//            }
+//        }
+//
+//        gridpane.setAlignment(Pos.CENTER);
+//        gridpane.setPrefSize(720,720);
+//        gridpane.gridLinesVisibleProperty().set(true);
+//        return gridpane;
+//    }
 
     public Scene[] makeNameAndColorPickerPage(){
 
@@ -230,13 +231,28 @@ public class GUI extends Application
         pageContents.add(GridSizeLabel,0,2);
 
 
-        final ComboBox<String> comboBox = new ComboBox<String>();
+        comboBox = new ComboBox<String>();
         comboBox.getItems().addAll("Small","Big");
         comboBox.getSelectionModel().selectFirst();
         comboBox.setPrefSize(200,40);
         comboBox.setStyle("-fx-font: 20px \"Serif\";");
         GridPane.setHalignment(comboBox, HPos.CENTER);
         pageContents.add(comboBox,1,2);
+        comboBox.setOnAction(e -> {
+                    if (comboBox.getValue().equals("Big")) {
+                        rows = 15;
+                        cols = 10;
+                        if(Grid.list!=null){
+                        Grid.list.remove(0,Grid.list.size());}
+                    }
+                    else{
+                        rows = 9;
+                        cols = 6;
+                    }
+                });
+
+
+
 
 
         Label playersLabel = new Label("Players");
@@ -282,8 +298,10 @@ public class GUI extends Application
 
 
     public Scene Grid_GUI(){
-        Grid g = new Grid();
-        g.createGrid();
+        Grid g = new Grid(rows,cols);
+        g.createGrid(rows,cols);
+        Cell[][] cellsArray = new Cell[rows][cols];
+        System.out.println(rows+" "+cols);
         Cell c = new Cell(cellsArray);
         for(int i =0 ;i<rows ; i++){
             for(int j =0 ;j<cols;j++){
@@ -315,6 +333,7 @@ public class GUI extends Application
 //        Duration DURATION = Duration.seconds(4);
 //        Animation animation;
         scene2.setOnMouseClicked(event -> explosionEvent(event,g,c));
+        comboBox.setValue("Small");
 
         return scene2;
     }
@@ -413,13 +432,9 @@ public class GUI extends Application
             pstage.setScene(scene2);
         }
         else if(event.getSource()==playGame){
-            if(scene2!=null){
-                pstage.setScene(scene2);
-            }
-            else {
                 scene2 = Grid_GUI();
                 pstage.setScene(scene2);
-            }
+
         }
         else if(event.getSource()==settingsBtn){
             scene3 = makeSettingsPage();
