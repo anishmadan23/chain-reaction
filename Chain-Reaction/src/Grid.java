@@ -62,15 +62,15 @@ public class Grid
 		if(rows == 9 && cols == 6){
 			cellSize = 50;
 			xGridStart = 20;
-			yGridStart = 40;
+			yGridStart = 50;
 			xLeftShift = 12;
 			yBottomShift = 18;
-			cellOffset = 2;
+			cellOffset = 4;
 		}
 		else{
 			cellSize = 45;
 			xGridStart = 20;
-			yGridStart = 30;
+			yGridStart = 45;
 			xLeftShift = 10;
 			yBottomShift = 16;
 			cellOffset =2;	//xLeftShift, yBottomShift and CellOffset are proportional, eg XL=15,YBS=24,CO=3
@@ -100,7 +100,7 @@ public class Grid
 
 //			list.remove(x);
 			x.setTranslateX((toX + 1) * cellSize);
-			x.setTranslateY((toY + 1) * cellSize + (cellSize / 4));
+			x.setTranslateY((toY + 1) * cellSize + (cellSize / 2));
 		}
 		}
 	}
@@ -123,14 +123,14 @@ public class Grid
 		if (array[(int) x][(int) y] == 0) {
 			System.out.println((int) x + " " + (int) y);
 			sphere.setTranslateX((x + 1) * cellSize);
-			sphere.setTranslateY((y + 1) * cellSize + (cellSize / 4));
+			sphere.setTranslateY((y + 1) * cellSize + (cellSize / 2));
 			array[(int) x][(int) y] = 1;
     		c.grid[(int)y][(int)x].setOrbs(1);
 			root1[(int)y][(int)x].getChildren().add(sphere);
 
 		} else if (array[(int) x][(int) y] == 1 ) {
 			sphere.setTranslateX((x + 1) * cellSize);
-			sphere.setTranslateY((y + 1) * cellSize + (cellSize / 4));
+			sphere.setTranslateY((y + 1) * cellSize + (cellSize / 2));
 			array[(int) x][(int) y] = 2;
 			c.grid[(int)y][(int)x].setOrbs(2);
 
@@ -138,7 +138,7 @@ public class Grid
 			Circle circle = new Circle(12);
 			circle.setFill(Color.TRANSPARENT);
 			circle.setTranslateX((x + 1) * cellSize);
-			circle.setTranslateY((y + 1) * cellSize + (cellSize / 4));
+			circle.setTranslateY((y + 1) * cellSize + (cellSize / 2));
 			Rotate rotate = new Rotate();
 			rotate.setAngle(180);
 			rotate.setPivotX(0);
@@ -174,7 +174,7 @@ public class Grid
 //			animation.play();
 		} else if (array[(int) x][(int) y] == 2) {
 			sphere.setTranslateX((x + 1) * cellSize);
-			sphere.setTranslateY((y + 1) * cellSize + (cellSize / 4));
+			sphere.setTranslateY((y + 1) * cellSize + (cellSize / 2));
 			array[(int) x][(int) y] = 3;
 			c.grid[(int)y][(int)x].setOrbs(3);
 
@@ -183,7 +183,7 @@ public class Grid
 			Circle circle = new Circle(12);
 			circle.setFill(Color.TRANSPARENT);
 			circle.setTranslateX((x + 1) * cellSize);
-			circle.setTranslateY((y + 1) * cellSize + (cellSize / 4));
+			circle.setTranslateY((y + 1) * cellSize + (cellSize / 2));
 			Rotate rotate = new Rotate();
 			rotate.setAngle(180);
 			rotate.setAxis(Rotate.X_AXIS);

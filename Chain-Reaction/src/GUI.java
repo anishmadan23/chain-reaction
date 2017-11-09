@@ -242,8 +242,8 @@ public class GUI extends Application
                     if (comboBox.getValue().equals("Big")) {
                         rows = 15;
                         cols = 10;
-                        if(Grid.list!=null){
-                        Grid.list.remove(0,Grid.list.size());}
+//                        if(Grid.list!=null){
+//                        Grid.list.remove(0,Grid.list.size());}
                     }
                     else{
                         rows = 9;
@@ -315,9 +315,9 @@ public class GUI extends Application
                 pstage.setScene(scene2);
             }
             else if(g.comboBox.getValue().equals("Go to Main Menu")){
-                scene1 = makeInitialPage();
+//                scene1 = makeInitialPage();
                 pstage.setScene(scene1);
-                g.comboBox.setValue("Options");
+//                g.comboBox.setValue("Options");
             }
         });
 
@@ -347,7 +347,7 @@ public class GUI extends Application
         } else {
             cellSize = 45;
             xGridStart = 20;
-            yGridStart = 30;
+            yGridStart = 45;
         }
         double x = event.getSceneX();
         double y = event.getSceneY();
