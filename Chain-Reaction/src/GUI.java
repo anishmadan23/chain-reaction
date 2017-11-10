@@ -49,6 +49,9 @@ public class GUI extends Application
     public TextField[] playerNameInputs = new TextField[8];
     GridPane settingsView;
 
+    Button backToSettings, saveSettings;
+    Label headingSettings;
+
 
 
 
@@ -97,6 +100,8 @@ public class GUI extends Application
 //        return gridpane;
 //    }
 
+
+
     public Scene[] makeNameAndColorPickerPage(){
 
 
@@ -109,58 +114,101 @@ public class GUI extends Application
             playerName.setFont(Font.font("Cambria",FontWeight.BOLD,20));
             playerName.setPadding(new Insets(0,0,0,10));
             GridPane.setHalignment(playerName,HPos.CENTER);
-            GridPane.setMargin(playerName,new Insets(20,0,0,0));
+            GridPane.setMargin(playerName,new Insets(20,20,0,0));
+            GridPane.setColumnSpan(playerName,2);
 
             playerNameInputs[i] = new TextField();
             playerNameInputs[i].setPromptText("Player 1");
-            playerNameInputs[i].getText();
+//            playerNameInputs[i].getText();
             playerNameInputs[i].setMinHeight(40);
-            playerNameInputs[i].setPadding(new Insets(0,20,0,0));
+            playerNameInputs[i].setPadding(new Insets(0,20,0,10));
             GridPane.setHalignment(playerNameInputs[i],HPos.LEFT);
-            GridPane.setMargin(playerNameInputs[i],new Insets(20,20,0,0));
+            GridPane.setMargin(playerNameInputs[i],new Insets(20,20,0,20));
+            GridPane.setColumnSpan(playerNameInputs[i],2);
+
+
+            ColorPicker colorPicker1 = new ColorPicker(defaultColorList[i]);
+//        ColorPicker colorPicker2 = new ColorPicker(Color.BLACK);
+            GridPane.setColumnSpan(colorPicker1,2);
+
 
             Button saveNameBtn = new Button("Save");
-            saveNameBtn.setPrefSize(80,20);
-            saveNameBtn.setFont(new Font("Arial",12));
-            GridPane.setHalignment(saveNameBtn, HPos.LEFT);
+            saveNameBtn.setPrefSize(Double.MAX_VALUE,Double.MAX_VALUE);
+            saveNameBtn.setFont(new Font("Arial",20));
+            GridPane.setMargin(saveNameBtn, new Insets(10,10,10,10));
+            GridPane.setHalignment(saveNameBtn, HPos.CENTER);
+//            Players p = playersForSettings[i];
+            int index =  i;
+            saveNameBtn.setOnMouseClicked(e->
+                                {System.out.println(index);
+                                playersForSettings[index].setName(playerNameInputs[index].getText());//fix null pointer issue here
+                                playersForSettings[index].setColor(colorPicker1.getValue());
+                                });
             //define onclick
 
 
             Label orbColor = new Label("Colour of Orb");
             orbColor.setFont(Font.font("Cambria",FontWeight.BOLD,20));
             orbColor.setPadding(new Insets(0,0,0,20));
+            GridPane.setColumnSpan(orbColor,2);
             GridPane.setHalignment(orbColor,HPos.CENTER);
+
+            backToSettings = new Button("Back");
+            GridPane.setMargin(backToSettings, new Insets(10,10,10,10));
+            backToSettings.setPrefSize(Double.MAX_VALUE,Double.MAX_VALUE);
+            backToSettings.setFont(new Font("Arial",20));
+            GridPane.setHalignment(backToMenuBtn, HPos.CENTER);
+            backToSettings.setOnMouseClicked(e->{
+                pstage.setScene(scene3);
+            });
+
+            headingSettings = new Label("Chain Reaction Settings");
+            headingSettings.setFont(Font.font("Cambria",FontWeight.BOLD,20));
+            GridPane.setHalignment(headingSettings, HPos.CENTER);
+            GridPane.setColumnSpan(headingSettings,2);
+
 
             RowConstraints row1 = new RowConstraints();
             row1.setPercentHeight(10);
 
             RowConstraints row2 = new RowConstraints();
-            row2.setPercentHeight(5);
+            row2.setPercentHeight(10);
 
             RowConstraints row3 = new RowConstraints();
             row3.setPercentHeight(10);
 
             ColumnConstraints col1 = new ColumnConstraints();
-            col1.setPercentWidth(50);
+            col1.setPercentWidth(15);
 
             ColumnConstraints col2 = new ColumnConstraints();
-            col2.setPercentWidth(50);
+            col2.setPercentWidth(35);
+
+            ColumnConstraints col3 = new ColumnConstraints();
+            col3.setPercentWidth(35);
+
+            ColumnConstraints col4 = new ColumnConstraints();
+            col4.setPercentWidth(15);
 
             nameAndColorPicker.getRowConstraints().addAll(row1,row2,row3);
-            nameAndColorPicker.getColumnConstraints().addAll(col1,col2);
+            nameAndColorPicker.getColumnConstraints().addAll(col1,col2,col3,col4);
 
-            nameAndColorPicker.add(playerName,0,0);
-            nameAndColorPicker.add(playerNameInputs[i],1,0);
-            nameAndColorPicker.add(saveNameBtn,1,1);
+
+            nameAndColorPicker.add(backToSettings,0,0);
+            nameAndColorPicker.add(headingSettings,1,0);
+            nameAndColorPicker.add(saveNameBtn,3,0);
+            nameAndColorPicker.add(playerName,0,1);
+
+            nameAndColorPicker.add(playerNameInputs[i],2,1);
+
             nameAndColorPicker.add(orbColor,0,2);
+            nameAndColorPicker.add(colorPicker1,2,2);
 
 //        GridPane.setColumnSpan(playerName,2);
 //        GridPane.setColumnSpan(playerNameInput,2);
 
 
-            ColorPicker colorPicker1 = new ColorPicker(defaultColorList[i]);
-//        ColorPicker colorPicker2 = new ColorPicker(Color.BLACK);
-            nameAndColorPicker.add(colorPicker1,1,2);
+
+
 
         nameAndColorPickerScenes[i] = new Scene(nameAndColorPicker,720,720);
         nameAndColorPickerScenes[i].setFill(Color.BLACK);
@@ -399,11 +447,10 @@ public class GUI extends Application
         backToMenuBtn.setPrefSize(150,30);
         backToMenuBtn.setFont(new Font("Cambria",13));
         backToMenuBtn.setOnAction(e -> ButtonClick(e));
+        GridPane.setHalignment(backToMenuBtn, HPos.LEFT);
 //        GridPane.setHalignment(resumeBtn, HPos.CENTER);
         settingsView.add(backToMenuBtn,0,0);
         GridPane.setMargin(backToMenuBtn,new Insets(0,0,0,20));
-
-
 
 
 

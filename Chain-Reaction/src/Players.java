@@ -2,23 +2,38 @@ import javafx.scene.paint.Color;
 
 public class Players {
     private String name;
-//    private float red;
-//    private float green;
-//    private float blue;
+    private double red;
+    private double green;
+    private double blue;
     private Color color;
     private boolean visited;
 
     public Players(String name1,Color color1){
         this.name = name1;
-//        this.red = r;
-//        this.green = g;
-//        this.blue = b;
+        this.red = color1.getRed();
+        this.green = color1.getGreen();
+        this.blue = color1.getBlue();
+        this.color = color1;
+        this.visited = false;
+    }
+    public Players(String name1,Color color1, double r, double g, double b){
+        this.name = name1;
+        this.red = r;
+        this.green = g;
+        this.blue = b;
         this.color = color1;
         this.visited = false;
     }
 
     public void setName(String name1) {
         this.name = name1;
+    }
+
+    public void setColor(Color color1){
+        this.color = color1;
+        this.red = color1.getRed();
+        this.blue = color1.getBlue();
+        this.green = color1.getGreen();
     }
 
     public String getName() {
