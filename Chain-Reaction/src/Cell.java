@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.Queue;
+import javafx.event.EventHandler;
+import javafx.event.ActionEvent;
 
 public class Cell implements Serializable {
 
@@ -85,7 +87,8 @@ public class Cell implements Serializable {
         return queue;
     }
 
-    public void explosion(int i, int j, Grid g) {        //requires an initial click on the cell
+    public void explosion(int i, int j, Grid g) 
+    {        //requires an initial click on the cell
         System.out.println("Inside explosion " + this.grid[i][j].getOrbs() + " " + "Coord " + i + " " + j);
         this.grid[i][j].setOrbs(this.grid[i][j].getOrbs() + 1);
         if (this.grid[i][j].getOrbs() < getCriticalMass(i, j))
@@ -97,7 +100,7 @@ public class Cell implements Serializable {
         {
 //            this.grid[i][j].setOrbs(0);
 
-
+            System.out.println(this.grid[i][j].getOrbs()+"Sfsdfsfesfsdsed");
             Queue<Coordinates> queue = getNeighbours(i, j);
             ArrayList<Coordinates> a = new ArrayList<>(queue);
             for (int f = 0; f < a.size(); f++) {
@@ -105,11 +108,25 @@ public class Cell implements Serializable {
             }
             int length = queue.size();
             System.out.println("Size : " + length);
-            for (int l = 0; l < length; l++) {
+            for (int l = 0; l < length; l++) 
+            {
                 Coordinates cxy = queue.poll();
                 g.shiftOrbs(i,j,cxy.getX(),cxy.getY(),this);
                 this.grid[i][j].setOrbs(0);
-                explosion(cxy.getX(), cxy.getY(),g);
+                g.animation1.setOnFinished(new EventHandler<ActionEvent>() 
+                {
+                    @Override
+                    public void handle(ActionEvent event) 
+                    {
+                        System.out.println(cxy.getX()+"   "+cxy.getY());
+                        System.out.println(g.root1[cxy.getX()][cxy.getY()].getChildren().remove(0));
+//                        g.root1[cxy.getX()][cxy.getY()].getChildren().remove(g.sphere11);
+                        //g.root1[cxy.getX()][cxy.getY()].getChildren().remove(g.line);
+                        explosion(cxy.getX(), cxy.getY(),g);
+
+                    }
+                });
+                
 
             }
 //            return grid;
