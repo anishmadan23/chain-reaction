@@ -37,7 +37,7 @@ public class Grid
 	PathTransition path1,path2,path3;
 	Group[][] root1;
 	Group root = new Group();
-	static ObservableList<Node> list;
+	ObservableList<Node> list;
 	int array[][];
 
 	GUI grc = new GUI();
@@ -100,15 +100,15 @@ public class Grid
 	{
 		line= new Line();
 		line.setStartX((inY + 1) * cellSize);
-		line.setStartY((inX + 1) * cellSize + (cellSize / 4));
+		line.setStartY((inX + 1) * cellSize + (cellSize / 2));
     	line.setEndX((toY + 1) * cellSize);
-    	line.setEndY((toX + 1) * cellSize + (cellSize / 4));
+    	line.setEndY((toX + 1) * cellSize + (cellSize / 2));
     	line.setStroke(Color.TRANSPARENT);
 
     	sphere11 = new Sphere();
 		sphere11.setRadius(9);
 		sphere11.setTranslateX((inX + 1) * cellSize);
-		sphere11.setTranslateY((inY + 1) * cellSize + (cellSize / 4));
+		sphere11.setTranslateY((inY + 1) * cellSize + (cellSize / 2));
 		PhongMaterial p1 = new PhongMaterial();
 		p1.setDiffuseColor(Color.BLUE);
 		sphere11.setMaterial(p1);
@@ -154,7 +154,7 @@ public class Grid
 
 	public Cell[][] createSphere(double x, double y,Cell c)
 	{
-		if(c.grid[(int)y][(int)x].getOrbs()==c.getCriticalMass((int)y,(int)x)-1)
+		if(c.grid[(int)y][(int)x].getOrbs()==c.getCriticalMass((int)y,(int)x,rows,cols)-1)
 			DURATION = Duration.seconds(2);
 		else
 			DURATION = Duration.seconds(4);
@@ -266,7 +266,7 @@ public class Grid
 				Circle circle = new Circle(12);
 				circle.setFill(Color.TRANSPARENT);
 				circle.setTranslateX((x + 1) * cellSize);
-				circle.setTranslateY((y + 1) * cellSize + (cellSize / 4));
+				circle.setTranslateY((y + 1) * cellSize + (cellSize / 2));
 				Rotate rotate = new Rotate();
 				rotate.setAngle(180);
 				rotate.setPivotX(0);
@@ -282,7 +282,7 @@ public class Grid
 				Circle circle = new Circle(12);
 				circle.setFill(Color.TRANSPARENT);
 				circle.setTranslateX((x + 1) * cellSize);
-				circle.setTranslateY((y + 1) * cellSize + (cellSize / 4));
+				circle.setTranslateY((y + 1) * cellSize + (cellSize / 2));
 				Rotate rotate = new Rotate();
 				rotate.setAngle(180);
 				rotate.setAxis(Rotate.X_AXIS);

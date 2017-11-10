@@ -27,8 +27,8 @@ import javafx.scene.input.MouseEvent;
 public class GUI extends Application
 {
 
-    public int rows=9;
-    public int cols=6;
+    public int rows;
+    public int cols;
     public int numberOfPlayers  = 2;
 
     public GUI() {
@@ -346,8 +346,14 @@ public class GUI extends Application
 
 
     public Scene Grid_GUI(){
+        if(comboBox.getValue().equals("Big")){
+            rows = 15 ;
+            cols = 10;
+            System.out.println("Changed");
+        }
         Grid g = new Grid(rows,cols);
         g.createGrid(rows,cols);
+        System.out.println("Rows "+rows+" Cols "+cols);
         Cell[][] cellsArray = new Cell[rows][cols];
         System.out.println(rows+" "+cols);
         Cell c = new Cell(cellsArray);
@@ -381,7 +387,7 @@ public class GUI extends Application
 //        Duration DURATION = Duration.seconds(4);
 //        Animation animation;
         scene2.setOnMouseClicked(event -> explosionEvent(event,g,c));
-        comboBox.setValue("Small");
+//        comboBox.setValue("Small");
 
         return scene2;
     }
@@ -410,8 +416,9 @@ public class GUI extends Application
 
         if (x < cols + 1 && y < rows + 1) {
             System.out.println("this" + (int) x + " " + (int) y);
+            System.out.println(rows+" "+cols);
 
-            c.explosion((int) y, (int) x,g);
+            c.explosion((int) y, (int) x,g,rows,cols);
         }
         for(int i = 0;i<rows;i++){
             for(int j = 0; j<cols ;j++){

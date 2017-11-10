@@ -11,15 +11,15 @@ public class Cell implements Serializable {
     private int orbs;
     private int X_Coordinate;
     private int Y_Coordinate;
-    public int rows = 15;
-    public int cols = 10;
+//    public int rows = 15;
+//    public int cols = 10;
     public Cell[][] grid;
 
     public Cell(int orbs1) {
         this.orbs = orbs1;
     }
 
-    public Cell(int x1, int y1, int orbs1) {
+    public Cell(int x1, int y1, int orbs1,int rows,int cols) {
         this.X_Coordinate = x1;
         this.Y_Coordinate = y1;
         this.orbs = orbs1;
@@ -51,47 +51,47 @@ public class Cell implements Serializable {
         this.orbs = orbs;
     }
 
-    public int getCriticalMass(int i, int j) {
-        if (isCorner(i, j)){System.out.println("In corner");
+    public int getCriticalMass(int i, int j,int rows,int cols) {
+        if (isCorner(i, j,rows, cols)){System.out.println("In corner");
             return 2;}
-        else if (isEdge(i, j))
+        else if (isEdge(i, j,rows,cols))
             return 3;
         else
             return 4;
     }
 
-    private boolean isCorner(int i, int j) {
+    private boolean isCorner(int i, int j,int rows, int cols) {
         return ((i == 0 && j == 0) || (i == rows - 1 && j == 0) || (i == 0 && j == cols - 1) ||
                 (i == rows - 1 && j == cols - 1));
     }
 
-    private boolean isEdge(int i, int j) {
+    private boolean isEdge(int i, int j,int rows, int cols) {
         return ((i == 0) || (j == 0) || (i == rows - 1) || (j == cols - 1));
     }
 
-    public boolean isValidNeighbour(int i, int j) {
+    public boolean isValidNeighbour(int i, int j,int rows, int  cols) {
         return (i >= 0 && i < rows && j >= 0 && j < cols);
     }
 
 
-    public Queue<Coordinates> getNeighbours(int i, int j) {
+    public Queue<Coordinates> getNeighbours(int i, int j,int rows, int cols) {
         Deque<Coordinates> queue = new LinkedList<>();
-        if (isValidNeighbour(i + 1, j))
+        if (isValidNeighbour(i + 1, j,rows,cols))
             queue.add(new Coordinates(i + 1, j));
-        if (isValidNeighbour(i, j + 1))
+        if (isValidNeighbour(i, j + 1,rows,cols))
             queue.add(new Coordinates(i, j + 1));
-        if (isValidNeighbour(i - 1, j))
+        if (isValidNeighbour(i - 1, j,rows,cols))
             queue.add(new Coordinates(i - 1, j));
-        if (isValidNeighbour(i, j - 1))
+        if (isValidNeighbour(i, j - 1,rows,cols))
             queue.add(new Coordinates(i, j - 1));
         return queue;
     }
 
-    public void explosion(int i, int j, Grid g) 
+    public void explosion(int i, int j, Grid g,int rows, int cols)
     {        //requires an initial click on the cell
         System.out.println("Inside explosion " + this.grid[i][j].getOrbs() + " " + "Coord " + i + " " + j);
         this.grid[i][j].setOrbs(this.grid[i][j].getOrbs() + 1);
-        if (this.grid[i][j].getOrbs() < getCriticalMass(i, j))
+        if (this.grid[i][j].getOrbs() < getCriticalMass(i, j,rows,cols))
         {
             this.grid = g.createSphere(j,i,this);
             return;
@@ -101,7 +101,7 @@ public class Cell implements Serializable {
 //            this.grid[i][j].setOrbs(0);
 
             System.out.println(this.grid[i][j].getOrbs()+"Sfsdfsfesfsdsed");
-            Queue<Coordinates> queue = getNeighbours(i, j);
+            Queue<Coordinates> queue = getNeighbours(i, j,rows, cols);
             ArrayList<Coordinates> a = new ArrayList<>(queue);
             for (int f = 0; f < a.size(); f++) {
                 System.out.println("Neighbours " + a.get(f).getX() + " " + a.get(f).getY());
@@ -122,7 +122,7 @@ public class Cell implements Serializable {
                         System.out.println(g.root1[cxy.getX()][cxy.getY()].getChildren().remove(0));
 //                        g.root1[cxy.getX()][cxy.getY()].getChildren().remove(g.sphere11);
                         //g.root1[cxy.getX()][cxy.getY()].getChildren().remove(g.line);
-                        explosion(cxy.getX(), cxy.getY(),g);
+                        explosion(cxy.getX(), cxy.getY(),g,rows,cols);
 
                     }
                 });
