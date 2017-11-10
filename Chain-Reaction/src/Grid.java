@@ -31,28 +31,29 @@ import java.util.concurrent.TimeUnit;
 
 public class Grid
 {
+
+	ComboBox<String> comboBox;
 	public int cellOffset, xLeftShift, yBottomShift,xGridStart,yGridStart,cellSize;
 	PathTransition path1,path2,path3;
 	Group[][] root1;
 	Group root = new Group();
-	ObservableList<Node> list;
+	static ObservableList<Node> list;
 	int array[][];
 
 	GUI grc = new GUI();
 	int rows = grc.rows;
 	int cols = grc.cols;
-	Cell[][] cellArray = new Cell[rows][cols];
 
 
-	public Grid()
-	{
+
+	public Grid(int rows, int cols){
 		root1 = new Group[rows][cols];
 		list = root.getChildren();
 		array = new int[cols][rows];
-		for(int i = 0 ;i<rows; i++)
-		{
-			for(int j = 0;j<cols ;j++)
-			{
+		Cell[][] cellArray = new Cell[rows][cols];
+		for(int i = 0 ;i<rows; i++){
+			for(int j = 0;j<cols ;j++){
+
 				root1[i][j] = new Group();
 				cellArray[i][j] = new Cell(0);
 			}
@@ -60,22 +61,21 @@ public class Grid
 
 	}
 
-	public void calculateOffsetsForGrid()
-	{
-		if(rows == 9 && cols == 6)
-		{
+
+	public void calculateOffsetsForGrid(int rows, int cols){
+		if(rows == 9 && cols == 6){
 			cellSize = 50;
 			xGridStart = 20;
-			yGridStart = 40;
+			yGridStart = 50;
 			xLeftShift = 12;
 			yBottomShift = 18;
-			cellOffset = 2;
+			cellOffset = 4;
 		}
 		else
 		{
 			cellSize = 45;
 			xGridStart = 20;
-			yGridStart = 30;
+			yGridStart = 45;
 			xLeftShift = 10;
 			yBottomShift = 16;
 			cellOffset =2;	//xLeftShift, yBottomShift and CellOffset are proportional, eg XL=15,YBS=24,CO=3
@@ -134,6 +134,12 @@ public class Grid
 			Node x = root1[inX][inY].getChildren().get(0);
 			root1[inX][inY].getChildren().remove(x);
 			array[inY][inX]--;
+
+
+//			list.remove(x);
+//			x.setTranslateX((toX + 1) * cellSize);
+//			x.setTranslateY((toY + 1) * cellSize + (cellSize / 2));
+//		}
 		}
 	}
 
@@ -163,7 +169,7 @@ public class Grid
 		{
 			System.out.println((int) x + " " + (int) y);
 			sphere.setTranslateX((x + 1) * cellSize);
-			sphere.setTranslateY((y + 1) * cellSize + (cellSize / 4));
+			sphere.setTranslateY((y + 1) * cellSize + (cellSize / 2));
 			array[(int) x][(int) y] = 1;
     		c.grid[(int)y][(int)x].setOrbs(1);
 			root1[(int)y][(int)x].getChildren().add(sphere);
@@ -172,12 +178,35 @@ public class Grid
 
 		else if (array[(int) x][(int) y] == 1 ) {
 			sphere.setTranslateX((x + 1) * cellSize);
-			sphere.setTranslateY((y + 1) * cellSize + (cellSize / 4));
+			sphere.setTranslateY((y + 1) * cellSize + (cellSize / 2));
 			array[(int) x][(int) y] = 2;
 			c.grid[(int)y][(int)x].setOrbs(2);
+
 			
 			animate((int)x,(int)y, sphere);
 			
+
+
+//			path1 = new PathTransition();
+//			Circle circle = new Circle(12);
+//			circle.setFill(Color.TRANSPARENT);
+//			circle.setTranslateX((x + 1) * cellSize);
+//			circle.setTranslateY((y + 1) * cellSize + (cellSize / 2));
+//			Rotate rotate = new Rotate();
+//			rotate.setAngle(180);
+//			rotate.setPivotX(0);
+//			rotate.setPivotY(0);
+//			rotate.setAxis(Rotate.Y_AXIS);
+//			circle.getTransforms().addAll(rotate);
+//			path1.setNode(sphere);
+//			path1.setPath(circle);
+//			path1.setOrientation(OrientationType.ORTHOGONAL_TO_TANGENT);
+//			path1.setInterpolator(Interpolator.LINEAR);
+//
+//			path1.setDuration(DURATION);
+//			path1.setCycleCount(Timeline.INDEFINITE);
+//
+//			path1.play();
 			root1[(int)y][(int)x].getChildren().add(sphere);
 
 		} 
@@ -185,12 +214,42 @@ public class Grid
 		else if (array[(int) x][(int) y] == 2) 
 		{
 			sphere.setTranslateX((x + 1) * cellSize);
-			sphere.setTranslateY((y + 1) * cellSize + (cellSize / 4));
+			sphere.setTranslateY((y + 1) * cellSize + (cellSize / 2));
 			array[(int) x][(int) y] = 3;
 			c.grid[(int)y][(int)x].setOrbs(3);
 
 			animate((int)x,(int)y, sphere);			
 
+
+//			path2 = new PathTransition();
+//			Circle circle = new Circle(12);
+//			circle.setFill(Color.TRANSPARENT);
+//			circle.setTranslateX((x + 1) * cellSize);
+//			circle.setTranslateY((y + 1) * cellSize + (cellSize / 2));
+//			Rotate rotate = new Rotate();
+//			rotate.setAngle(180);
+//			rotate.setAxis(Rotate.X_AXIS);
+//			rotate.setPivotX(5);
+//			rotate.setPivotY(0);
+//			circle.getTransforms().addAll(rotate);
+//			path2.setNode(sphere);
+//			path2.setPath(circle);
+//			path2.setOrientation(OrientationType.ORTHOGONAL_TO_TANGENT);
+//			path2.setInterpolator(Interpolator.LINEAR);
+//
+//
+//			path2.setDuration(DURATION);
+//
+//			path3 = path1;
+//			if(DURATION==Duration.seconds(2)){
+//				path1.stop();
+//				path3.setDuration(DURATION);
+//			}
+//
+//			path2.setCycleCount(Timeline.INDEFINITE);
+////			root1[(int)y][(int)x].getChildren().add(sphere);
+//			path3.play();
+//			path2.play();
 			root1[(int)y][(int)x].getChildren().add(sphere);
 
 		}
@@ -236,7 +295,9 @@ public class Grid
 			}
 		}
 
-	public void createGrid()
+
+
+	public void createGrid(int rows, int cols)
 	{	Button undoBtn  = new Button("Undo");
 		undoBtn.setPrefSize(120,40);
 		undoBtn.setFont(Font.font("Arial", FontWeight.BOLD,20));
@@ -244,8 +305,7 @@ public class Grid
 		undoBtn.setLayoutY(100);
 		list.add(undoBtn);
 
-
-		final ComboBox<String> comboBox = new ComboBox<>();
+		comboBox = new ComboBox<>();
 		comboBox.setLayoutX(450);
 		comboBox.setLayoutY(300);
 		comboBox.getItems().addAll("New Game","Go to Main Menu");
@@ -254,7 +314,7 @@ public class Grid
 		comboBox.setStyle("-fx-font: 15px \"Serif\";");
 		list.add(comboBox);
 
-		calculateOffsetsForGrid();
+		calculateOffsetsForGrid(rows,cols);
 
 		for(int i=0; i<rows+1; i++)
 		{
