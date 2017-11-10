@@ -265,7 +265,7 @@ public class GUI extends Application
 
 //        g.root.getChildren().addAll(g.root1);
 //        StackPane pane = new StackPane();
-        scene2 = new Scene(g.root, 720, 600);
+        scene2 = new Scene(g.root, 720, 720);
         scene2.setFill(Color.BLACK);
 
 
