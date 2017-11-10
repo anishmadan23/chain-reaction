@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8c62cfdf-be90-4d2c-b70c-ff0730833b79" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Chain-Reaction/GUI.class" afterPath="$PROJECT_DIR$/out/production/Chain-Reaction/GUI.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Chain-Reaction/Players.class" afterPath="$PROJECT_DIR$/out/production/Chain-Reaction/Players.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Chain-Reaction/src/GUI.java" afterPath="$PROJECT_DIR$/Chain-Reaction/src/GUI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Chain-Reaction/src/Players.java" afterPath="$PROJECT_DIR$/Chain-Reaction/src/Players.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Chain-Reaction/src/Grid.java" afterPath="$PROJECT_DIR$/Chain-Reaction/src/Grid.java" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -52,11 +49,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GUI.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GUI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Chain-Reaction/src/GUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
-              <caret line="64" column="32" lean-forward="true" selection-start-line="64" selection-start-column="32" selection-end-line="64" selection-end-column="32" />
+            <state relative-caret-position="-234">
+              <caret line="47" column="47" lean-forward="true" selection-start-line="47" selection-start-column="47" selection-end-line="47" selection-end-column="47" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -77,11 +74,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Grid.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Grid.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Chain-Reaction/src/Grid.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1836">
-              <caret line="102" column="64" lean-forward="false" selection-start-line="102" selection-start-column="64" selection-end-line="102" selection-end-column="64" />
+            <state relative-caret-position="198">
+              <caret line="74" column="32" lean-forward="false" selection-start-line="74" selection-start-column="32" selection-end-line="74" selection-end-column="32" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -131,6 +128,7 @@
       <find>15</find>
       <find>cellsarray</find>
       <find>save</find>
+      <find>backToMenuBtn</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -149,9 +147,9 @@
         <option value="$PROJECT_DIR$/Chain-Reaction/src/Settings.java" />
         <option value="$PROJECT_DIR$/Chain-Reaction/src/Cell.java" />
         <option value="$PROJECT_DIR$/Chain-Reaction/src/Game.java" />
-        <option value="$PROJECT_DIR$/Chain-Reaction/src/Grid.java" />
         <option value="$PROJECT_DIR$/Chain-Reaction/src/Players.java" />
         <option value="$PROJECT_DIR$/Chain-Reaction/src/GUI.java" />
+        <option value="$PROJECT_DIR$/Chain-Reaction/src/Grid.java" />
       </list>
     </option>
   </component>
@@ -373,12 +371,12 @@
       <workItem from="1509002520320" duration="3498000" />
       <workItem from="1509116321053" duration="28104000" />
       <workItem from="1510124468518" duration="23390000" />
-      <workItem from="1510304330198" duration="4116000" />
+      <workItem from="1510304330198" duration="4221000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="149193000" />
+    <option name="totallyTimeSpent" value="149298000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="-4" width="1368" height="780" extended-state="6" />
@@ -917,16 +915,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Chain-Reaction/src/Grid.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1836">
-          <caret line="102" column="64" lean-forward="false" selection-start-line="102" selection-start-column="64" selection-end-line="102" selection-end-column="64" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Chain-Reaction/src/Players.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="594">
@@ -948,8 +936,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Chain-Reaction/src/GUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="64" column="32" lean-forward="true" selection-start-line="64" selection-start-column="32" selection-end-line="64" selection-end-column="32" />
+        <state relative-caret-position="-234">
+          <caret line="47" column="47" lean-forward="true" selection-start-line="47" selection-start-column="47" selection-end-line="47" selection-end-column="47" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Chain-Reaction/src/Grid.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="74" column="32" lean-forward="false" selection-start-line="74" selection-start-column="32" selection-end-line="74" selection-end-column="32" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

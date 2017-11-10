@@ -72,7 +72,7 @@ public class Grid
 			xGridStart = 20;
 			yGridStart = 45;
 			xLeftShift = 10;
-			yBottomShift = 16;
+			yBottomShift = 16;	
 			cellOffset =2;	//xLeftShift, yBottomShift and CellOffset are proportional, eg XL=15,YBS=24,CO=3
 		}
 	}
