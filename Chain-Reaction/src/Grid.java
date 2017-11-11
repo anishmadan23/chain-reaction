@@ -44,10 +44,6 @@ public class Grid
 	int rows = grc.rows;
 	int cols = grc.cols;
 
-	Color globalColor;
-
-
-
 	public Grid(int rows, int cols){
 		root1 = new Group[rows][cols];
 		list = root.getChildren();
@@ -75,23 +71,23 @@ public class Grid
 		}
 		else
 		{
-			cellSize = 45;
+			cellSize = 42;
 			xGridStart = 20;
-			yGridStart = 45;
+			yGridStart = 42;
 			xLeftShift = 10;
 			yBottomShift = 16;	
 			cellOffset =2;	//xLeftShift, yBottomShift and CellOffset are proportional, eg XL=15,YBS=24,CO=3
 		}
 	}
 
-	Duration DURATION = Duration.seconds(4);
+	Duration DURATION = Duration.seconds(2);
 	Animation animation, animation1;
 	Sphere sphere11;
 	Line line;
 
 	Transition createTransition1(Shape path, Sphere node)
 	{
-		PathTransition t = new PathTransition(Duration.seconds(0.5), path, node);
+		PathTransition t = new PathTransition(Duration.seconds(0.4), path, node);
 		t.setOrientation(OrientationType.ORTHOGONAL_TO_TANGENT);
 		t.setCycleCount(1);
 		t.setInterpolator(Interpolator.LINEAR);
@@ -156,7 +152,7 @@ public class Grid
 
 	public Cell[][] createSphere(double x, double y,Players[] p, int playerIndex,Cell c)
 	{
-		if(c.grid[(int)y][(int)x].getOrbs()==c.getCriticalMass((int)y,(int)x,rows,cols)-1)
+		if(c.grid[(int)y][(int)x].getOrbs()==c.getCriticalMass((int)y,(int)x,rows,cols))
 			DURATION = Duration.seconds(2);
 		else
 			DURATION = Duration.seconds(4);
@@ -258,13 +254,13 @@ public class Grid
 	public void createGrid(int rows, int cols,Color color1)
 	{	Button undoBtn  = new Button("Undo");
 		undoBtn.setPrefSize(120,40);
-		undoBtn.setFont(Font.font("Arial", FontWeight.BOLD,20));
-		undoBtn.setLayoutX(450);
+		undoBtn.setFont(Font.font("Arial", FontWeight.SEMI_BOLD,18));
+		undoBtn.setLayoutX(500);
 		undoBtn.setLayoutY(100);
 		list.add(undoBtn);
 
 		comboBox = new ComboBox<>();
-		comboBox.setLayoutX(450);
+		comboBox.setLayoutX(500);
 		comboBox.setLayoutY(300);
 		comboBox.getItems().addAll("New Game","Go to Main Menu");
 		comboBox.setValue("Options");

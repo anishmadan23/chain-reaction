@@ -450,7 +450,7 @@ public class GUI extends Application
 
 //        g.root.getChildren().addAll(g.root1);
 //        StackPane pane = new StackPane();
-        scene2 = new Scene(g.root, 720, 600);
+        scene2 = new Scene(g.root, 720, 720);
         scene2.setFill(Color.BLACK);
 
 
@@ -467,9 +467,9 @@ public class GUI extends Application
             xGridStart = 20;
             yGridStart = 50;
         } else {
-            cellSize = 45;
+            cellSize = 43;
             xGridStart = 20;
-            yGridStart = 45;
+            yGridStart = 43;
         }
         double x = event.getSceneX();
         double y = event.getSceneY();
@@ -613,6 +613,7 @@ public class GUI extends Application
         pstage = primaryStage;
         primaryStage.setTitle("Chain Reaction");
         scene1 = makeInitialPage();
+        primaryStage.setResizable(false);
 
 
         primaryStage.setScene(scene1);
