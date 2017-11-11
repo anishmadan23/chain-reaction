@@ -44,6 +44,8 @@ public class Grid
 	int rows = grc.rows;
 	int cols = grc.cols;
 
+	Color globalColor;
+
 
 
 	public Grid(int rows, int cols){
@@ -96,7 +98,7 @@ public class Grid
 		return t;
 	}
 
-	public void move(int inX, int inY, int toX, int toY)
+	public void move(int inX, int inY, int toX, int toY,Players[] p, int playerIndex)
 	{
 		line= new Line();
 		line.setStartX((inY + 1) * cellSize);
@@ -110,20 +112,24 @@ public class Grid
 		sphere11.setTranslateX((inX + 1) * cellSize);
 		sphere11.setTranslateY((inY + 1) * cellSize + (cellSize / 2));
 		PhongMaterial p1 = new PhongMaterial();
-		p1.setDiffuseColor(Color.BLUE);
+		p1.setDiffuseColor(p[playerIndex].getColor());
 		sphere11.setMaterial(p1);
 		
 		root1[toX][toY].getChildren().add(sphere11);
+
+
 		//root1[toX][toY].getChildren().add(line);
 
     	animation1 = new ParallelTransition(createTransition1(line, sphere11));
 		animation1.play();
+
+
 	}
 
-	public void shiftOrbs(int inX, int inY, int toX, int toY,Cell c)
+	public void shiftOrbs(int inX, int inY, int toX, int toY,Players[] p, int playerIndex,Cell c)
 	{
 
-		move(inX, inY,toX,toY);
+		move(inX, inY,toX,toY,p,playerIndex);
 
 		System.out.println("Array val :"+array[inY][inX]);
 		if(array[inY][inX]>0) 

@@ -5,13 +5,15 @@ import java.util.LinkedList;
 import java.util.Queue;
 import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
+import javafx.scene.paint.PhongMaterial;
+import javafx.scene.shape.Sphere;
 
 public class Cell implements Serializable {
 
     private int orbs;
     private int X_Coordinate;
     private int Y_Coordinate;
-//    public int rows = 15;
+    //    public int rows = 15;
 //    public int cols = 10;
     public Cell[][] grid;
 
@@ -87,49 +89,80 @@ public class Cell implements Serializable {
         return queue;
     }
 
-    public void explosion(int i, int j, Grid g,int rows, int cols, int playerIndex, Players[] p)
-    {        //requires an initial click on the cell
+    public int explosion(int i, int j, Grid g,int rows, int cols, int playerIndex, Players[] p,GUI gr)
+    {
         System.out.println("Inside explosion " + this.grid[i][j].getOrbs() + " " + "Coord " + i + " " + j);
-        this.grid[i][j].setOrbs(this.grid[i][j].getOrbs() + 1);
-        if (this.grid[i][j].getOrbs() < getCriticalMass(i, j,rows,cols))
-        {
+//        this.grid[i][j].setOrbs(this.grid[i][j].getOrbs()+1);
+
+        if (this.grid[i][j].getOrbs() == 0){
             this.grid = g.createSphere(j,i,p,playerIndex,this);
-            return;
+//            this.grid[i][j].setOrbs(this.grid[i][j].getOrbs()+1);
+            return 1;
         }
-        else
-        {
-//            this.grid[i][j].setOrbs(0);
+        else if (this.grid[i][j].getOrbs() < getCriticalMass(i, j,rows,cols) -1) {
 
-            System.out.println(this.grid[i][j].getOrbs()+"Sfsdfsfesfsdsed");
-            Queue<Coordinates> queue = getNeighbours(i, j,rows, cols);
-            ArrayList<Coordinates> a = new ArrayList<>(queue);
-            for (int f = 0; f < a.size(); f++) {
-                System.out.println("Neighbours " + a.get(f).getX() + " " + a.get(f).getY());
-            }
-            int length = queue.size();
-            System.out.println("Size : " + length);
-            for (int l = 0; l < length; l++) 
-            {
-                Coordinates cxy = queue.poll();
-                g.shiftOrbs(i,j,cxy.getX(),cxy.getY(),this);
-                this.grid[i][j].setOrbs(0);
-                g.animation1.setOnFinished(new EventHandler<ActionEvent>() 
+
+
+                Sphere x = (Sphere) g.root1[i][j].getChildren().get(0);
+                PhongMaterial ph = (PhongMaterial)x.getMaterial();
+
+                if(p[playerIndex].getColor().equals(ph.getDiffuseColor())){
+                    this.grid = g.createSphere(j, i, p, playerIndex, this);
+//             this.grid[i][j].setOrbs(this.grid[i][j].getOrbs() + 1);
+                    return 1;}
+
+
+                else{
+                    return 0;
+                }
+         }
+
+        else {
+
+            Sphere x = (Sphere) g.root1[i][j].getChildren().get(0);
+            PhongMaterial ph = (PhongMaterial)x.getMaterial();
+            if(p[playerIndex].getColor().equals(ph.getDiffuseColor())){
+//                this.grid[i][j].setOrbs(this.grid[i][j].getOrbs()+1);
+
+
+                System.out.println(this.grid[i][j].getOrbs()+"Sfsdfsfesfsdsed");
+                Queue<Coordinates> queue = getNeighbours(i, j,rows, cols);
+                ArrayList<Coordinates> a = new ArrayList<>(queue);
+                for (int f = 0; f < a.size(); f++) {
+                    System.out.println("Neighbours " + a.get(f).getX() + " " + a.get(f).getY());
+                }
+                int length = queue.size();
+                System.out.println("Size : " + length);
+                for (int l = 0; l < length; l++)
                 {
-                    @Override
-                    public void handle(ActionEvent event) 
+                    Coordinates cxy = queue.poll();
+                    g.shiftOrbs(i,j,cxy.getX(),cxy.getY(),p,playerIndex,this);
+                    this.grid[i][j].setOrbs(0);
+                    g.animation1.setOnFinished(new EventHandler<ActionEvent>()
                     {
-                        System.out.println(cxy.getX()+"   "+cxy.getY());
-                        System.out.println(g.root1[cxy.getX()][cxy.getY()].getChildren().remove(0));
+                        @Override
+                        public void handle(ActionEvent event)
+                        {
+                            System.out.println(cxy.getX()+"   "+cxy.getY());
+                            System.out.println(g.root1[cxy.getX()][cxy.getY()].getChildren().remove(0));
+                            for(int i = 0;i<g.root1[cxy.getX()][cxy.getY()].getChildren().size();i++){
+                                Sphere x = (Sphere) g.root1[cxy.getX()][cxy.getY()].getChildren().get(i);
+                                PhongMaterial ph = new PhongMaterial();
+                                ph.setDiffuseColor(p[playerIndex].getColor());
+                                x.setMaterial(ph);
+                            }
 //                        g.root1[cxy.getX()][cxy.getY()].getChildren().remove(g.sphere11);
-                        //g.root1[cxy.getX()][cxy.getY()].getChildren().remove(g.line);
-                        explosion(cxy.getX(), cxy.getY(),g,rows,cols,playerIndex,p);
+                            //g.root1[cxy.getX()][cxy.getY()].getChildren().remove(g.line);
+                            explosion(cxy.getX(), cxy.getY(),g,rows,cols,playerIndex,p,gr);
 
-                    }
-                });
-                
-
+                        }
+                    });
+                }
+                return 1;
             }
-//            return grid;
+            else{
+                return 0;
+            }
         }
     }
 }

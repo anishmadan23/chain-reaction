@@ -31,11 +31,15 @@ public class GUI extends Application
     public int cols;
     public int playersInGame  = 2;
 
+    public int mouseClicks = 0;
+    public int playerIndex1 = 0;
+    public int colorIndex1 = 0;
+    public int  r  = 1;
     boolean initialisedTextFields = false;
     boolean initalisedColorPicker = false;
     boolean initialisedPlayers = false;
 
-    public int mouseClicks = 0;
+
 
 
     public GUI() {
@@ -371,6 +375,9 @@ public class GUI extends Application
                 scene2 = Grid_GUI();
                 pstage.setScene(scene2);
                 mouseClicks = 0;
+                playerIndex1 = 0;
+                colorIndex1 = 0;
+                r  = 1;
             }
             else if(g.comboBox.getValue().equals("Go to Main Menu")){
 //                scene1 = makeInitialPage();
@@ -417,15 +424,21 @@ public class GUI extends Application
         y = Math.floor(y);
 
         if (x < cols + 1 && y < rows + 1) {
-            mouseClicks++;
-            int playerIndex=  (mouseClicks-1)%(playersInGame);
-            int colorIndex = mouseClicks%playersInGame;
-            g.changeGridColor(playersForSettings[colorIndex].getColor());
-            System.out.println(playerIndex+" "+playersForSettings[playerIndex].getColor());
+
+            System.out.println("MouseClicks = "+mouseClicks);
+//            g.changeGridColor(playersForSettings[colorIndex1].getColor());
+            System.out.println(playerIndex1+" "+playersForSettings[playerIndex1].getColor());
             System.out.println("this" + (int) x + " " + (int) y);
             System.out.println(rows+" "+cols);
 
-            c.explosion((int) y, (int) x,g,rows,cols,playerIndex, playersForSettings);
+            r = c.explosion((int) y, (int) x,g,rows,cols,playerIndex1, playersForSettings,this);
+            mouseClicks+=r;
+            playerIndex1=  (mouseClicks)%(playersInGame);
+            colorIndex1 = (mouseClicks)%playersInGame;
+            g.changeGridColor(playersForSettings[colorIndex1].getColor());
+            System.out.println("r = "+r);
+
+
         }
         for(int i = 0;i<rows;i++){
             for(int j = 0; j<cols ;j++){
@@ -501,6 +514,9 @@ public class GUI extends Application
         }
         else if(event.getSource()==playGame){
                 mouseClicks = 0;
+                playerIndex1 = 0;
+                colorIndex1 = 0;
+                r  = 1;
                 scene2 = Grid_GUI();
                 pstage.setScene(scene2);
 
