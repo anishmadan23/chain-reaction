@@ -355,7 +355,7 @@ public class GUI extends Application
 
 
         Grid g = new Grid(rows,cols);
-        g.createGrid(rows,cols);
+        g.createGrid(rows,cols,playersForSettings[0].getColor());
         System.out.println("Rows "+rows+" Cols "+cols);
         Cell[][] cellsArray = new Cell[rows][cols];
         System.out.println(rows+" "+cols);
@@ -419,6 +419,8 @@ public class GUI extends Application
         if (x < cols + 1 && y < rows + 1) {
             mouseClicks++;
             int playerIndex=  (mouseClicks-1)%(playersInGame);
+            int colorIndex = mouseClicks%playersInGame;
+            g.changeGridColor(playersForSettings[colorIndex].getColor());
             System.out.println(playerIndex+" "+playersForSettings[playerIndex].getColor());
             System.out.println("this" + (int) x + " " + (int) y);
             System.out.println(rows+" "+cols);

@@ -240,8 +240,16 @@ public class Grid
 		}
 
 
+	public void changeGridColor(Color color){
+		for(int i = 0;i<list.size();i++){
+			if(list.get(i) instanceof Line){
+				((Line) list.get(i)).setStroke(color);
+			}
+		}
+	}
 
-	public void createGrid(int rows, int cols)
+
+	public void createGrid(int rows, int cols,Color color1)
 	{	Button undoBtn  = new Button("Undo");
 		undoBtn.setPrefSize(120,40);
 		undoBtn.setFont(Font.font("Arial", FontWeight.BOLD,20));
@@ -263,7 +271,7 @@ public class Grid
 		for(int i=0; i<rows+1; i++)
 		{
 			Line line= new Line();
-			line.setStroke(Color.BLUE);
+			line.setStroke(color1);
 			line.setStartX(xGridStart);
 			line.setStartY(yGridStart+(cellSize*i));
 			line.setEndX(xGridStart+(cellSize*cols));
@@ -274,7 +282,7 @@ public class Grid
 		for(int i=0; i<rows+1; i++)
 		{
 			Line line= new Line();
-			line.setStroke(Color.BLUE);
+			line.setStroke(color1);
 			line.setStartX(xGridStart+xLeftShift);
 			int effCell = cellSize - cellOffset;
 			line.setStartY(yGridStart+yBottomShift+(effCell*i));
@@ -286,7 +294,7 @@ public class Grid
 		for(int i=0; i<cols+1; i++)
 		{
 			Line line= new Line();
-			line.setStroke(Color.BLUE);
+			line.setStroke(color1);
 			line.setStartX(xGridStart+(cellSize*i));
 			line.setStartY(yGridStart);
 			line.setEndX(xGridStart+(cellSize*i));
@@ -297,7 +305,7 @@ public class Grid
 		for(int i=0; i<cols+1; i++)
 		{
 			Line line= new Line();
-			line.setStroke(Color.BLUE);
+			line.setStroke(color1);
 			int effCell = cellSize - cellOffset;
 			line.setStartX(xGridStart+xLeftShift+(effCell*i));
 			line.setStartY(yGridStart+yBottomShift);
@@ -311,7 +319,7 @@ public class Grid
 			for(int j=0; j<cols+1; j++)
 			{
 				Line line= new Line();
-				line.setStroke(Color.BLUE);
+				line.setStroke(color1);
 				line.setStartX(xGridStart+(cellSize*j));
 				line.setStartY(yGridStart+(cellSize*i));
 				int effCell = cellSize - cellOffset;
