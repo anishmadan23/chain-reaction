@@ -1,16 +1,21 @@
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
+
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.Sphere;
 
 public class Cell implements Serializable {
 
+
     private int orbs;
+    public Alert alert = new Alert(Alert.AlertType.INFORMATION);
     private int X_Coordinate;
     private int Y_Coordinate;
     //    public int rows = 15;
@@ -74,6 +79,61 @@ public class Cell implements Serializable {
     public boolean isValidNeighbour(int i, int j,int rows, int  cols) {
         return (i >= 0 && i < rows && j >= 0 && j < cols);
     }
+
+    @SuppressWarnings("Duplicates")
+    public int checkIfWon(Grid g, Players[] p,int playerIndex,int rows, int cols){
+        int c = 0;int sum =0;
+        Color color = null;
+        for(int i = 0;i<rows;i++){
+            for(int j = 0;j<cols;j++){
+                if(g.root1[i][j].getChildren().size()>0){
+                    Sphere x = (Sphere) g.root1[i][j].getChildren().get(0);
+                    PhongMaterial ph = (PhongMaterial)x.getMaterial();
+                    color = ph.getDiffuseColor();
+                    break;
+                }
+            }
+        }
+        for(int i = 0;i<rows;i++) {
+            for (int j = 0; j < cols; j++) {
+                if (g.root1[i][j].getChildren().size() > 0) {
+                    sum++;
+                }
+            }
+        }
+
+
+
+        System.out.println("Blue = "+color.getBlue());
+        System.out.println("Red = "+color.getRed());
+        System.out.println("Green = "+color.getGreen());
+
+        for(int i = 0;i<rows;i++){
+            for(int j = 0;j<cols;j++) {
+                if (g.root1[i][j].getChildren().size() > 0) {
+                    Sphere x = (Sphere) g.root1[i][j].getChildren().get(0);
+                    PhongMaterial ph = (PhongMaterial) x.getMaterial();
+                    System.out.println("Blue1 = "+ph.getDiffuseColor().getBlue());
+                    System.out.println("Red1 = "+ph.getDiffuseColor().getRed());
+                    System.out.println("Green1 = "+ph.getDiffuseColor().getGreen());
+                    if (ph.getDiffuseColor().getBlue() != color.getBlue() || ph.getDiffuseColor().getRed() != color.getRed()
+                            || ph.getDiffuseColor().getGreen() != color.getGreen() ) {
+                        System.out.println("Not Same");
+                        c = 1;
+                        break;
+                    }
+
+                }
+            }
+        }
+        if(c==0 && sum>=2){
+            System.out.println("Same");
+            c=2;
+        }
+        return c;
+
+    }
+
 
 
     public Queue<Coordinates> getNeighbours(int i, int j,int rows, int cols) {
@@ -153,10 +213,42 @@ public class Cell implements Serializable {
                             }
 //                        g.root1[cxy.getX()][cxy.getY()].getChildren().remove(g.sphere11);
                             //g.root1[cxy.getX()][cxy.getY()].getChildren().remove(g.line);
-                            explosion(cxy.getX(), cxy.getY(),g,rows,cols,playerIndex,p,gr);
+                            if( gr.mouseClicks>1 && checkIfWon(g,p,playerIndex,rows,cols)==2) {
+
+                                Platform.runLater(new Runnable() {
+                                    @Override
+                                    public final void run() {
+
+
+                                        alert.setTitle("You Won!");
+                                        alert.setHeaderText(null);
+                                        alert.setContentText(p[playerIndex].getName()+" won!");
+                                        ButtonType b1 = new ButtonType("New Game");
+                                        ButtonType buttonTypeCancel = new ButtonType("Exit", ButtonBar.ButtonData.CANCEL_CLOSE);
+                                        alert.getButtonTypes().setAll(b1,buttonTypeCancel);
+
+                                        Optional<ButtonType> result = alert.showAndWait();
+                                        if (result.get() == b1) {
+                                            gr.mouseClicks = 0;
+                                            gr.playerIndex1 = 0;
+                                            gr.colorIndex1 = 0;
+                                            gr.r  = 1;
+                                            gr.scene2 = gr.Grid_GUI();
+                                            gr.pstage.setScene(gr.scene2);
+
+                                        } else {
+                                            System.exit(0);
+                                        }
+                                    }
+
+                                });
+                            }
+                            else{
+                            explosion(cxy.getX(), cxy.getY(), g, rows, cols, playerIndex, p, gr);}
 
                         }
                     });
+
                 }
                 return 1;
             }

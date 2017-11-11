@@ -22,6 +22,7 @@ import javafx.event.ActionEvent;
 
 import javafx.scene.input.MouseEvent;
 
+import java.util.Optional;
 
 
 public class GUI extends Application
@@ -38,6 +39,10 @@ public class GUI extends Application
     boolean initialisedTextFields = false;
     boolean initalisedColorPicker = false;
     boolean initialisedPlayers = false;
+
+
+
+
 
 
 
@@ -96,6 +101,59 @@ public class GUI extends Application
         launch(args);
     }
 
+//    @SuppressWarnings("Duplicates")
+//    public int checkIfWon(Grid g, Players[] p,int playerIndex){
+//        int c = 0;int sum =0;
+//        Color color = null;
+//        for(int i = 0;i<rows;i++){
+//            for(int j = 0;j<cols;j++){
+//                if(g.root1[i][j].getChildren().size()>0){
+//                    Sphere x = (Sphere) g.root1[i][j].getChildren().get(0);
+//                    PhongMaterial ph = (PhongMaterial)x.getMaterial();
+//                    color = ph.getDiffuseColor();
+//                    break;
+//                }
+//            }
+//        }
+//        for(int i = 0;i<rows;i++) {
+//            for (int j = 0; j < cols; j++) {
+//                if (g.root1[i][j].getChildren().size() > 0) {
+//                    sum++;
+//                }
+//            }
+//        }
+//
+//
+//
+//        System.out.println("Blue = "+color.getBlue());
+//        System.out.println("Red = "+color.getRed());
+//        System.out.println("Green = "+color.getGreen());
+//
+//        for(int i = 0;i<rows;i++){
+//            for(int j = 0;j<cols;j++) {
+//                if (g.root1[i][j].getChildren().size() > 0) {
+//                    Sphere x = (Sphere) g.root1[i][j].getChildren().get(0);
+//                    PhongMaterial ph = (PhongMaterial) x.getMaterial();
+//                    System.out.println("Blue1 = "+ph.getDiffuseColor().getBlue());
+//                    System.out.println("Red1 = "+ph.getDiffuseColor().getRed());
+//                    System.out.println("Green1 = "+ph.getDiffuseColor().getGreen());
+//                    if (ph.getDiffuseColor().getBlue() != color.getBlue() || ph.getDiffuseColor().getRed() != color.getRed()
+//                            || ph.getDiffuseColor().getGreen() != color.getGreen() ) {
+//                        System.out.println("Not Same");
+//                        c = 1;
+//                        break;
+//                    }
+//
+//                }
+//            }
+//        }
+//        if(c==0 && sum>=2){
+//            System.out.println("Same");
+//            c=2;
+//        }
+//        return c;
+//
+//    }
 
     public final Scene[] makeNameAndColorPickerPage(){
 
@@ -430,6 +488,8 @@ public class GUI extends Application
             System.out.println(playerIndex1+" "+playersForSettings[playerIndex1].getColor());
             System.out.println("this" + (int) x + " " + (int) y);
             System.out.println(rows+" "+cols);
+
+//            System.out.println("Checking "+checkIfWon(g,playersForSettings,playerIndex1));
 
             r = c.explosion((int) y, (int) x,g,rows,cols,playerIndex1, playersForSettings,this);
             mouseClicks+=r;
