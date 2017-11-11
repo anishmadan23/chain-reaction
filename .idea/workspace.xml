@@ -2,15 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8c62cfdf-be90-4d2c-b70c-ff0730833b79" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Chain-Reaction/Cell.class" afterPath="$PROJECT_DIR$/out/production/Chain-Reaction/Cell.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Chain-Reaction/GUI.class" afterPath="$PROJECT_DIR$/out/production/Chain-Reaction/GUI.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Chain-Reaction/Grid.class" afterPath="$PROJECT_DIR$/out/production/Chain-Reaction/Grid.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Chain-Reaction/Players.class" afterPath="$PROJECT_DIR$/out/production/Chain-Reaction/Players.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Chain-Reaction/src/Cell.java" afterPath="$PROJECT_DIR$/Chain-Reaction/src/Cell.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Chain-Reaction/src/GUI.java" afterPath="$PROJECT_DIR$/Chain-Reaction/src/GUI.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Chain-Reaction/src/Grid.java" afterPath="$PROJECT_DIR$/Chain-Reaction/src/Grid.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Chain-Reaction/src/Players.java" afterPath="$PROJECT_DIR$/Chain-Reaction/src/Players.java" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -24,7 +18,7 @@
       <file leaf-file-name="Cell.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Chain-Reaction/src/Cell.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="28">
+            <state relative-caret-position="1566">
               <caret line="95" column="0" lean-forward="false" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -36,7 +30,7 @@
       <file leaf-file-name="Grid.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Chain-Reaction/src/Grid.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="28">
+            <state relative-caret-position="2430">
               <caret line="164" column="0" lean-forward="false" selection-start-line="164" selection-start-column="0" selection-end-line="164" selection-end-column="0" />
               <folding />
             </state>
@@ -46,8 +40,8 @@
       <file leaf-file-name="Players.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Chain-Reaction/src/Players.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="42" column="0" lean-forward="true" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+            <state relative-caret-position="720">
+              <caret line="42" column="0" lean-forward="false" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
               <folding>
                 <element signature="e#996#997#0" expanded="true" />
                 <element signature="e#1024#1025#0" expanded="true" />
@@ -69,12 +63,9 @@
       <file leaf-file-name="GUI.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Chain-Reaction/src/GUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
+            <state relative-caret-position="-4158">
               <caret line="31" column="33" lean-forward="false" selection-start-line="31" selection-start-column="33" selection-end-line="31" selection-end-column="33" />
-              <folding>
-                <element signature="e#2620#2621#0" expanded="true" />
-                <element signature="e#2648#2649#0" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -149,10 +140,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
-      <pane id="Scratches" />
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -175,6 +162,10 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -341,11 +332,12 @@
       <workItem from="1509002520320" duration="3498000" />
       <workItem from="1509116321053" duration="28104000" />
       <workItem from="1510328175371" duration="11458000" />
+      <workItem from="1510392591028" duration="49000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="133145000" />
+    <option name="totallyTimeSpent" value="133194000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="-4" width="1368" height="780" extended-state="6" />
@@ -458,10 +450,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5490">
           <caret line="305" column="32" lean-forward="false" selection-start-line="305" selection-start-column="32" selection-end-line="305" selection-end-column="32" />
-          <folding>
-            <element signature="e#2620#2621#0" expanded="true" />
-            <element signature="e#2648#2649#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -556,10 +545,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4518">
           <caret line="251" column="36" lean-forward="false" selection-start-line="251" selection-start-column="36" selection-end-line="251" selection-end-column="36" />
-          <folding>
-            <element signature="e#2620#2621#0" expanded="true" />
-            <element signature="e#2648#2649#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -621,10 +607,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4392">
           <caret line="268" column="80" lean-forward="false" selection-start-line="268" selection-start-column="80" selection-end-line="268" selection-end-column="80" />
-          <folding>
-            <element signature="e#2620#2621#0" expanded="true" />
-            <element signature="e#2648#2649#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -663,10 +646,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="36">
           <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding>
-            <element signature="e#2620#2621#0" expanded="true" />
-            <element signature="e#2648#2649#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -801,56 +781,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="494">
           <caret line="1001" column="10" lean-forward="false" selection-start-line="1001" selection-start-column="10" selection-end-line="1001" selection-end-column="10" />
-          <folding>
-            <marker date="1510392321214" expanded="true" signature="50878:50895" ph="..." />
-            <marker date="1510392321214" expanded="true" signature="50878:50913" ph="..." />
-            <marker date="1510392321214" expanded="true" signature="50878:50926" ph="..." />
-            <marker date="1510392321214" expanded="true" signature="50878:50941" ph="..." />
-            <marker date="1510392321214" expanded="true" signature="50976:53435" ph="..." />
-            <marker date="1510392321214" expanded="true" signature="50989:53420" ph="..." />
-            <marker date="1510392321214" expanded="true" signature="51043:51338" ph="..." />
-            <marker date="1510392321214" expanded="true" signature="51062:51323" ph="..." />
-            <marker date="1510392321214" expanded="true" signature="51125:51303" ph="..." />
-            <marker date="1510392321214" expanded="true" signature="51165:51269" ph="..." />
-            <marker date="1510392321214" expanded="true" signature="51186:51247" ph="..." />
-            <marker date="1510392321214" expanded="true" signature="51388:51715" ph="..." />
-            <marker date="1510392321214" expanded="true" signature="51407:51700" ph="..." />
-            <marker date="1510392321214" expanded="true" signature="51502:51680" ph="..." />
-            <marker date="1510392321214" expanded="true" signature="51542:51646" ph="..." />
-            <marker date="1510392321214" expanded="true" signature="51563:51624" ph="..." />
-            <marker date="1510392321214" expanded="true" signature="51766:52031" ph="..." />
-            <marker date="1510392321214" expanded="true" signature="51785:52016" ph="..." />
-            <marker date="1510392321214" expanded="true" signature="51818:51996" ph="..." />
-            <marker date="1510392321214" expanded="true" signature="51858:51962" ph="..." />
-            <marker date="1510392321214" expanded="true" signature="51879:51940" ph="..." />
-            <marker date="1510392321214" expanded="true" signature="52074:52380" ph="..." />
-            <marker date="1510392321214" expanded="true" signature="52093:52365" ph="..." />
-            <marker date="1510392321214" expanded="true" signature="52167:52345" ph="..." />
-            <marker date="1510392321214" expanded="true" signature="52207:52311" ph="..." />
-            <marker date="1510392321214" expanded="true" signature="52228:52289" ph="..." />
-            <marker date="1510392321214" expanded="true" signature="52431:52748" ph="..." />
-            <marker date="1510392321214" expanded="true" signature="52450:52733" ph="..." />
-            <marker date="1510392321214" expanded="true" signature="52535:52713" ph="..." />
-            <marker date="1510392321214" expanded="true" signature="52575:52679" ph="..." />
-            <marker date="1510392321214" expanded="true" signature="52596:52657" ph="..." />
-            <marker date="1510392321214" expanded="true" signature="52783:53089" ph="..." />
-            <marker date="1510392321214" expanded="true" signature="52802:53074" ph="..." />
-            <marker date="1510392321214" expanded="true" signature="52876:53054" ph="..." />
-            <marker date="1510392321214" expanded="true" signature="52916:53020" ph="..." />
-            <marker date="1510392321214" expanded="true" signature="52937:52998" ph="..." />
-            <marker date="1510392321214" expanded="true" signature="53141:53406" ph="..." />
-            <marker date="1510392321214" expanded="true" signature="53160:53391" ph="..." />
-            <marker date="1510392321214" expanded="true" signature="53193:53371" ph="..." />
-            <marker date="1510392321214" expanded="true" signature="53233:53337" ph="..." />
-            <marker date="1510392321214" expanded="true" signature="53254:53315" ph="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Chain-Reaction/src/Players.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="42" column="0" lean-forward="true" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+        <state relative-caret-position="720">
+          <caret line="42" column="0" lean-forward="false" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
           <folding>
             <element signature="e#996#997#0" expanded="true" />
             <element signature="e#1024#1025#0" expanded="true" />
@@ -860,7 +798,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Chain-Reaction/src/Grid.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="28">
+        <state relative-caret-position="2430">
           <caret line="164" column="0" lean-forward="false" selection-start-line="164" selection-start-column="0" selection-end-line="164" selection-end-column="0" />
           <folding />
         </state>
@@ -868,7 +806,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Chain-Reaction/src/Cell.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="28">
+        <state relative-caret-position="1566">
           <caret line="95" column="0" lean-forward="false" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -878,12 +816,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Chain-Reaction/src/GUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
+        <state relative-caret-position="-4158">
           <caret line="31" column="33" lean-forward="false" selection-start-line="31" selection-start-column="33" selection-end-line="31" selection-end-column="33" />
-          <folding>
-            <element signature="e#2620#2621#0" expanded="true" />
-            <element signature="e#2648#2649#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>

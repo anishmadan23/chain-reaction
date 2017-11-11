@@ -136,10 +136,6 @@ public class Grid
 			array[inY][inX]--;
 
 
-//			list.remove(x);
-//			x.setTranslateX((toX + 1) * cellSize);
-//			x.setTranslateY((toY + 1) * cellSize + (cellSize / 2));
-//		}
 		}
 	}
 
@@ -184,29 +180,7 @@ public class Grid
 
 			
 			animate((int)x,(int)y, sphere);
-			
 
-
-//			path1 = new PathTransition();
-//			Circle circle = new Circle(12);
-//			circle.setFill(Color.TRANSPARENT);
-//			circle.setTranslateX((x + 1) * cellSize);
-//			circle.setTranslateY((y + 1) * cellSize + (cellSize / 2));
-//			Rotate rotate = new Rotate();
-//			rotate.setAngle(180);
-//			rotate.setPivotX(0);
-//			rotate.setPivotY(0);
-//			rotate.setAxis(Rotate.Y_AXIS);
-//			circle.getTransforms().addAll(rotate);
-//			path1.setNode(sphere);
-//			path1.setPath(circle);
-//			path1.setOrientation(OrientationType.ORTHOGONAL_TO_TANGENT);
-//			path1.setInterpolator(Interpolator.LINEAR);
-//
-//			path1.setDuration(DURATION);
-//			path1.setCycleCount(Timeline.INDEFINITE);
-//
-//			path1.play();
 			root1[(int)y][(int)x].getChildren().add(sphere);
 
 		} 
@@ -220,36 +194,6 @@ public class Grid
 
 			animate((int)x,(int)y, sphere);			
 
-
-//			path2 = new PathTransition();
-//			Circle circle = new Circle(12);
-//			circle.setFill(Color.TRANSPARENT);
-//			circle.setTranslateX((x + 1) * cellSize);
-//			circle.setTranslateY((y + 1) * cellSize + (cellSize / 2));
-//			Rotate rotate = new Rotate();
-//			rotate.setAngle(180);
-//			rotate.setAxis(Rotate.X_AXIS);
-//			rotate.setPivotX(5);
-//			rotate.setPivotY(0);
-//			circle.getTransforms().addAll(rotate);
-//			path2.setNode(sphere);
-//			path2.setPath(circle);
-//			path2.setOrientation(OrientationType.ORTHOGONAL_TO_TANGENT);
-//			path2.setInterpolator(Interpolator.LINEAR);
-//
-//
-//			path2.setDuration(DURATION);
-//
-//			path3 = path1;
-//			if(DURATION==Duration.seconds(2)){
-//				path1.stop();
-//				path3.setDuration(DURATION);
-//			}
-//
-//			path2.setCycleCount(Timeline.INDEFINITE);
-////			root1[(int)y][(int)x].getChildren().add(sphere);
-//			path3.play();
-//			path2.play();
 			root1[(int)y][(int)x].getChildren().add(sphere);
 
 		}
