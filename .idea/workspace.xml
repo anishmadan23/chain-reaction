@@ -5,10 +5,12 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Chain-Reaction/Cell.class" afterPath="$PROJECT_DIR$/out/production/Chain-Reaction/Cell.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Chain-Reaction/GUI.class" afterPath="$PROJECT_DIR$/out/production/Chain-Reaction/GUI.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Chain-Reaction/Grid.class" afterPath="$PROJECT_DIR$/out/production/Chain-Reaction/Grid.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Chain-Reaction/Players.class" afterPath="$PROJECT_DIR$/out/production/Chain-Reaction/Players.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Chain-Reaction/src/Cell.java" afterPath="$PROJECT_DIR$/Chain-Reaction/src/Cell.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Chain-Reaction/src/GUI.java" afterPath="$PROJECT_DIR$/Chain-Reaction/src/GUI.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Chain-Reaction/src/Grid.java" afterPath="$PROJECT_DIR$/Chain-Reaction/src/Grid.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Chain-Reaction/src/Players.java" afterPath="$PROJECT_DIR$/Chain-Reaction/src/Players.java" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -22,8 +24,8 @@
       <file leaf-file-name="Cell.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Chain-Reaction/src/Cell.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="351">
-              <caret line="93" column="70" lean-forward="false" selection-start-line="93" selection-start-column="70" selection-end-line="93" selection-end-column="70" />
+            <state relative-caret-position="28">
+              <caret line="95" column="0" lean-forward="false" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -31,12 +33,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Grid.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Grid.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Chain-Reaction/src/Grid.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-918">
-              <caret line="284" column="71" lean-forward="false" selection-start-line="284" selection-start-column="71" selection-end-line="284" selection-end-column="71" />
+            <state relative-caret-position="28">
+              <caret line="164" column="0" lean-forward="false" selection-start-line="164" selection-start-column="0" selection-end-line="164" selection-end-column="0" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Players.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Chain-Reaction/src/Players.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="450">
+              <caret line="42" column="0" lean-forward="true" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+              <folding>
+                <element signature="e#996#997#0" expanded="true" />
+                <element signature="e#1024#1025#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -51,63 +66,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GUI.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="GUI.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Chain-Reaction/src/GUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="403" column="27" lean-forward="false" selection-start-line="403" selection-start-column="27" selection-end-line="403" selection-end-column="27" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="workspace.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="494">
-              <caret line="976" column="10" lean-forward="false" selection-start-line="976" selection-start-column="10" selection-end-line="976" selection-end-column="10" />
+            <state relative-caret-position="108">
+              <caret line="31" column="33" lean-forward="false" selection-start-line="31" selection-start-column="33" selection-end-line="31" selection-end-column="33" />
               <folding>
-                <marker date="1510331803917" expanded="true" signature="52547:52564" ph="..." />
-                <marker date="1510331803917" expanded="true" signature="52547:52582" ph="..." />
-                <marker date="1510331803917" expanded="true" signature="52547:52595" ph="..." />
-                <marker date="1510331803917" expanded="true" signature="52547:52610" ph="..." />
-                <marker date="1510331803917" expanded="true" signature="52645:55104" ph="..." />
-                <marker date="1510331803917" expanded="true" signature="52658:55089" ph="..." />
-                <marker date="1510331803917" expanded="true" signature="52712:53007" ph="..." />
-                <marker date="1510331803917" expanded="true" signature="52731:52992" ph="..." />
-                <marker date="1510331803917" expanded="true" signature="52794:52972" ph="..." />
-                <marker date="1510331803917" expanded="true" signature="52834:52938" ph="..." />
-                <marker date="1510331803917" expanded="true" signature="52855:52916" ph="..." />
-                <marker date="1510331803917" expanded="true" signature="53057:53384" ph="..." />
-                <marker date="1510331803917" expanded="true" signature="53076:53369" ph="..." />
-                <marker date="1510331803917" expanded="true" signature="53171:53349" ph="..." />
-                <marker date="1510331803917" expanded="true" signature="53211:53315" ph="..." />
-                <marker date="1510331803917" expanded="true" signature="53232:53293" ph="..." />
-                <marker date="1510331803917" expanded="true" signature="53435:53700" ph="..." />
-                <marker date="1510331803917" expanded="true" signature="53454:53685" ph="..." />
-                <marker date="1510331803917" expanded="true" signature="53487:53665" ph="..." />
-                <marker date="1510331803917" expanded="true" signature="53527:53631" ph="..." />
-                <marker date="1510331803917" expanded="true" signature="53548:53609" ph="..." />
-                <marker date="1510331803917" expanded="true" signature="53743:54049" ph="..." />
-                <marker date="1510331803917" expanded="true" signature="53762:54034" ph="..." />
-                <marker date="1510331803917" expanded="true" signature="53836:54014" ph="..." />
-                <marker date="1510331803917" expanded="true" signature="53876:53980" ph="..." />
-                <marker date="1510331803917" expanded="true" signature="53897:53958" ph="..." />
-                <marker date="1510331803917" expanded="true" signature="54100:54417" ph="..." />
-                <marker date="1510331803917" expanded="true" signature="54119:54402" ph="..." />
-                <marker date="1510331803917" expanded="true" signature="54204:54382" ph="..." />
-                <marker date="1510331803917" expanded="true" signature="54244:54348" ph="..." />
-                <marker date="1510331803917" expanded="true" signature="54265:54326" ph="..." />
-                <marker date="1510331803917" expanded="true" signature="54452:54758" ph="..." />
-                <marker date="1510331803917" expanded="true" signature="54471:54743" ph="..." />
-                <marker date="1510331803917" expanded="true" signature="54545:54723" ph="..." />
-                <marker date="1510331803917" expanded="true" signature="54585:54689" ph="..." />
-                <marker date="1510331803917" expanded="true" signature="54606:54667" ph="..." />
-                <marker date="1510331803917" expanded="true" signature="54810:55075" ph="..." />
-                <marker date="1510331803917" expanded="true" signature="54829:55060" ph="..." />
-                <marker date="1510331803917" expanded="true" signature="54862:55040" ph="..." />
-                <marker date="1510331803917" expanded="true" signature="54902:55006" ph="..." />
-                <marker date="1510331803917" expanded="true" signature="54923:54984" ph="..." />
+                <element signature="e#2620#2621#0" expanded="true" />
+                <element signature="e#2648#2649#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -130,6 +96,7 @@
       <find>array</find>
       <find>list</find>
       <find>comboBox</find>
+      <find>makeNameAndColorPickerPage</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -143,15 +110,15 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Chain-Reaction/src/Players.java" />
         <option value="$PROJECT_DIR$/Chain-Reaction/src/Coordinates.java" />
         <option value="$PROJECT_DIR$/Chain-Reaction/src/Board.java" />
         <option value="$PROJECT_DIR$/Chain-Reaction/src/Game.java" />
         <option value="$PROJECT_DIR$/Chain-Reaction/src/Settings.java" />
         <option value="$PROJECT_DIR$/.idea/workspace.xml" />
         <option value="$PROJECT_DIR$/Chain-Reaction/src/Cell.java" />
-        <option value="$PROJECT_DIR$/Chain-Reaction/src/GUI.java" />
+        <option value="$PROJECT_DIR$/Chain-Reaction/src/Players.java" />
         <option value="$PROJECT_DIR$/Chain-Reaction/src/Grid.java" />
+        <option value="$PROJECT_DIR$/Chain-Reaction/src/GUI.java" />
       </list>
     </option>
   </component>
@@ -373,12 +340,12 @@
       <workItem from="1508866168409" duration="28774000" />
       <workItem from="1509002520320" duration="3498000" />
       <workItem from="1509116321053" duration="28104000" />
-      <workItem from="1510328175371" duration="2845000" />
+      <workItem from="1510328175371" duration="11458000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="124532000" />
+    <option name="totallyTimeSpent" value="133145000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="-4" width="1368" height="780" extended-state="6" />
@@ -392,7 +359,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32882884" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1891892" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.6516517" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -480,7 +447,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="234">
           <caret line="13" column="36" lean-forward="false" selection-start-line="13" selection-start-column="36" selection-end-line="13" selection-end-column="36" />
-          <folding />
+          <folding>
+            <element signature="e#996#997#0" expanded="true" />
+            <element signature="e#1024#1025#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -488,7 +458,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5490">
           <caret line="305" column="32" lean-forward="false" selection-start-line="305" selection-start-column="32" selection-end-line="305" selection-end-column="32" />
-          <folding />
+          <folding>
+            <element signature="e#2620#2621#0" expanded="true" />
+            <element signature="e#2648#2649#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -539,7 +512,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="234">
           <caret line="13" column="36" lean-forward="false" selection-start-line="13" selection-start-column="36" selection-end-line="13" selection-end-column="36" />
-          <folding />
+          <folding>
+            <element signature="e#996#997#0" expanded="true" />
+            <element signature="e#1024#1025#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -580,7 +556,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4518">
           <caret line="251" column="36" lean-forward="false" selection-start-line="251" selection-start-column="36" selection-end-line="251" selection-end-column="36" />
-          <folding />
+          <folding>
+            <element signature="e#2620#2621#0" expanded="true" />
+            <element signature="e#2648#2649#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -608,7 +587,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="234">
           <caret line="13" column="36" lean-forward="false" selection-start-line="13" selection-start-column="36" selection-end-line="13" selection-end-column="36" />
-          <folding />
+          <folding>
+            <element signature="e#996#997#0" expanded="true" />
+            <element signature="e#1024#1025#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -639,7 +621,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4392">
           <caret line="268" column="80" lean-forward="false" selection-start-line="268" selection-start-column="80" selection-end-line="268" selection-end-column="80" />
-          <folding />
+          <folding>
+            <element signature="e#2620#2621#0" expanded="true" />
+            <element signature="e#2648#2649#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -667,7 +652,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="234">
           <caret line="13" column="36" lean-forward="false" selection-start-line="13" selection-start-column="36" selection-end-line="13" selection-end-column="36" />
-          <folding />
+          <folding>
+            <element signature="e#996#997#0" expanded="true" />
+            <element signature="e#1024#1025#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -675,7 +663,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="36">
           <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#2620#2621#0" expanded="true" />
+            <element signature="e#2648#2649#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -716,7 +707,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="234">
           <caret line="13" column="36" lean-forward="false" selection-start-line="13" selection-start-column="36" selection-end-line="13" selection-end-column="36" />
-          <folding />
+          <folding>
+            <element signature="e#996#997#0" expanded="true" />
+            <element signature="e#1024#1025#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -796,14 +790,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Chain-Reaction/src/Players.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="36" lean-forward="false" selection-start-line="13" selection-start-column="36" selection-end-line="13" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Chain-Reaction/src/Coordinates.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
@@ -814,57 +800,76 @@
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="494">
-          <caret line="976" column="10" lean-forward="false" selection-start-line="976" selection-start-column="10" selection-end-line="976" selection-end-column="10" />
+          <caret line="1001" column="10" lean-forward="false" selection-start-line="1001" selection-start-column="10" selection-end-line="1001" selection-end-column="10" />
           <folding>
-            <marker date="1510331803917" expanded="true" signature="52547:52564" ph="..." />
-            <marker date="1510331803917" expanded="true" signature="52547:52582" ph="..." />
-            <marker date="1510331803917" expanded="true" signature="52547:52595" ph="..." />
-            <marker date="1510331803917" expanded="true" signature="52547:52610" ph="..." />
-            <marker date="1510331803917" expanded="true" signature="52645:55104" ph="..." />
-            <marker date="1510331803917" expanded="true" signature="52658:55089" ph="..." />
-            <marker date="1510331803917" expanded="true" signature="52712:53007" ph="..." />
-            <marker date="1510331803917" expanded="true" signature="52731:52992" ph="..." />
-            <marker date="1510331803917" expanded="true" signature="52794:52972" ph="..." />
-            <marker date="1510331803917" expanded="true" signature="52834:52938" ph="..." />
-            <marker date="1510331803917" expanded="true" signature="52855:52916" ph="..." />
-            <marker date="1510331803917" expanded="true" signature="53057:53384" ph="..." />
-            <marker date="1510331803917" expanded="true" signature="53076:53369" ph="..." />
-            <marker date="1510331803917" expanded="true" signature="53171:53349" ph="..." />
-            <marker date="1510331803917" expanded="true" signature="53211:53315" ph="..." />
-            <marker date="1510331803917" expanded="true" signature="53232:53293" ph="..." />
-            <marker date="1510331803917" expanded="true" signature="53435:53700" ph="..." />
-            <marker date="1510331803917" expanded="true" signature="53454:53685" ph="..." />
-            <marker date="1510331803917" expanded="true" signature="53487:53665" ph="..." />
-            <marker date="1510331803917" expanded="true" signature="53527:53631" ph="..." />
-            <marker date="1510331803917" expanded="true" signature="53548:53609" ph="..." />
-            <marker date="1510331803917" expanded="true" signature="53743:54049" ph="..." />
-            <marker date="1510331803917" expanded="true" signature="53762:54034" ph="..." />
-            <marker date="1510331803917" expanded="true" signature="53836:54014" ph="..." />
-            <marker date="1510331803917" expanded="true" signature="53876:53980" ph="..." />
-            <marker date="1510331803917" expanded="true" signature="53897:53958" ph="..." />
-            <marker date="1510331803917" expanded="true" signature="54100:54417" ph="..." />
-            <marker date="1510331803917" expanded="true" signature="54119:54402" ph="..." />
-            <marker date="1510331803917" expanded="true" signature="54204:54382" ph="..." />
-            <marker date="1510331803917" expanded="true" signature="54244:54348" ph="..." />
-            <marker date="1510331803917" expanded="true" signature="54265:54326" ph="..." />
-            <marker date="1510331803917" expanded="true" signature="54452:54758" ph="..." />
-            <marker date="1510331803917" expanded="true" signature="54471:54743" ph="..." />
-            <marker date="1510331803917" expanded="true" signature="54545:54723" ph="..." />
-            <marker date="1510331803917" expanded="true" signature="54585:54689" ph="..." />
-            <marker date="1510331803917" expanded="true" signature="54606:54667" ph="..." />
-            <marker date="1510331803917" expanded="true" signature="54810:55075" ph="..." />
-            <marker date="1510331803917" expanded="true" signature="54829:55060" ph="..." />
-            <marker date="1510331803917" expanded="true" signature="54862:55040" ph="..." />
-            <marker date="1510331803917" expanded="true" signature="54902:55006" ph="..." />
-            <marker date="1510331803917" expanded="true" signature="54923:54984" ph="..." />
+            <marker date="1510392321214" expanded="true" signature="50878:50895" ph="..." />
+            <marker date="1510392321214" expanded="true" signature="50878:50913" ph="..." />
+            <marker date="1510392321214" expanded="true" signature="50878:50926" ph="..." />
+            <marker date="1510392321214" expanded="true" signature="50878:50941" ph="..." />
+            <marker date="1510392321214" expanded="true" signature="50976:53435" ph="..." />
+            <marker date="1510392321214" expanded="true" signature="50989:53420" ph="..." />
+            <marker date="1510392321214" expanded="true" signature="51043:51338" ph="..." />
+            <marker date="1510392321214" expanded="true" signature="51062:51323" ph="..." />
+            <marker date="1510392321214" expanded="true" signature="51125:51303" ph="..." />
+            <marker date="1510392321214" expanded="true" signature="51165:51269" ph="..." />
+            <marker date="1510392321214" expanded="true" signature="51186:51247" ph="..." />
+            <marker date="1510392321214" expanded="true" signature="51388:51715" ph="..." />
+            <marker date="1510392321214" expanded="true" signature="51407:51700" ph="..." />
+            <marker date="1510392321214" expanded="true" signature="51502:51680" ph="..." />
+            <marker date="1510392321214" expanded="true" signature="51542:51646" ph="..." />
+            <marker date="1510392321214" expanded="true" signature="51563:51624" ph="..." />
+            <marker date="1510392321214" expanded="true" signature="51766:52031" ph="..." />
+            <marker date="1510392321214" expanded="true" signature="51785:52016" ph="..." />
+            <marker date="1510392321214" expanded="true" signature="51818:51996" ph="..." />
+            <marker date="1510392321214" expanded="true" signature="51858:51962" ph="..." />
+            <marker date="1510392321214" expanded="true" signature="51879:51940" ph="..." />
+            <marker date="1510392321214" expanded="true" signature="52074:52380" ph="..." />
+            <marker date="1510392321214" expanded="true" signature="52093:52365" ph="..." />
+            <marker date="1510392321214" expanded="true" signature="52167:52345" ph="..." />
+            <marker date="1510392321214" expanded="true" signature="52207:52311" ph="..." />
+            <marker date="1510392321214" expanded="true" signature="52228:52289" ph="..." />
+            <marker date="1510392321214" expanded="true" signature="52431:52748" ph="..." />
+            <marker date="1510392321214" expanded="true" signature="52450:52733" ph="..." />
+            <marker date="1510392321214" expanded="true" signature="52535:52713" ph="..." />
+            <marker date="1510392321214" expanded="true" signature="52575:52679" ph="..." />
+            <marker date="1510392321214" expanded="true" signature="52596:52657" ph="..." />
+            <marker date="1510392321214" expanded="true" signature="52783:53089" ph="..." />
+            <marker date="1510392321214" expanded="true" signature="52802:53074" ph="..." />
+            <marker date="1510392321214" expanded="true" signature="52876:53054" ph="..." />
+            <marker date="1510392321214" expanded="true" signature="52916:53020" ph="..." />
+            <marker date="1510392321214" expanded="true" signature="52937:52998" ph="..." />
+            <marker date="1510392321214" expanded="true" signature="53141:53406" ph="..." />
+            <marker date="1510392321214" expanded="true" signature="53160:53391" ph="..." />
+            <marker date="1510392321214" expanded="true" signature="53193:53371" ph="..." />
+            <marker date="1510392321214" expanded="true" signature="53233:53337" ph="..." />
+            <marker date="1510392321214" expanded="true" signature="53254:53315" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Chain-Reaction/src/Players.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="42" column="0" lean-forward="true" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+          <folding>
+            <element signature="e#996#997#0" expanded="true" />
+            <element signature="e#1024#1025#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Chain-Reaction/src/Grid.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="28">
+          <caret line="164" column="0" lean-forward="false" selection-start-line="164" selection-start-column="0" selection-end-line="164" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Chain-Reaction/src/Cell.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="93" column="70" lean-forward="false" selection-start-line="93" selection-start-column="70" selection-end-line="93" selection-end-column="70" />
+        <state relative-caret-position="28">
+          <caret line="95" column="0" lean-forward="false" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -873,17 +878,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Chain-Reaction/src/GUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="403" column="27" lean-forward="false" selection-start-line="403" selection-start-column="27" selection-end-line="403" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Chain-Reaction/src/Grid.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-918">
-          <caret line="284" column="71" lean-forward="false" selection-start-line="284" selection-start-column="71" selection-end-line="284" selection-end-column="71" />
-          <folding />
+        <state relative-caret-position="108">
+          <caret line="31" column="33" lean-forward="false" selection-start-line="31" selection-start-column="33" selection-end-line="31" selection-end-column="33" />
+          <folding>
+            <element signature="e#2620#2621#0" expanded="true" />
+            <element signature="e#2648#2649#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

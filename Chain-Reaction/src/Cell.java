@@ -87,13 +87,13 @@ public class Cell implements Serializable {
         return queue;
     }
 
-    public void explosion(int i, int j, Grid g,int rows, int cols)
+    public void explosion(int i, int j, Grid g,int rows, int cols, int playerIndex, Players[] p)
     {        //requires an initial click on the cell
         System.out.println("Inside explosion " + this.grid[i][j].getOrbs() + " " + "Coord " + i + " " + j);
         this.grid[i][j].setOrbs(this.grid[i][j].getOrbs() + 1);
         if (this.grid[i][j].getOrbs() < getCriticalMass(i, j,rows,cols))
         {
-            this.grid = g.createSphere(j,i,this);
+            this.grid = g.createSphere(j,i,p,playerIndex,this);
             return;
         }
         else
@@ -122,7 +122,7 @@ public class Cell implements Serializable {
                         System.out.println(g.root1[cxy.getX()][cxy.getY()].getChildren().remove(0));
 //                        g.root1[cxy.getX()][cxy.getY()].getChildren().remove(g.sphere11);
                         //g.root1[cxy.getX()][cxy.getY()].getChildren().remove(g.line);
-                        explosion(cxy.getX(), cxy.getY(),g,rows,cols);
+                        explosion(cxy.getX(), cxy.getY(),g,rows,cols,playerIndex,p);
 
                     }
                 });

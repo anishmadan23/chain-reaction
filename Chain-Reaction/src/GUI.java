@@ -29,12 +29,23 @@ public class GUI extends Application
 
     public int rows;
     public int cols;
-    public int numberOfPlayers  = 2;
+    public int playersInGame  = 2;
+
+    boolean initialisedTextFields = false;
+    boolean initalisedColorPicker = false;
+    boolean initialisedPlayers = false;
+
+    public int mouseClicks = 0;
+
 
     public GUI() {
         this.rows = 9;
         this.cols = 6;
+
     }
+
+    ObservableList<Integer> players = FXCollections.observableArrayList(2,3,4,5,6,7,8);
+    Spinner<Integer> spinner ;
 
     ComboBox<String> comboBox;
     public Scene scene1 =null,scene2=null,scene3=null,scene4;      //scene3 - settings, scene4 -> Name, ColorPicker
@@ -47,6 +58,7 @@ public class GUI extends Application
             Color.ORANGE, Color.WHITE};
 //    public Label[] playerName = new Label[8];
     public TextField[] playerNameInputs = new TextField[8];
+    public ColorPicker[] colorPickers = new ColorPicker[8];
     GridPane settingsView;
 
     Button backToSettings, saveSettings;
@@ -55,54 +67,33 @@ public class GUI extends Application
 
 
 
+    public void initialiseColorPicker(){
+        if(!initalisedColorPicker){
+            for(int i = 0;i<8;i++){
+                colorPickers[i] = new ColorPicker(defaultColorList[i]);
+            }
+            initalisedColorPicker = true;
+        }
 
+    }
+
+    public  void initialiseTextFields(){
+        if(!initialisedTextFields) {
+            for (int i = 0; i < 8; i++) {
+                playerNameInputs[i] = new TextField();
+                playerNameInputs[i].setText("Player " + String.valueOf(i + 1));
+            }
+            initialisedTextFields = true;
+        }
+    }
 
     public static void main(String[] args)
     {
         launch(args);
     }
 
-//    public GridPane makeGrid()
-//    {
-//        GridPane gridpane = new GridPane();
-//        gridpane.setAlignment(Pos.CENTER);
-//        ColumnConstraints[] colCons = new ColumnConstraints[cols];
-//        RowConstraints[] rowCons = new RowConstraints[rows];
-//
-//        for(int i = 0;i< cols ; i++)
-//        {
-//            colCons[i] = new ColumnConstraints();
-//            colCons[i].setPercentWidth(100.0/cols);
-//            gridpane.getColumnConstraints().add(colCons[i]) ;
-//        }
-//
-//
-//        for( int i =0 ; i<rows;i++){
-//            rowCons[i] = new RowConstraints();
-//            rowCons[i].setPercentHeight(100.0/rows);
-//            gridpane.getRowConstraints().add(rowCons[i]);
-//        }
-//
-//        Sphere[][] spheres = new Sphere[rows][cols];
-//        for(int i = 0; i< rows;i++){
-//            for(int j = 0 ;j<cols;j++){
-//                spheres[i][j] = new Sphere(15);
-//                spheres[i][j].setMaterial(new PhongMaterial(Color.BLUE));
-//                gridpane.add(spheres[i][j],j,i);
-//                GridPane.setHalignment(spheres[i][j], HPos.CENTER);
-//                GridPane.setValignment(spheres[i][j], VPos.CENTER);
-//            }
-//        }
-//
-//        gridpane.setAlignment(Pos.CENTER);
-//        gridpane.setPrefSize(720,720);
-//        gridpane.gridLinesVisibleProperty().set(true);
-//        return gridpane;
-//    }
 
-
-
-    public Scene[] makeNameAndColorPickerPage(){
+    public final Scene[] makeNameAndColorPickerPage(){
 
 
         for(int i = 0;i<8;i++){
@@ -117,9 +108,8 @@ public class GUI extends Application
             GridPane.setMargin(playerName,new Insets(20,20,0,0));
             GridPane.setColumnSpan(playerName,2);
 
-            playerNameInputs[i] = new TextField();
-            playerNameInputs[i].setPromptText("Player 1");
-//            playerNameInputs[i].getText();
+
+            System.out.println(playerNameInputs[i].getText());
             playerNameInputs[i].setMinHeight(40);
             playerNameInputs[i].setPadding(new Insets(0,20,0,10));
             GridPane.setHalignment(playerNameInputs[i],HPos.LEFT);
@@ -127,9 +117,11 @@ public class GUI extends Application
             GridPane.setColumnSpan(playerNameInputs[i],2);
 
 
-            ColorPicker colorPicker1 = new ColorPicker(defaultColorList[i]);
+
 //        ColorPicker colorPicker2 = new ColorPicker(Color.BLACK);
-            GridPane.setColumnSpan(colorPicker1,2);
+            GridPane.setMargin(colorPickers[i],new Insets(20,20,0,20));
+
+            GridPane.setColumnSpan(colorPickers[i],2);
 
 
             Button saveNameBtn = new Button("Save");
@@ -140,9 +132,13 @@ public class GUI extends Application
 //            Players p = playersForSettings[i];
             int index =  i;
             saveNameBtn.setOnMouseClicked(e->
-                                {System.out.println(index);
-                                playersForSettings[index].setName(playerNameInputs[index].getText());//fix null pointer issue here
-                                playersForSettings[index].setColor(colorPicker1.getValue());
+                                {
+                                    System.out.println(index);
+                                    playersForSettings[index].setName(playerNameInputs[index].getText());//fix null pointer issue here
+                                    playerNameInputs[index].setText(playersForSettings[index].getName());
+                                    System.out.println(playerNameInputs[index].getText());
+
+                                    playersForSettings[index].setColor(colorPickers[index].getValue());
                                 });
             //define onclick
 
@@ -201,7 +197,7 @@ public class GUI extends Application
             nameAndColorPicker.add(playerNameInputs[i],2,1);
 
             nameAndColorPicker.add(orbColor,0,2);
-            nameAndColorPicker.add(colorPicker1,2,2);
+            nameAndColorPicker.add(colorPickers[i],2,2);
 
 //        GridPane.setColumnSpan(playerName,2);
 //        GridPane.setColumnSpan(playerNameInput,2);
@@ -219,6 +215,9 @@ public class GUI extends Application
     }
 
     public Scene makeInitialPage(){
+        initialisePlayers();
+        initialiseTextFields();
+        initialiseColorPicker();
         StackPane rootpane = new StackPane();
         GridPane  pageContents = new GridPane();
 
@@ -253,6 +252,7 @@ public class GUI extends Application
         img.setFitWidth(40);
         infoLabel.setGraphic(img);
 
+
         pageContents.add(gameName,0,0);
         GridPane.setColumnSpan(gameName,2);
         GridPane.setHalignment(gameName, HPos.CENTER);
@@ -279,7 +279,7 @@ public class GUI extends Application
         pageContents.add(GridSizeLabel,0,2);
 
 
-        comboBox = new ComboBox<String>();
+        comboBox = new ComboBox<>();
         comboBox.getItems().addAll("Small","Big");
         comboBox.getSelectionModel().selectFirst();
         comboBox.setPrefSize(200,40);
@@ -302,15 +302,14 @@ public class GUI extends Application
 
 
 
-
+        spinner = new Spinner<>();
         Label playersLabel = new Label("Players");
         playersLabel.setFont(new Font("Arial",25));
         playersLabel.setFont(Font.font("Arial",FontWeight.BOLD,25));
         GridPane.setHalignment(playersLabel, HPos.CENTER);
         pageContents.add(playersLabel,0,3);
 
-        ObservableList<Integer> players = FXCollections.observableArrayList(2,3,4,5,6,7,8);
-        final Spinner<Integer> spinner = new Spinner<>();
+
         SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.ListSpinnerValueFactory<>(players);
         valueFactory.setValue(2);                               // Default value
         spinner.setValueFactory(valueFactory);
@@ -351,6 +350,14 @@ public class GUI extends Application
             cols = 10;
             System.out.println("Changed");
         }
+
+        playersInGame = spinner.getValue();         //playersInGame receiving value correctly
+
+
+
+
+
+
         Grid g = new Grid(rows,cols);
         g.createGrid(rows,cols);
         System.out.println("Rows "+rows+" Cols "+cols);
@@ -384,10 +391,8 @@ public class GUI extends Application
         scene2.setFill(Color.BLACK);
 
 
-//        Duration DURATION = Duration.seconds(4);
-//        Animation animation;
         scene2.setOnMouseClicked(event -> explosionEvent(event,g,c));
-//        comboBox.setValue("Small");
+
 
         return scene2;
     }
@@ -415,10 +420,13 @@ public class GUI extends Application
         y = Math.floor(y);
 
         if (x < cols + 1 && y < rows + 1) {
+            mouseClicks++;
+            int playerIndex=  (mouseClicks-1)%(playersInGame);
+            System.out.println(playerIndex+" "+playersForSettings[playerIndex].getColor());
             System.out.println("this" + (int) x + " " + (int) y);
             System.out.println(rows+" "+cols);
 
-            c.explosion((int) y, (int) x,g,rows,cols);
+            c.explosion((int) y, (int) x,g,rows,cols,playerIndex, playersForSettings);
         }
         for(int i = 0;i<rows;i++){
             for(int j = 0; j<cols ;j++){
@@ -430,11 +438,18 @@ public class GUI extends Application
 
     }
 
-    public Scene makeSettingsPage(){
-        for(int i = 0;i<numberOfPlayers;i++){
-            String x = "Player "+String.valueOf(i+1);
-            playersForSettings[i] = new Players(x,defaultColorList[i]);
+    public void initialisePlayers() {
+        if (!initialisedPlayers) {
+            for (int i = 0; i < 8; i++) {
+                String x = "Player " + String.valueOf(i + 1);
+                playersForSettings[i] = new Players(x, defaultColorList[i]);
+            }
+            initialisedPlayers = true;
         }
+    }
+
+    public Scene makeSettingsPage(){
+
 
 
         settingsView = new GridPane();

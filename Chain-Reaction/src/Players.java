@@ -36,6 +36,12 @@ public class Players {
         this.green = color1.getGreen();
     }
 
+    public Color getColor() {
+        return color;
+    }
+
+
+
     public String getName() {
         return name;
     }

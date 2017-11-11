@@ -152,7 +152,7 @@ public class Grid
 		return t;
 	}
 
-	public Cell[][] createSphere(double x, double y,Cell c)
+	public Cell[][] createSphere(double x, double y,Players[] p, int playerIndex,Cell c)
 	{
 		if(c.grid[(int)y][(int)x].getOrbs()==c.getCriticalMass((int)y,(int)x,rows,cols)-1)
 			DURATION = Duration.seconds(2);
@@ -161,9 +161,9 @@ public class Grid
 		
 		Sphere sphere = new Sphere();
 		sphere.setRadius(9);
-		PhongMaterial p = new PhongMaterial();
-		p.setDiffuseColor(Color.BLUE);
-		sphere.setMaterial(p);
+		PhongMaterial ph = new PhongMaterial();
+		ph.setDiffuseColor(p[playerIndex].getColor());
+		sphere.setMaterial(ph);
 		
 		if (array[(int) x][(int) y] == 0) 
 		{
