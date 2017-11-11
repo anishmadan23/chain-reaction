@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
 
@@ -10,12 +11,15 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.Sphere;
+import javafx.stage.Modality;
 
 public class Cell implements Serializable {
 
 
     private int orbs;
     public Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    Optional<ButtonType> result;
+    ButtonType b1;
     private int X_Coordinate;
     private int Y_Coordinate;
     //    public int rows = 15;
@@ -134,6 +138,21 @@ public class Cell implements Serializable {
 
     }
 
+    public Optional<ButtonType> showAlert() throws IllegalStateException{
+        return alert.showAndWait();
+    }
+
+    public void setupAlert(Players[] p, int playerIndex){
+        alert.setTitle("You Won!");
+        alert.setHeaderText(null);
+        alert.setContentText(p[playerIndex].getName()+" won!");
+        b1 = new ButtonType("New Game");
+        ButtonType buttonTypeCancel = new ButtonType("Exit", ButtonBar.ButtonData.CANCEL_CLOSE);
+        alert.getButtonTypes().setAll(b1,buttonTypeCancel);
+
+
+    }
+
 
 
     public Queue<Coordinates> getNeighbours(int i, int j,int rows, int cols) {
@@ -214,20 +233,14 @@ public class Cell implements Serializable {
 //                        g.root1[cxy.getX()][cxy.getY()].getChildren().remove(g.sphere11);
                             //g.root1[cxy.getX()][cxy.getY()].getChildren().remove(g.line);
                             if( gr.mouseClicks>1 && checkIfWon(g,p,playerIndex,rows,cols)==2) {
-
+//                                gr.pstage.initModality(Modality.NONE);
                                 Platform.runLater(new Runnable() {
                                     @Override
-                                    public final void run() {
+                                    public void run() throws IllegalStateException{
 
 
-                                        alert.setTitle("You Won!");
-                                        alert.setHeaderText(null);
-                                        alert.setContentText(p[playerIndex].getName()+" won!");
-                                        ButtonType b1 = new ButtonType("New Game");
-                                        ButtonType buttonTypeCancel = new ButtonType("Exit", ButtonBar.ButtonData.CANCEL_CLOSE);
-                                        alert.getButtonTypes().setAll(b1,buttonTypeCancel);
-
-                                        Optional<ButtonType> result = alert.showAndWait();
+                                       setupAlert(p,playerIndex);
+                                        result = showAlert();
                                         if (result.get() == b1) {
                                             gr.mouseClicks = 0;
                                             gr.playerIndex1 = 0;
@@ -235,6 +248,7 @@ public class Cell implements Serializable {
                                             gr.r  = 1;
                                             gr.scene2 = gr.Grid_GUI();
                                             gr.pstage.setScene(gr.scene2);
+                                            return;
 
                                         } else {
                                             System.exit(0);
