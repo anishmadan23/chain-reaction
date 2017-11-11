@@ -354,10 +354,6 @@ public class GUI extends Application
         playersInGame = spinner.getValue();         //playersInGame receiving value correctly
 
 
-
-
-
-
         Grid g = new Grid(rows,cols);
         g.createGrid(rows,cols);
         System.out.println("Rows "+rows+" Cols "+cols);
@@ -374,6 +370,7 @@ public class GUI extends Application
             if(g.comboBox.getValue().equals("New Game")){
                 scene2 = Grid_GUI();
                 pstage.setScene(scene2);
+                mouseClicks = 0;
             }
             else if(g.comboBox.getValue().equals("Go to Main Menu")){
 //                scene1 = makeInitialPage();
@@ -501,6 +498,7 @@ public class GUI extends Application
             pstage.setScene(scene2);
         }
         else if(event.getSource()==playGame){
+                mouseClicks = 0;
                 scene2 = Grid_GUI();
                 pstage.setScene(scene2);
 
