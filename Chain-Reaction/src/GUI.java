@@ -201,6 +201,7 @@ public class GUI extends Application
                                     System.out.println(playerNameInputs[index].getText());
 
                                     playersForSettings[index].setColor(colorPickers[index].getValue());
+                                    pstage.setScene(scene3);
                                 });
             //define onclick
 
@@ -613,6 +614,7 @@ public class GUI extends Application
         primaryStage.setTitle("Chain Reaction");
         scene1 = makeInitialPage();
 
+
         primaryStage.setScene(scene1);
         settingsBtn.setOnAction(event -> ButtonClick(event));
 
@@ -625,6 +627,8 @@ public class GUI extends Application
 //        System.out.println(primaryStage.getScene()==scene3);
 
 
+
+        primaryStage.getIcons().add(new Image("https://lh5.ggpht.com/xUefJ0Wrh0pyUuRnCAkRggnJbCGcMoKzARwxtGN1rZEK8cUvwHCLh7DPZbUv059aoA=w300"));
         primaryStage.show();
     }
 }
