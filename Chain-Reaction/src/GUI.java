@@ -277,10 +277,12 @@ public class GUI extends Application
 
     }
 
-    public Scene makeInitialPage(){
+    public Scene makeInitialPage()
+    {
         initialisePlayers();
         initialiseTextFields();
         initialiseColorPicker();
+
         StackPane rootpane = new StackPane();
         GridPane  pageContents = new GridPane();
 
@@ -473,8 +475,8 @@ public class GUI extends Application
         }
         double x = event.getSceneX();
         double y = event.getSceneY();
-        //System.out.println(x);
-        //System.out.println(y);
+        System.out.println(x);
+        System.out.println(y);
         x = x - xGridStart;
         y = y - yGridStart;
         x = x / cellSize;
@@ -609,7 +611,8 @@ public class GUI extends Application
     }
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage)
+    {
         pstage = primaryStage;
         primaryStage.setTitle("Chain Reaction");
         scene1 = makeInitialPage();
