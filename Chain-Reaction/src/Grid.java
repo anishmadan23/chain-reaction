@@ -163,7 +163,7 @@ public class Grid
                 {
                     Sphere sphere= (Sphere) root1[i][j].getChildren().get(0);
                     PhongMaterial ph= (PhongMaterial) sphere.getMaterial();
-                    String s= String.valueOf(ph.getDiffuseColor());
+                    String s= String.valueOf(ph.getDiffuseColor().getBlue()+" "+ph.getDiffuseColor().getGreen()+" "+ph.getDiffuseColor().getRed());
                     color_name[i][j]=s;
 
                 }

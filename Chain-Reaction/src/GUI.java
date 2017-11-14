@@ -424,14 +424,22 @@ public class GUI extends Application
         scene2.setFill(Color.BLACK);
 
 
-        scene2.setOnMouseClicked(event -> explosionEvent(event,g,c));
+        scene2.setOnMouseClicked(event -> {
+            try {
+                explosionEvent(event, g, c);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        });
 
-        Grid g1 = new Grid(rows,cols);
-        String[][] colorsOfPlayers = g1.color(rows,cols);
-
-        int[][] arrayOfPlayerIndices = g1.array;
-        serialize(rows, cols,colorsOfPlayers,arrayOfPlayerIndices);
-        deserialize();
+//        Grid g1 = new Grid(rows,cols);
+//        String[][] colorsOfPlayers = g1.color(rows,cols);
+//
+//        int[][] arrayOfPlayerIndices = g1.array;
+       // serialize(rows, cols,colorsOfPlayers,arrayOfPlayerIndices);
+        //deserialize();
 
 
         return scene2;
@@ -441,16 +449,10 @@ public class GUI extends Application
     {
         Serial serial1= new Serial(rows,cols, c,a);
         serial1.dummy =2;
-        ObjectOutputStream out= null;
-        try
-        {
-            new ObjectOutputStream( new FileOutputStream("out.txt"));
-            out.writeObject(serial1);
-        }
-        finally
-        {
-            out.close();
-        }
+        //Useless u= new Useless();
+        ObjectOutputStream out1= new ObjectOutputStream( new FileOutputStream("out.txt"));
+            out1.writeObject(serial1);
+            out1.close();
 
 
 
@@ -473,7 +475,7 @@ public class GUI extends Application
 
     }
 
-    public void explosionEvent(MouseEvent event,Grid g, Cell c) {
+    public void explosionEvent(MouseEvent event,Grid g, Cell c) throws IOException, ClassNotFoundException {
         int cellSize, xGridStart, yGridStart;
         if (rows == 9 && cols == 6) {
             cellSize = 50;
@@ -517,9 +519,23 @@ public class GUI extends Application
 
 
         }
+
+        String[][] colorsOfPlayers = g.color(rows,cols);
+
+        int[][] arrayOfPlayerIndices = g.array;
+
+         serialize(rows, cols,colorsOfPlayers,arrayOfPlayerIndices);
+        try {
+            deserialize();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
         for(int i = 0;i<rows;i++){
             for(int j = 0; j<cols ;j++){
-                System.out.print(c.grid[i][j].getOrbs()+" ");
+                System.out.print(arrayOfPlayerIndices[j][i]+" ");
             }
             System.out.println();
         }
