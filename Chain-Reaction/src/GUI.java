@@ -40,6 +40,7 @@ public class GUI extends Application
     boolean initialisedTextFields = false;
     boolean initalisedColorPicker = false;
     boolean initialisedPlayers = false;
+    public Serial s1;
 
 
 
@@ -94,6 +95,7 @@ public class GUI extends Application
     }
 
     public static void main(String[] args)
+
     {
         launch(args);
     }
@@ -368,22 +370,56 @@ public class GUI extends Application
     }
 
 
-
-
-
-    public Scene Grid_GUI() throws IOException, ClassNotFoundException {
-        if(comboBox.getValue().equals("Big")){
-            rows = 15 ;
-            cols = 10;
-            System.out.println("Changed");
+    public void ButtonClick(ActionEvent event) throws IOException{
+        //Grid g=new Grid(rows,cols);
+        if(event.getSource()==resumeBtn) {
+            try {
+                s1=deserialize();
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+            scene2 = Grid_resume(rows,cols);
+            pstage.setScene(scene2);
         }
+        else if(event.getSource()==playGame){
+            mouseClicks = 0;
+            playerIndex1 = 0;
+            colorIndex1 = 0;
+            r  = 1;
+            try {
+                scene2 = Grid_GUI();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+            pstage.setScene(scene2);
 
-        playersInGame = spinner.getValue();         //playersInGame receiving value correctly
+        }
+        else if(event.getSource()==settingsBtn){
+            scene3 = makeSettingsPage();
+            pstage.setScene(scene3);
+            settingsView.getChildren().get(1).setOnMouseClicked(e -> LabelClick(e,0));
+            settingsView.getChildren().get(2).setOnMouseClicked(e -> LabelClick(e,1));
+            settingsView.getChildren().get(3).setOnMouseClicked(e -> LabelClick(e,2));
+            settingsView.getChildren().get(4).setOnMouseClicked(e -> LabelClick(e,3));
+            settingsView.getChildren().get(5).setOnMouseClicked(e -> LabelClick(e,4));
+            settingsView.getChildren().get(6).setOnMouseClicked(e -> LabelClick(e,5));
+            settingsView.getChildren().get(7).setOnMouseClicked(e -> LabelClick(e,6));
+            settingsView.getChildren().get(8).setOnMouseClicked(e -> LabelClick(e,7));
+        }
+        else if(event.getSource()==backToMenuBtn){
+            System.out.println(event.getSource());
+            scene1 = makeInitialPage();
+            pstage.setScene(scene1);
+        }
+    }
 
 
-        Grid g = new Grid(rows,cols);
-        g.createGrid(rows,cols,playersForSettings[0].getColor());
-        System.out.println("Rows "+rows+" Cols "+cols);
+
+    public Scene Grid_resume(int rows, int cols)
+    {
+        rows=s1.row;
+        cols=s1.column;
+
         Cell[][] cellsArray = new Cell[rows][cols];
         System.out.println(rows+" "+cols);
         Cell c = new Cell(cellsArray);
@@ -392,7 +428,41 @@ public class GUI extends Application
                 cellsArray[i][j] = new Cell(0);
             }
         }
+        Grid g = new Grid(rows,cols);
+        g.createGrid(rows,cols,playersForSettings[0].getColor());
+        int dummy_array[][]= new int[cols][rows];
+        for(int i=0; i<rows; i++)
+        {
+            for(int j=0; j<cols; j++)
+            {
+                if( s1!=null && s1.array[j][i]>0)
+                {
+                    for(int k=0; k<s1.array[j][i]; k++)
+                    {
+                        g.createSphere_undo(j,i,c,dummy_array,s1.player_color_grid);
+                    }
+                }
+            }
+        }
+        for(int i=0; i<rows; i++)
+        {
+            for(int j=0; j<cols; j++)
+            {
+                System.out.print(c.grid[i][j].getOrbs()+"  ");
+            }
+            System.out.println();
+        }
 
+        scene2 = new Scene(g.root, 720, 720);
+        scene2.setFill(Color.BLACK);
+        after(g,c);
+        return scene2;
+
+    }
+
+
+    public void after(Grid g, Cell c)
+    {
         g.comboBox.setOnAction(e -> {
             if(g.comboBox.getValue().equals("New Game")){
                 try {
@@ -416,14 +486,6 @@ public class GUI extends Application
         });
 
 
-
-
-//        g.root.getChildren().addAll(g.root1);
-//        StackPane pane = new StackPane();
-        scene2 = new Scene(g.root, 720, 720);
-        scene2.setFill(Color.BLACK);
-
-
         scene2.setOnMouseClicked(event -> {
             try {
                 explosionEvent(event, g, c);
@@ -434,13 +496,35 @@ public class GUI extends Application
             }
         });
 
-//        Grid g1 = new Grid(rows,cols);
-//        String[][] colorsOfPlayers = g1.color(rows,cols);
-//
-//        int[][] arrayOfPlayerIndices = g1.array;
-       // serialize(rows, cols,colorsOfPlayers,arrayOfPlayerIndices);
-        //deserialize();
+    }
 
+
+    public Scene Grid_GUI() throws IOException, ClassNotFoundException {
+//        if(comboBox.getValue().equals("Big")){
+//            rows = 15 ;
+//            cols = 10;
+//            System.out.println("Changed");
+//        }
+
+        playersInGame = spinner.getValue();         //playersInGame receiving value correctly
+
+
+        Grid g = new Grid(rows,cols);
+        g.createGrid(rows,cols,playersForSettings[0].getColor());
+        System.out.println("Rows "+rows+" Cols "+cols);
+        Cell[][] cellsArray = new Cell[rows][cols];
+        System.out.println(rows+" "+cols);
+        Cell c = new Cell(cellsArray);
+        for(int i =0 ;i<rows ; i++){
+            for(int j =0 ;j<cols;j++){
+                cellsArray[i][j] = new Cell(0);
+            }
+        }
+
+        scene2 = new Scene(g.root, 720, 720);
+        scene2.setFill(Color.BLACK);
+
+        after(g,c);
 
         return scene2;
     }
@@ -449,27 +533,21 @@ public class GUI extends Application
     {
         Serial serial1= new Serial(rows,cols, c,a);
         serial1.dummy =2;
-        //Useless u= new Useless();
         ObjectOutputStream out1= new ObjectOutputStream( new FileOutputStream("out.txt"));
             out1.writeObject(serial1);
             out1.close();
 
 
 
+
     }
 
-    public static void deserialize() throws IOException, ClassNotFoundException {
-        ObjectInputStream in= null;
-        try
-        {
-            in= new ObjectInputStream( new FileInputStream("out.txt"));
+    public static Serial deserialize() throws IOException, ClassNotFoundException {
+        ObjectInputStream in= new ObjectInputStream( new FileInputStream("out.txt"));
             Serial s1= (Serial)in.readObject();
             s1.display();
-        }
-        finally {
             in.close();
-        }
-
+            return s1;
 
 
 
@@ -525,13 +603,7 @@ public class GUI extends Application
         int[][] arrayOfPlayerIndices = g.array;
 
          serialize(rows, cols,colorsOfPlayers,arrayOfPlayerIndices);
-        try {
-            deserialize();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+
 
         for(int i = 0;i<rows;i++){
             for(int j = 0; j<cols ;j++){
@@ -607,46 +679,7 @@ public class GUI extends Application
         return scene3;
     }
 
-    public void ButtonClick(ActionEvent event) throws IOException{
-        if(event.getSource()==resumeBtn) {
-            try {
-                scene2 = Grid_GUI();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-            pstage.setScene(scene2);
-        }
-        else if(event.getSource()==playGame){
-                mouseClicks = 0;
-                playerIndex1 = 0;
-                colorIndex1 = 0;
-                r  = 1;
-            try {
-                scene2 = Grid_GUI();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-            pstage.setScene(scene2);
 
-        }
-        else if(event.getSource()==settingsBtn){
-            scene3 = makeSettingsPage();
-            pstage.setScene(scene3);
-            settingsView.getChildren().get(1).setOnMouseClicked(e -> LabelClick(e,0));
-            settingsView.getChildren().get(2).setOnMouseClicked(e -> LabelClick(e,1));
-            settingsView.getChildren().get(3).setOnMouseClicked(e -> LabelClick(e,2));
-            settingsView.getChildren().get(4).setOnMouseClicked(e -> LabelClick(e,3));
-            settingsView.getChildren().get(5).setOnMouseClicked(e -> LabelClick(e,4));
-            settingsView.getChildren().get(6).setOnMouseClicked(e -> LabelClick(e,5));
-            settingsView.getChildren().get(7).setOnMouseClicked(e -> LabelClick(e,6));
-            settingsView.getChildren().get(8).setOnMouseClicked(e -> LabelClick(e,7));
-        }
-        else if(event.getSource()==backToMenuBtn){
-            System.out.println(event.getSource());
-            scene1 = makeInitialPage();
-            pstage.setScene(scene1);
-            }
-        }
 
 
 
@@ -665,28 +698,28 @@ public class GUI extends Application
 
 
         primaryStage.setScene(scene1);
-        settingsBtn.setOnAction(event -> {
-            try {
-                ButtonClick(event);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-
-        playGame.setOnAction(event -> {
-            try {
-                ButtonClick(event);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-        resumeBtn.setOnAction(event -> {
-            try {
-                ButtonClick(event);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
+//        settingsBtn.setOnAction(event -> {
+//            try {
+//                ButtonClick(event);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        });
+//
+//        playGame.setOnAction(event -> {
+//            try {
+//                ButtonClick(event);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        });
+//        resumeBtn.setOnAction(event -> {
+//            try {
+//                ButtonClick(event);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        });
 
 //        if(primaryStage.getScene()==scene3) {
 

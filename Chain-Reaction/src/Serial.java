@@ -55,14 +55,14 @@ public class Serial implements Serializable
             for (int j=0; j<column; j++)
             {
                 System.out.print(player_color_grid[i][j]+"  ");
-                String s=player_color_grid[i][j];
-                if(s!=null) {
-                    String x[] = s.split(" ");
-                    double b = Double.parseDouble(x[0]);
-                    double g = Double.parseDouble(x[1]);
-                    double r = Double.parseDouble(x[2]);
-                    System.out.println("Tokenized rgb = " + b + " " + g + " " + r);
-                }
+//                String s=player_color_grid[i][j];
+//                if(s!=null) {
+//                    String x[] = s.split(" ");
+//                    double b = Double.parseDouble(x[0]);
+//                    double g = Double.parseDouble(x[1]);
+//                    double r = Double.parseDouble(x[2]);
+//                    System.out.println("Tokenized rgb = " + b + " " + g + " " + r);
+                //}
 
             }
             System.out.println();

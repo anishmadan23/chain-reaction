@@ -173,6 +173,72 @@ public class Grid
         return color_name;
     }
 
+    public Cell[][] createSphere_undo(double x, double y,Cell c, int array1[][], String col[][])
+    {
+
+        Sphere sphere = new Sphere();
+        sphere.setRadius(9);
+        String s=col[(int)y][(int)x];
+
+        String bgr[]=s.split(" ");
+        double b = Double.parseDouble(bgr[0]);
+        double g = Double.parseDouble(bgr[1]);
+        double r = Double.parseDouble(bgr[2]);
+        PhongMaterial ph = new PhongMaterial();
+        Color c1= new Color(r,g,b,1);
+        ph.setDiffuseColor(c1);
+        sphere.setMaterial(ph);
+        //System.out.println(array1[(int)x][(int)y]);
+        if (array1[(int) x][(int) y] == 0)
+        {
+            System.out.println((int) x + " " + (int) y);
+            sphere.setTranslateX((x + 1) * cellSize);
+            sphere.setTranslateY((y + 1) * cellSize + (cellSize / 2));
+            array1[(int) x][(int) y] = 1;
+            c.grid[(int)y][(int)x].setOrbs(1);
+            root1[(int)y][(int)x].getChildren().add(sphere);
+
+        }
+
+        else if (array1[(int) x][(int) y] == 1 ) {
+            sphere.setTranslateX((x + 1) * cellSize);
+            sphere.setTranslateY((y + 1) * cellSize + (cellSize / 2));
+            array1[(int) x][(int) y] = 2;
+            c.grid[(int)y][(int)x].setOrbs(2);
+            System.out.println("entered to create 2nd sphere");
+
+            animate((int)x,(int)y, sphere, array1);
+
+            root1[(int)y][(int)x].getChildren().add(sphere);
+
+        }
+
+        else if (array1[(int) x][(int) y] == 2)
+        {
+            sphere.setTranslateX((x + 1) * cellSize);
+            sphere.setTranslateY((y + 1) * cellSize + (cellSize / 2));
+            array1[(int) x][(int) y] = 3;
+            c.grid[(int)y][(int)x].setOrbs(3);
+
+            animate((int)x,(int)y, sphere, array1);
+
+            root1[(int)y][(int)x].getChildren().add(sphere);
+
+        }
+
+        for(int i=0; i<rows; i++)
+        {
+            for(int j=0;j<cols; j++)
+            {
+                array[j][i]=array1[j][i];
+            }
+        }
+
+
+
+        return c.grid;
+    }
+
 	public Cell[][] createSphere(double x, double y,Players[] p, int playerIndex,Cell c)
 	{
 		if(c.grid[(int)y][(int)x].getOrbs()==c.getCriticalMass((int)y,(int)x,rows,cols))
@@ -204,7 +270,7 @@ public class Grid
 			c.grid[(int)y][(int)x].setOrbs(2);
 
 			
-			animate((int)x,(int)y, sphere);
+			animate((int)x,(int)y, sphere, array);
 
 			root1[(int)y][(int)x].getChildren().add(sphere);
 
@@ -217,7 +283,7 @@ public class Grid
 			array[(int) x][(int) y] = 3;
 			c.grid[(int)y][(int)x].setOrbs(3);
 
-			animate((int)x,(int)y, sphere);			
+			animate((int)x,(int)y, sphere, array);
 
 			root1[(int)y][(int)x].getChildren().add(sphere);
 
@@ -228,8 +294,9 @@ public class Grid
 		return c.grid;
 	}
 
-	public void animate(int x, int y, Sphere sphere)
+	public void animate(int x, int y, Sphere sphere, int array[][])
 		{
+
 			if(array[x][y]==2)
 			{
 				Circle circle = new Circle(12);
@@ -255,8 +322,8 @@ public class Grid
 				Rotate rotate = new Rotate();
 				rotate.setAngle(180);
 				rotate.setAxis(Rotate.X_AXIS);
-				rotate.setPivotX(5);
-				rotate.setPivotY(0);
+				rotate.setPivotX(2);
+				rotate.setPivotY(2);
 				circle.getTransforms().addAll(rotate);
 
 				animation = new ParallelTransition(createTransition(circle, sphere));
