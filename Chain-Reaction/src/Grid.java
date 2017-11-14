@@ -150,6 +150,29 @@ public class Grid
 		return t;
 	}
 
+
+    //Serial serial= new Serial(rows, cols);
+	public String[][] color(int rows, int cols)
+    {
+        String color_name[][]= new String[rows][cols];
+        for(int i=0; i<rows; i++)
+        {
+            for(int j=0; j<cols; j++)
+            {
+                if(array[j][i]>0)
+                {
+                    Sphere sphere= (Sphere) root1[i][j].getChildren().get(0);
+                    PhongMaterial ph= (PhongMaterial) sphere.getMaterial();
+                    String s= String.valueOf(ph.getDiffuseColor());
+                    color_name[i][j]=s;
+
+                }
+            }
+        }
+        //serial.initialize_color(color_name);
+        return color_name;
+    }
+
 	public Cell[][] createSphere(double x, double y,Players[] p, int playerIndex,Cell c)
 	{
 		if(c.grid[(int)y][(int)x].getOrbs()==c.getCriticalMass((int)y,(int)x,rows,cols))

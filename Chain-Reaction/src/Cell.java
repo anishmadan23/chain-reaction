@@ -246,7 +246,13 @@ public class Cell implements Serializable {
                                             gr.playerIndex1 = 0;
                                             gr.colorIndex1 = 0;
                                             gr.r  = 1;
-                                            gr.scene2 = gr.Grid_GUI();
+                                            try {
+                                                gr.scene2 = gr.Grid_GUI();
+                                            } catch (IOException e) {
+                                                e.printStackTrace();
+                                            } catch (ClassNotFoundException e) {
+                                                e.printStackTrace();
+                                            }
                                             gr.pstage.setScene(gr.scene2);
                                             return;
 

@@ -22,6 +22,7 @@ import javafx.event.ActionEvent;
 
 import javafx.scene.input.MouseEvent;
 
+import java.io.*;
 import java.util.Optional;
 
 
@@ -39,10 +40,6 @@ public class GUI extends Application
     boolean initialisedTextFields = false;
     boolean initalisedColorPicker = false;
     boolean initialisedPlayers = false;
-
-
-
-
 
 
 
@@ -101,59 +98,6 @@ public class GUI extends Application
         launch(args);
     }
 
-//    @SuppressWarnings("Duplicates")
-//    public int checkIfWon(Grid g, Players[] p,int playerIndex){
-//        int c = 0;int sum =0;
-//        Color color = null;
-//        for(int i = 0;i<rows;i++){
-//            for(int j = 0;j<cols;j++){
-//                if(g.root1[i][j].getChildren().size()>0){
-//                    Sphere x = (Sphere) g.root1[i][j].getChildren().get(0);
-//                    PhongMaterial ph = (PhongMaterial)x.getMaterial();
-//                    color = ph.getDiffuseColor();
-//                    break;
-//                }
-//            }
-//        }
-//        for(int i = 0;i<rows;i++) {
-//            for (int j = 0; j < cols; j++) {
-//                if (g.root1[i][j].getChildren().size() > 0) {
-//                    sum++;
-//                }
-//            }
-//        }
-//
-//
-//
-//        System.out.println("Blue = "+color.getBlue());
-//        System.out.println("Red = "+color.getRed());
-//        System.out.println("Green = "+color.getGreen());
-//
-//        for(int i = 0;i<rows;i++){
-//            for(int j = 0;j<cols;j++) {
-//                if (g.root1[i][j].getChildren().size() > 0) {
-//                    Sphere x = (Sphere) g.root1[i][j].getChildren().get(0);
-//                    PhongMaterial ph = (PhongMaterial) x.getMaterial();
-//                    System.out.println("Blue1 = "+ph.getDiffuseColor().getBlue());
-//                    System.out.println("Red1 = "+ph.getDiffuseColor().getRed());
-//                    System.out.println("Green1 = "+ph.getDiffuseColor().getGreen());
-//                    if (ph.getDiffuseColor().getBlue() != color.getBlue() || ph.getDiffuseColor().getRed() != color.getRed()
-//                            || ph.getDiffuseColor().getGreen() != color.getGreen() ) {
-//                        System.out.println("Not Same");
-//                        c = 1;
-//                        break;
-//                    }
-//
-//                }
-//            }
-//        }
-//        if(c==0 && sum>=2){
-//            System.out.println("Same");
-//            c=2;
-//        }
-//        return c;
-//
-//    }
 
     public final Scene[] makeNameAndColorPickerPage(){
 
@@ -392,10 +336,28 @@ public class GUI extends Application
         pageContents.add(settingsBtn,0,4);
 
 
-        settingsBtn.setOnAction(event -> ButtonClick(event));
+        settingsBtn.setOnAction(event -> {
+            try {
+                ButtonClick(event);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
 
-        playGame.setOnAction(event -> ButtonClick(event));
-        resumeBtn.setOnAction(event -> ButtonClick(event));
+        playGame.setOnAction(event -> {
+            try {
+                ButtonClick(event);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        resumeBtn.setOnAction(event -> {
+            try {
+                ButtonClick(event);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
 
 
 //        pageContents.gridLinesVisibleProperty().set(true);
@@ -409,7 +371,7 @@ public class GUI extends Application
 
 
 
-    public Scene Grid_GUI(){
+    public Scene Grid_GUI() throws IOException, ClassNotFoundException {
         if(comboBox.getValue().equals("Big")){
             rows = 15 ;
             cols = 10;
@@ -433,7 +395,13 @@ public class GUI extends Application
 
         g.comboBox.setOnAction(e -> {
             if(g.comboBox.getValue().equals("New Game")){
-                scene2 = Grid_GUI();
+                try {
+                    scene2 = Grid_GUI();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                } catch (ClassNotFoundException e1) {
+                    e1.printStackTrace();
+                }
                 pstage.setScene(scene2);
                 mouseClicks = 0;
                 playerIndex1 = 0;
@@ -458,8 +426,51 @@ public class GUI extends Application
 
         scene2.setOnMouseClicked(event -> explosionEvent(event,g,c));
 
+        Grid g1 = new Grid(rows,cols);
+        String[][] colorsOfPlayers = g1.color(rows,cols);
+
+        int[][] arrayOfPlayerIndices = g1.array;
+        serialize(rows, cols,colorsOfPlayers,arrayOfPlayerIndices);
+        deserialize();
+
 
         return scene2;
+    }
+
+    public static void serialize(int rows, int cols,String[][] c,int [][] a)throws IOException
+    {
+        Serial serial1= new Serial(rows,cols, c,a);
+        serial1.dummy =2;
+        ObjectOutputStream out= null;
+        try
+        {
+            new ObjectOutputStream( new FileOutputStream("out.txt"));
+            out.writeObject(serial1);
+        }
+        finally
+        {
+            out.close();
+        }
+
+
+
+    }
+
+    public static void deserialize() throws IOException, ClassNotFoundException {
+        ObjectInputStream in= null;
+        try
+        {
+            in= new ObjectInputStream( new FileInputStream("out.txt"));
+            Serial s1= (Serial)in.readObject();
+            s1.display();
+        }
+        finally {
+            in.close();
+        }
+
+
+
+
     }
 
     public void explosionEvent(MouseEvent event,Grid g, Cell c) {
@@ -495,6 +506,9 @@ public class GUI extends Application
 //            System.out.println("Checking "+checkIfWon(g,playersForSettings,playerIndex1));
 
             r = c.explosion((int) y, (int) x,g,rows,cols,playerIndex1, playersForSettings,this);
+
+   //         serial1.initialize(g.array);
+
             mouseClicks+=r;
             playerIndex1=  (mouseClicks)%(playersInGame);
             colorIndex1 = (mouseClicks)%playersInGame;
@@ -512,6 +526,7 @@ public class GUI extends Application
 
 
     }
+
 
     public void initialisePlayers() {
         if (!initialisedPlayers) {
@@ -543,7 +558,13 @@ public class GUI extends Application
         backToMenuBtn = new Button("Back To Menu");
         backToMenuBtn.setPrefSize(150,30);
         backToMenuBtn.setFont(new Font("Cambria",13));
-        backToMenuBtn.setOnAction(e -> ButtonClick(e));
+        backToMenuBtn.setOnAction(e -> {
+            try {
+                ButtonClick(e);
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        });
         GridPane.setHalignment(backToMenuBtn, HPos.LEFT);
 //        GridPane.setHalignment(resumeBtn, HPos.CENTER);
         settingsView.add(backToMenuBtn,0,0);
@@ -570,9 +591,13 @@ public class GUI extends Application
         return scene3;
     }
 
-    public void ButtonClick(ActionEvent event){
+    public void ButtonClick(ActionEvent event) throws IOException{
         if(event.getSource()==resumeBtn) {
-            scene2 = Grid_GUI();
+            try {
+                scene2 = Grid_GUI();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
             pstage.setScene(scene2);
         }
         else if(event.getSource()==playGame){
@@ -580,8 +605,12 @@ public class GUI extends Application
                 playerIndex1 = 0;
                 colorIndex1 = 0;
                 r  = 1;
+            try {
                 scene2 = Grid_GUI();
-                pstage.setScene(scene2);
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+            pstage.setScene(scene2);
 
         }
         else if(event.getSource()==settingsBtn){
@@ -611,7 +640,7 @@ public class GUI extends Application
     }
 
     @Override
-    public void start(Stage primaryStage)
+    public void start(Stage primaryStage) throws IOException
     {
         pstage = primaryStage;
         primaryStage.setTitle("Chain Reaction");
@@ -620,10 +649,28 @@ public class GUI extends Application
 
 
         primaryStage.setScene(scene1);
-        settingsBtn.setOnAction(event -> ButtonClick(event));
+        settingsBtn.setOnAction(event -> {
+            try {
+                ButtonClick(event);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
 
-        playGame.setOnAction(event -> ButtonClick(event));
-        resumeBtn.setOnAction(event -> ButtonClick(event));
+        playGame.setOnAction(event -> {
+            try {
+                ButtonClick(event);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        resumeBtn.setOnAction(event -> {
+            try {
+                ButtonClick(event);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
 
 //        if(primaryStage.getScene()==scene3) {
 
