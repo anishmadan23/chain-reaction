@@ -281,6 +281,7 @@ public class Cell implements Serializable {
                         String[][] colorsOfPlayers = g.color(rows,cols);
                         try {
                             gr.serialize(rows, cols,g.array,colorsOfPlayers, gr.mouseClicks, gr.playersInGame);
+                            System.out.println("Serialized");
                         } catch (IOException e) {
                             e.printStackTrace();
                         }

@@ -448,6 +448,14 @@ public class GUI extends Application
             }
         }
 
+        String[][] colorsOfPlayers = g.color(rows,cols);
+        try {
+            serialize(rows,cols,g.array,colorsOfPlayers, mouseClicks-1, playersInGame);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Serialized");
+
         mouseClicks=obj.mouse;
         playersInGame=obj.players_in_game;
         playerIndex1=  (mouseClicks)%(playersInGame);
@@ -487,15 +495,34 @@ public class GUI extends Application
         });
 
         g.undoBtn.setOnAction(event -> {
-            scene2 = Grid_resume(rows,cols, s2);
-            pstage.setScene(scene2);
+            if(mouseClicks>1) {
+                scene2 = Grid_resume(rows, cols, s2);
+                pstage.setScene(scene2);
+
+            }
+            else {
+                Scene scene_start = null;
+                try {
+                    scene_start = Grid_GUI();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                pstage.setScene(scene_start);
+                mouseClicks = 0;
+                playerIndex1 = 0;
+                colorIndex1 = 0;
+                r  = 1;
+            }
+
         });
 
 
         scene2.setOnMouseClicked(event -> {
             try {
-                if(mouseClicks>0)
-                    s2=deserialize();
+
+
                 explosionEvent(event, g, c);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -584,6 +611,10 @@ public class GUI extends Application
         y = Math.floor(y);
 
         if (x < cols + 1 && y < rows + 1) {
+            if(mouseClicks>0) {
+                s2 = deserialize();
+                System.out.println("Deserialized");
+            }
 
             System.out.println("MouseClicks = "+mouseClicks);
 //            g.changeGridColor(playersForSettings[colorIndex1].getColor());
@@ -604,11 +635,13 @@ public class GUI extends Application
             g.changeGridColor(playersForSettings[colorIndex1].getColor());
             System.out.println("r = "+r);
 
+            String[][] colorsOfPlayers = g.color(rows,cols);
+            serialize(rows,cols,g.array,colorsOfPlayers, mouseClicks, playersInGame);
+            System.out.println("Serialized");
 
         }
 
-        String[][] colorsOfPlayers = g.color(rows,cols);
-        serialize(rows,cols,g.array,colorsOfPlayers, mouseClicks, playersInGame);
+
 
         //int[][] arrayOfPlayerIndices = g.array;
 
