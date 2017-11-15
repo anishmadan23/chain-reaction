@@ -340,9 +340,10 @@ public class Grid
 		}
 	}
 
+	public Button undoBtn;
 
 	public void createGrid(int rows, int cols,Color color1)
-	{	Button undoBtn  = new Button("Undo");
+	{	undoBtn  = new Button("Undo");
 		undoBtn.setPrefSize(120,40);
 		undoBtn.setFont(Font.font("Arial", FontWeight.SEMI_BOLD,18));
 		undoBtn.setLayoutX(500);

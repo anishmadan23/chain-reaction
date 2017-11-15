@@ -40,7 +40,7 @@ public class GUI extends Application
     boolean initialisedTextFields = false;
     boolean initalisedColorPicker = false;
     boolean initialisedPlayers = false;
-    public Serial s1;
+    public Serial s1,s2;
     int array_after_explosion[][];
 
 
@@ -380,7 +380,7 @@ public class GUI extends Application
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
-            scene2 = Grid_resume(rows,cols);
+            scene2 = Grid_resume(rows,cols, s1);
             pstage.setScene(scene2);
         }
         else if(event.getSource()==playGame){
@@ -418,10 +418,10 @@ public class GUI extends Application
 
 
 
-    public Scene Grid_resume(int rows, int cols)
+    public Scene Grid_resume(int rows, int cols, Serial obj)
     {
-        rows=s1.row;
-        cols=s1.column;
+        rows=obj.row;
+        cols=obj.column;
 
         Cell[][] cellsArray = new Cell[rows][cols];
         System.out.println(rows+" "+cols);
@@ -438,18 +438,18 @@ public class GUI extends Application
         {
             for(int j=0; j<cols; j++)
             {
-                if( s1!=null && s1.array[j][i]>0)
+                if( obj!=null && obj.array[j][i]>0)
                 {
-                    for(int k=0; k<s1.array[j][i]; k++)
+                    for(int k=0; k<obj.array[j][i]; k++)
                     {
-                        g.createSphere_undo(j,i,c,dummy_array,s1.player_color_grid);
+                        g.createSphere_undo(j,i,c,dummy_array,obj.player_color_grid);
                     }
                 }
             }
         }
 
-        mouseClicks=s1.mouse;
-        playersInGame=s1.players_in_game;
+        mouseClicks=obj.mouse;
+        playersInGame=obj.players_in_game;
         playerIndex1=  (mouseClicks)%(playersInGame);
         colorIndex1 = (mouseClicks)%playersInGame;
         g.changeGridColor(playersForSettings[colorIndex1].getColor());
@@ -486,9 +486,16 @@ public class GUI extends Application
             }
         });
 
+        g.undoBtn.setOnAction(event -> {
+            scene2 = Grid_resume(rows,cols, s2);
+            pstage.setScene(scene2);
+        });
+
 
         scene2.setOnMouseClicked(event -> {
             try {
+                if(mouseClicks>0)
+                    s2=deserialize();
                 explosionEvent(event, g, c);
             } catch (IOException e) {
                 e.printStackTrace();
