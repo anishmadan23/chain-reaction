@@ -41,14 +41,16 @@ public class GUI extends Application
     boolean initalisedColorPicker = false;
     boolean initialisedPlayers = false;
     public Serial s1;
+    int array_after_explosion[][];
 
 
 
 
     public GUI() {
+
         this.rows = 9;
         this.cols = 6;
-
+        array_after_explosion= new int[this.rows][this.cols];
     }
 
     ObservableList<Integer> players = FXCollections.observableArrayList(2,3,4,5,6,7,8);
@@ -387,6 +389,7 @@ public class GUI extends Application
             colorIndex1 = 0;
             r  = 1;
             try {
+                playersInGame = spinner.getValue();         //playersInGame receiving value correctly
                 scene2 = Grid_GUI();
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
@@ -444,14 +447,12 @@ public class GUI extends Application
                 }
             }
         }
-        for(int i=0; i<rows; i++)
-        {
-            for(int j=0; j<cols; j++)
-            {
-                System.out.print(c.grid[i][j].getOrbs()+"  ");
-            }
-            System.out.println();
-        }
+
+        mouseClicks=s1.mouse;
+        playersInGame=s1.players_in_game;
+        playerIndex1=  (mouseClicks)%(playersInGame);
+        colorIndex1 = (mouseClicks)%playersInGame;
+        g.changeGridColor(playersForSettings[colorIndex1].getColor());
 
         scene2 = new Scene(g.root, 720, 720);
         scene2.setFill(Color.BLACK);
@@ -506,7 +507,7 @@ public class GUI extends Application
 //            System.out.println("Changed");
 //        }
 
-        playersInGame = spinner.getValue();         //playersInGame receiving value correctly
+
 
 
         Grid g = new Grid(rows,cols);
@@ -529,9 +530,9 @@ public class GUI extends Application
         return scene2;
     }
 
-    public static void serialize(int rows, int cols,String[][] c,int [][] a)throws IOException
+    public static void serialize(int rows, int cols, int[][] c, String[][] a, int mouseClicks, int playersInGame)throws IOException
     {
-        Serial serial1= new Serial(rows,cols, c,a);
+        Serial serial1= new Serial(rows,cols, a,c, mouseClicks,playersInGame );
         serial1.dummy =2;
         ObjectOutputStream out1= new ObjectOutputStream( new FileOutputStream("out.txt"));
             out1.writeObject(serial1);
@@ -587,6 +588,7 @@ public class GUI extends Application
 
             r = c.explosion((int) y, (int) x,g,rows,cols,playerIndex1, playersForSettings,this);
 
+
    //         serial1.initialize(g.array);
 
             mouseClicks+=r;
@@ -599,15 +601,15 @@ public class GUI extends Application
         }
 
         String[][] colorsOfPlayers = g.color(rows,cols);
+        serialize(rows,cols,g.array,colorsOfPlayers, mouseClicks, playersInGame);
 
-        int[][] arrayOfPlayerIndices = g.array;
+        //int[][] arrayOfPlayerIndices = g.array;
 
-         serialize(rows, cols,colorsOfPlayers,arrayOfPlayerIndices);
 
 
         for(int i = 0;i<rows;i++){
             for(int j = 0; j<cols ;j++){
-                System.out.print(arrayOfPlayerIndices[j][i]+" ");
+                System.out.print(g.array[j][i]+"      ");
             }
             System.out.println();
         }
