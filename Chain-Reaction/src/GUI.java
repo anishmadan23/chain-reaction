@@ -374,13 +374,23 @@ public class GUI extends Application
 
     public void ButtonClick(ActionEvent event) throws IOException{
         //Grid g=new Grid(rows,cols);
-        if(event.getSource()==resumeBtn) {
-            try {
-                s1=deserialize();
-            } catch (IOException | ClassNotFoundException e) {
-                e.printStackTrace();
+        if(event.getSource()==resumeBtn)
+        {
+            if(mouseClicks>0)
+            {
+                try {
+                    s1 = deserialize();
+                } catch (IOException | ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                scene2 = Grid_resume(rows, cols, s1);
             }
-            scene2 = Grid_resume(rows,cols, s1);
+            else
+                try {
+                    scene2 = Grid_GUI();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
             pstage.setScene(scene2);
         }
         else if(event.getSource()==playGame){
@@ -454,7 +464,7 @@ public class GUI extends Application
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("Serialized");
+        System.out.println("Serialized1");
 
         mouseClicks=obj.mouse;
         playersInGame=obj.players_in_game;
@@ -475,6 +485,7 @@ public class GUI extends Application
         g.comboBox.setOnAction(e -> {
             if(g.comboBox.getValue().equals("New Game")){
                 try {
+                    playersInGame= spinner.getValue();
                     scene2 = Grid_GUI();
                 } catch (IOException e1) {
                     e1.printStackTrace();
@@ -496,6 +507,7 @@ public class GUI extends Application
 
         g.undoBtn.setOnAction(event -> {
             if(mouseClicks>1) {
+                System.out.println("mouseClicks1 "+mouseClicks);
                 scene2 = Grid_resume(rows, cols, s2);
                 pstage.setScene(scene2);
 
@@ -534,14 +546,8 @@ public class GUI extends Application
     }
 
 
-    public Scene Grid_GUI() throws IOException, ClassNotFoundException {
-//        if(comboBox.getValue().equals("Big")){
-//            rows = 15 ;
-//            cols = 10;
-//            System.out.println("Changed");
-//        }
-
-
+    public Scene Grid_GUI() throws IOException, ClassNotFoundException
+    {
 
 
         Grid g = new Grid(rows,cols);
@@ -616,7 +622,7 @@ public class GUI extends Application
                 System.out.println("Deserialized");
             }
 
-            System.out.println("MouseClicks = "+mouseClicks);
+
 //            g.changeGridColor(playersForSettings[colorIndex1].getColor());
             System.out.println(playerIndex1+" "+playersForSettings[playerIndex1].getColor());
             System.out.println("this" + (int) x + " " + (int) y);
@@ -634,6 +640,7 @@ public class GUI extends Application
             colorIndex1 = (mouseClicks)%playersInGame;
             g.changeGridColor(playersForSettings[colorIndex1].getColor());
             System.out.println("r = "+r);
+            System.out.println("MouseClicks on addition of balls= "+mouseClicks);
 
             String[][] colorsOfPlayers = g.color(rows,cols);
             serialize(rows,cols,g.array,colorsOfPlayers, mouseClicks, playersInGame);
