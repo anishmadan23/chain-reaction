@@ -11,7 +11,6 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.Sphere;
-import javafx.stage.Modality;
 
 public class Cell implements Serializable {
 
@@ -107,8 +106,6 @@ public class Cell implements Serializable {
             }
         }
 
-
-
         System.out.println("Blue = "+color.getBlue());
         System.out.println("Red = "+color.getRed());
         System.out.println("Green = "+color.getGreen());
@@ -126,7 +123,6 @@ public class Cell implements Serializable {
                         c = 1;
                         break;
                     }
-
                 }
             }
         }
@@ -137,6 +133,8 @@ public class Cell implements Serializable {
         return c;
 
     }
+
+
 
     public Optional<ButtonType> showAlert() throws IllegalStateException{
         return alert.showAndWait();
@@ -152,8 +150,6 @@ public class Cell implements Serializable {
 
 
     }
-
-
 
     public Queue<Coordinates> getNeighbours(int i, int j,int rows, int cols) {
         Deque<Coordinates> queue = new LinkedList<>();
@@ -231,6 +227,7 @@ public class Cell implements Serializable {
                             ph1.setDiffuseColor(p[playerIndex].getColor());
                             x1.setMaterial(ph1);
                         }
+                        explosion(cxy.getX(), cxy.getY(), g, rows, cols, playerIndex, p, gr);
                         if( gr.mouseClicks>1 && checkIfWon(g,p,playerIndex,rows,cols)==2)
                         {
                             Platform.runLater(() -> {
@@ -264,10 +261,7 @@ public class Cell implements Serializable {
                                 }
                             });
                         }
-                        else
-                        {
-                            explosion(cxy.getX(), cxy.getY(), g, rows, cols, playerIndex, p, gr);
-                        }
+
 
                         for(int i1 = 0; i1 <rows; i1++)
                         {
