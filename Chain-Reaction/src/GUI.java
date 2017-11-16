@@ -44,8 +44,6 @@ public class GUI extends Application
     int array_after_explosion[][];
 
 
-
-
     public GUI() {
 
         this.rows = 9;
@@ -70,7 +68,7 @@ public class GUI extends Application
     public ColorPicker[] colorPickers = new ColorPicker[8];
     GridPane settingsView;
 
-    Button backToSettings, saveSettings;
+    Button backToSettings;
     Label headingSettings;
 
 
@@ -152,7 +150,6 @@ public class GUI extends Application
                                     pstage.setScene(scene3);
                                 });
             //define onclick
-
 
             Label orbColor = new Label("Colour of Orb");
             orbColor.setFont(Font.font("Cambria",FontWeight.BOLD,20));
@@ -255,6 +252,7 @@ public class GUI extends Application
         pageContents.getRowConstraints().addAll(row1,row2,row3,row4,row5);
 
         Label gameName = new Label("Chain Reaction for PC ");
+        gameName.setTextFill(Color.WHITE);
         gameName.setFont(Font.font("Cambria",FontWeight.BOLD,30));
 
         Label infoLabel = new Label();
@@ -274,20 +272,42 @@ public class GUI extends Application
         GridPane.setHalignment(infoLabel, HPos.CENTER);
 
         resumeBtn = new Button("Resume Game");
-        resumeBtn.setPrefSize(200,50);
-        resumeBtn.setFont(new Font("Cambria",20));
+        resumeBtn.setPrefSize(200,60);
+//        resumeBtn.setFont(new Font("Cambria",20));
+//        resumeBtn.setTextFill(Color.WHITE);
         GridPane.setHalignment(resumeBtn, HPos.CENTER);
+        resumeBtn.setStyle("-fx-background-color: rgba(0,0,0,0.75),\n" +
+                "                           rgba(255,255,255,0.75),\n" +
+                "                           linear-gradient(to bottom,#484848 0%,#181818 100%);"+
+                "-fx-background-insets: 5 5 5 5, 5 5 5 5, 1;"+
+                "-fx-padding: 5px;"+
+                "-fx-background-radius: 5px;"+
+                "-fx-font: 20px \"Cambria\";" +
+                "-fx-border-radius: 5px;"+
+                "-fx-text-fill: white");
+//        resumeBtn.setStyle("-fx-background-color: #383838");
         pageContents.add(resumeBtn,0,1);
 
         playGame =  new Button("New Game");
-        playGame.setPrefSize(200,50);
+        playGame.setPrefSize(200,60);
         playGame.setFont(new Font("Cambria",20));
+        playGame.setTextFill(Color.WHITE);
+        playGame.setStyle("-fx-background-color: rgba(0,0,0,0.75),\n" +
+                "                           rgba(255,255,255,0.75),\n" +
+                "                           linear-gradient(to bottom,#484848 0%,#181818 100%);"+
+                        "-fx-background-insets: 5 5 5 5, 5 5 5 5, 1;"+
+                        "-fx-padding: 5px;"+
+                        "-fx-background-radius: 5px;"+
+                        "-fx-font: 20px \"Cambria\";" +
+                        "-fx-border-radius: 5px;"+
+                        "-fx-text-fill: white");
         GridPane.setHalignment(playGame, HPos.CENTER);
         pageContents.add(playGame,1,1);
 
 
         Label GridSizeLabel = new Label("Grid Size");
         GridSizeLabel.setFont(Font.font("Arial",FontWeight.BOLD,25));
+        GridSizeLabel.setTextFill(Color.WHITE);
         GridPane.setHalignment(GridSizeLabel, HPos.CENTER);
         pageContents.add(GridSizeLabel,0,2);
 
@@ -296,7 +316,33 @@ public class GUI extends Application
         comboBox.getItems().addAll("Small","Big");
         comboBox.getSelectionModel().selectFirst();
         comboBox.setPrefSize(200,40);
-        comboBox.setStyle("-fx-font: 20px \"Serif\";");
+
+        comboBox.setStyle("-fx-background-color:  #ffffff;"+
+                "-fx-border-color: #383838;"+
+                "-fx-border-width: 4px;"+
+                "-fx-text-fill: white;"+
+                "-fx-background-radius: 3px, 3px, 2px, 1px;"+
+                "-fx-background-insets: 5 5 5 5, 5 5 5 5, 1;"+
+            "-fx-padding: 5px;"+
+
+            "-fx-font: 20px \"Cambria\";" +
+            "-fx-border-radius: 5px");
+//        comboBox.setStyle("-fx-background-color: rgba(0,0,0,0.75),\n" +
+//            "                           rgba(255,255,255,0.75),\n" +
+//            "                           linear-gradient(to bottom,#484848 0%,#181818 100%);"+
+//            "-fx-background-insets: 5 5 5 5, 5 5 5 5, 1;"+
+//            "-fx-padding: 5px;"+
+//            "-fx-background-radius: 5px;"+
+//            "-fx-font: 20px \"Cambria\";" +
+//            "-fx-border-radius: 5px;"+
+//            "-fx-text-fill: white");
+//        comboBox.setTextFill(Color.WHITE);
+//        comboBox.setStyle(
+//                        "-fx-font: 20px \"Serif\";"+
+//                        "-fx-background-color: #383838;"+
+//                        "-fx-text-fill: white");
+
+//        comboBox.setStyle("-fx-background-color: #383838");
         GridPane.setHalignment(comboBox, HPos.CENTER);
         pageContents.add(comboBox,1,2);
         comboBox.setOnAction(e -> {
@@ -312,12 +358,10 @@ public class GUI extends Application
                     }
                 });
 
-
-
-
         spinner = new Spinner<>();
         Label playersLabel = new Label("Players");
         playersLabel.setFont(new Font("Arial",25));
+        playersLabel.setTextFill(Color.WHITE);
         playersLabel.setFont(Font.font("Arial",FontWeight.BOLD,25));
         GridPane.setHalignment(playersLabel, HPos.CENTER);
         pageContents.add(playersLabel,0,3);
@@ -326,15 +370,35 @@ public class GUI extends Application
         SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.ListSpinnerValueFactory<>(players);
         valueFactory.setValue(2);                               // Default value
         spinner.setValueFactory(valueFactory);
-        spinner.setPrefSize(200,40);
-        spinner.setStyle("-fx-font: 20px \"Serif\";");
+        spinner.setPrefSize(200,50);
+//        spinner.setStyle("-fx-font: 20px \"Serif\";");
+        spinner.setStyle("-fx-background-color: rgba(0,0,0,0.75),\n" +
+            "                           rgba(255,255,255,0.75),\n" +
+            "                           linear-gradient(to bottom,#484848 0%,#181818 100%);"+
+            "-fx-background-insets: 5 5 5 5, 5 5 5 5, 1;"+
+            "-fx-padding: 5px;"+
+            "-fx-background-radius: 5px;"+
+            "-fx-font: 20px \"Cambria\";" +
+            "-fx-border-radius: 5px;"+
+            "-fx-text-fill: white");
         GridPane.setHalignment(spinner, HPos.CENTER);
         pageContents.add(spinner,1,3);
 
 
-        settingsBtn = new Button("Settings");
-        settingsBtn.setPrefSize(200,50);
-        settingsBtn.setFont(new Font("Cambria",20));
+        settingsBtn = new Button("Player Settings");
+        settingsBtn.setPrefSize(200,60);
+//        settingsBtn.setFont(new Font("Cambria",20));
+//        settingsBtn.setTextFill(Color.WHITE);
+//        settingsBtn.setStyle("-fx-background-color: #383838");
+        settingsBtn.setStyle("-fx-background-color: rgba(0,0,0,0.75),\n" +
+            "                           rgba(255,255,255,0.75),\n" +
+            "                           linear-gradient(to bottom,#484848 0%,#181818 100%);"+
+            "-fx-background-insets: 5 5 5 5, 5 5 5 5, 1;"+
+            "-fx-padding: 5px;"+
+            "-fx-background-radius: 5px;"+
+            "-fx-font: 20px \"Cambria\";" +
+            "-fx-border-radius: 5px;"+
+            "-fx-text-fill: white");
         GridPane.setColumnSpan(settingsBtn,3);
         GridPane.setHalignment(settingsBtn, HPos.CENTER);
         pageContents.add(settingsBtn,0,4);
@@ -368,6 +432,7 @@ public class GUI extends Application
         rootpane.getChildren().addAll(pageContents);
 //        rootpane.setStyle("-fx-background-color: #000;");
         scene1 = new Scene(rootpane,720,720);       //scene1 -> initial page
+        rootpane.setStyle("-fx-background-color: #000000");
         return scene1;
     }
 
