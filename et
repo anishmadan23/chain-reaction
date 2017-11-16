@@ -1,0 +1,338 @@
+[33mcommit 43e7ac5e3002560b8bd799e1cb0a32b31e7e864d[m
+Author: Anish Madan <anish16223@iiitd.ac.in>
+Date:   Thu Nov 16 11:35:12 2017 +0530
+
+    UC
+
+[33mcommit 46f9eec18b3749d76da7f64469d05ddba96c13da[m
+Author: Navdha Agarwal <navdha16250@iiitd.ac.in>
+Date:   Tue Nov 14 23:53:39 2017 +0530
+
+    serialize
+    
+    resume is working apart from some errors (array, color of the next turn)
+
+[33mcommit 13b9009f04970465c84b901e553372e3c2ae5fe6[m
+Author: Navdha Agarwal <navdha16250@iiitd.ac.in>
+Date:   Tue Nov 14 16:58:51 2017 +0530
+
+    serialize
+    
+    not the scene..
+
+[33mcommit b254a9814f4a7a064711e3ff2e387fb7cb0ab071[m
+Author: Navdha Agarwal <navdha16250@iiitd.ac.in>
+Date:   Tue Nov 14 12:49:50 2017 +0530
+
+    Serialize with errors
+
+[33mcommit d97e0deddb4bacfefe116b638f8bb71f36a9cc50[m
+Author: Navdha Agarwal <navdha16250@iiitd.ac.in>
+Date:   Mon Nov 13 15:29:48 2017 +0530
+
+    useless
+
+[33mcommit 6f0032559c034776a965cea9f239eedabd0d7cd4[m
+Author: Anish Madan <anish16223@iiitd.ac.in>
+Date:   Sun Nov 12 02:09:28 2017 +0530
+
+    Corrected the position of big grid and removed option of window resizing
+
+[33mcommit 62746ce6750db46c81918ca0f6662cc754903b8b[m
+Author: Anish Madan <anish16223@iiitd.ac.in>
+Date:   Sun Nov 12 01:42:19 2017 +0530
+
+    Added icon for application and on saving player settings screen goes back to general settings
+
+[33mcommit 650b81e1473fbd31c76d9497c2240fafd3b28333[m
+Author: Anish Madan <anish16223@iiitd.ac.in>
+Date:   Sun Nov 12 01:11:43 2017 +0530
+
+    New Game button working but alert still throwing IllegalStateException
+
+[33mcommit 832fcc604329593f009e5ec3bc7e53c235d62bd8[m
+Author: Anish Madan <anish16223@iiitd.ac.in>
+Date:   Sun Nov 12 00:54:18 2017 +0530
+
+    Alert added to signal end of game. New Game button in alert not working
+
+[33mcommit 5679c36850f4d9cb2796676a7c4f5750a43058d5[m
+Author: Anish Madan <anish16223@iiitd.ac.in>
+Date:   Sat Nov 11 21:37:56 2017 +0530
+
+    Implemented changing orb colour and grid colour with logic of the game and minimal testing
+
+[33mcommit 93114668877d54ab7eaa3b8e1c4623e02d5b5647[m
+Author: Anish Madan <anish16223@iiitd.ac.in>
+Date:   Sat Nov 11 17:22:50 2017 +0530
+
+    Add grid colour changing ability
+
+[33mcommit 85e4367a67e12750254a83d59089aa13c57a84e9[m
+Author: Anish Madan <anish16223@iiitd.ac.in>
+Date:   Sat Nov 11 16:58:34 2017 +0530
+
+    New Game now always starts with player1
+
+[33mcommit 3608417224694ff603564f391d30efa417f3e2de[m
+Merge: 516afd3 d3cd3c1
+Author: Anish Madan <anish16223@iiitd.ac.in>
+Date:   Sat Nov 11 15:01:36 2017 +0530
+
+    UC-4
+
+[33mcommit 516afd3819ea628bdcfd04c3ec09ac8349e3888c[m
+Author: Anish Madan <anish16223@iiitd.ac.in>
+Date:   Sat Nov 11 14:57:49 2017 +0530
+
+    Name and Colour of player saves correctly and colour of orb changes with player(not in transition)
+
+[33mcommit d3cd3c13e7e267aaeebbff55c803ad2780b9c63b[m
+Author: Navdha Agarwal <navdha16250@iiitd.ac.in>
+Date:   Sat Nov 11 02:33:51 2017 +0530
+
+    useless
+
+[33mcommit 31b1a43d665626fb82d919a35e09710ceae9106b[m
+Author: Anish Madan <anish16223@iiitd.ac.in>
+Date:   Fri Nov 10 22:08:23 2017 +0530
+
+    Resolved error of coordinates and rows/cols -- working demo with one colour
+
+[33mcommit 079a700b73395b15a883befa987c660d69256f65[m
+Author: Navdha Agarwal <navdha16250@iiitd.ac.in>
+Date:   Fri Nov 10 17:58:24 2017 +0530
+
+    xml
+
+[33mcommit 9b63df56817f879b0dc0937114d23193eeab55c5[m
+Merge: 3ffcb3e 38cb965
+Author: Anish Madan <anish16223@iiitd.ac.in>
+Date:   Fri Nov 10 16:23:54 2017 +0530
+
+    Merge remote-tracking branch 'origin/master'
+    
+    # Conflicts:
+    #	out/production/Chain-Reaction/GUI.class
+
+[33mcommit 3ffcb3eb0ae67e7fbe50e13b5ff564c962c9fcfe[m
+Author: Anish Madan <anish16223@iiitd.ac.in>
+Date:   Fri Nov 10 16:23:04 2017 +0530
+
+    Useless commit
+
+[33mcommit 38cb965d1cc48c194abd3f6d28ccce8f67c282ed[m
+Author: Navdha Agarwal <navdha16250@iiitd.ac.in>
+Date:   Fri Nov 10 16:20:06 2017 +0530
+
+    Useless commmit 3
+
+[33mcommit 0aedf76cf255c0be034e80757d709ffe0e670d09[m
+Merge: 146bb54 9fa1034
+Author: Anish Madan <anish16223@iiitd.ac.in>
+Date:   Fri Nov 10 16:17:29 2017 +0530
+
+    Useless commit 2
+
+[33mcommit 146bb5465dad9e824c68bfb89b1b80816b671009[m
+Author: Anish Madan <anish16223@iiitd.ac.in>
+Date:   Fri Nov 10 16:14:39 2017 +0530
+
+    Useless commit
+
+[33mcommit 4cf18cd3a90803f04161011c11da7cef6c8eb0c7[m
+Author: Anish Madan <anish16223@iiitd.ac.in>
+Date:   Fri Nov 10 16:12:48 2017 +0530
+
+    Chnaged colorPicker page
+
+[33mcommit 9fa1034f7a332c614966c107a9ecd82f075b6cb5[m
+Merge: 52b43e1 56b5a67
+Author: Navdha Agarwal <navdha16250@iiitd.ac.in>
+Date:   Fri Nov 10 16:08:12 2017 +0530
+
+    Animation of recursive function --conflict changed
+
+[33mcommit 52b43e1dbd76e1e318c3d8d332e87f2aad089cff[m
+Author: Navdha Agarwal <navdha16250@iiitd.ac.in>
+Date:   Fri Nov 10 15:51:50 2017 +0530
+
+    animation of recursive function
+
+[33mcommit 56b5a67ffab37d19e9be6e2fd56bc284e741bacc[m
+Author: Anish Madan <anish16223@iiitd.ac.in>
+Date:   Thu Nov 9 18:28:38 2017 +0530
+
+    Error on returning to initial page removed
+
+[33mcommit 5a9ae085a1de6f96a822b7111f0f3ac84cb41d36[m
+Author: Anish Madan <anish16223@iiitd.ac.in>
+Date:   Thu Nov 9 15:05:00 2017 +0530
+
+    Added event handling for changing size of grid but error on returning to initial page
+
+[33mcommit aa7457f5dfabece287939f26eadcb401e3e8618d[m
+Author: Anish Madan <anish16223@iiitd.ac.in>
+Date:   Thu Nov 9 00:47:38 2017 +0530
+
+     Set default colors for 8 players in settings, added event handling for dropDown menu and back btn
+
+[33mcommit 45236e6987eedf0ea25bb0b9a1176bba562d559e[m
+Author: Anish Madan <anish16223@iiitd.ac.in>
+Date:   Sat Oct 28 20:57:04 2017 +0530
+
+    GUI with logic implemented, without change of colours
+
+[33mcommit 00e61308513cc6b039735fcd0a6c71b9e78f7cc0[m
+Author: Anish Madan <anish16223@iiitd.ac.in>
+Date:   Thu Oct 26 00:17:44 2017 +0530
+
+    Implemented Recursive Logic for game without animation
+
+[33mcommit 51c72b5e77bf2472a45f5b8e8bf057e2bd11f971[m
+Author: Anish Madan <anish16223@iiitd.ac.in>
+Date:   Wed Oct 25 20:29:48 2017 +0530
+
+    Corrected the positioning of orbs in the grid
+
+[33mcommit 177810fde313406d33cb7c7a8f7a72e0fe49af3c[m
+Author: Anish Madan <anish16223@iiitd.ac.in>
+Date:   Wed Oct 25 17:57:52 2017 +0530
+
+    Generalised the 3d Grid for any no. of rows and columns
+
+[33mcommit 8e5cfa66578e7686383d3f83a5585428948548f3[m
+Merge: 53500f3 c14ab78
+Author: Anish Madan <anish16223@iiitd.ac.in>
+Date:   Wed Oct 25 01:24:09 2017 +0530
+
+    Merge branch 'master' of https://github.com/anishmadan23/chain-reaction
+
+[33mcommit 53500f384b63d73f4d560370211e53953d8bca3f[m
+Author: Anish Madan <anish16223@iiitd.ac.in>
+Date:   Wed Oct 25 01:23:42 2017 +0530
+
+    added recursive logic without gui implementation and shifted board class components to cell class
+
+[33mcommit c14ab7801d6eb6fc1a61b8ae3bd19158975afbd3[m
+Author: Navdha Agarwal <navdha16250@iiitd.ac.in>
+Date:   Tue Oct 24 09:15:17 2017 +0530
+
+    error
+    
+    put a condition if clicked outside the grid
+
+[33mcommit 700a507531ebed66da7e812538b36d1c310e1935[m
+Author: Anish Madan <anish16223@iiitd.ac.in>
+Date:   Tue Oct 24 01:44:28 2017 +0530
+
+    Added grid to GUI Class
+
+[33mcommit d7ca79ace519400eb1de6d4086e8ae8be0e41121[m
+Author: Anish Madan <anish16223@iiitd.ac.in>
+Date:   Tue Oct 24 00:49:01 2017 +0530
+
+    Added undo and drop down in 3d grid
+
+[33mcommit 096258d0a7ce656923814f426c30331ee3e9ff74[m
+Author: Navdha Agarwal <navdha16250@iiitd.ac.in>
+Date:   Mon Oct 23 23:40:03 2017 +0530
+
+    PhongMaterial added
+
+[33mcommit f1a96458248fe2e5a24854b61518f1a3842a0c79[m
+Author: Navdha Agarwal <navdha16250@iiitd.ac.in>
+Date:   Mon Oct 23 13:58:22 2017 +0530
+
+    rotation
+
+[33mcommit e69755a6e6a03948b0baa97302db52979c12c311[m
+Author: Navdha Agarwal <navdha16250@iiitd.ac.in>
+Date:   Mon Oct 23 13:57:31 2017 +0530
+
+    rotation
+
+[33mcommit e8448f6f64173f46f475a8b17c6ab31def11de43[m
+Author: Navdha Agarwal <navdha16250@iiitd.ac.in>
+Date:   Mon Oct 23 12:28:55 2017 +0530
+
+    Rotation
+
+[33mcommit e0eaf290accb2f9a1b8740fb314b5f0476c139c7[m
+Author: Anish Madan <anish16223@iiitd.ac.in>
+Date:   Mon Oct 23 02:05:37 2017 +0530
+
+    Added event handling to buttons and labels
+
+[33mcommit b61eb52374e29ba548c3b13fa001df9afc0bb030[m
+Author: Anish Madan <anish16223@iiitd.ac.in>
+Date:   Sat Oct 21 19:23:49 2017 +0530
+
+    Made all scenes without event handling
+
+[33mcommit fafcd4f9d090ccf654f15a9bbc64da3722fb80fc[m
+Merge: c13ee37 cc715ec
+Author: Anish Madan <anish16223@iiitd.ac.in>
+Date:   Sat Oct 21 12:40:22 2017 +0530
+
+    Merge branch 'master' of https://github.com/anishmadan23/chain-reaction
+
+[33mcommit c13ee37891a4a16e69bba9d70ca75475bf9d6c2b[m
+Author: Anish Madan <anish16223@iiitd.ac.in>
+Date:   Sat Oct 21 12:39:49 2017 +0530
+
+     No change
+
+[33mcommit cc715ec729bf316347eb80d4504ea0daad68e1ed[m
+Author: Navdha Agarwal <navdha16250@iiitd.ac.in>
+Date:   Sat Oct 21 09:40:02 2017 +0530
+
+    generic
+
+[33mcommit 931c648fc89a622cbb9c1250c64dde08503085b6[m
+Author: navdhaagarwal <navdha16250@iiitd.ac.in>
+Date:   Sat Oct 21 09:26:35 2017 +0530
+
+    Code for the 3d grid
+
+[33mcommit ec18eb4af80c21098e85f5c46143ac577cbc5dcc[m
+Author: navdhaagarwal <navdha16250@iiitd.ac.in>
+Date:   Sat Oct 21 09:25:55 2017 +0530
+
+    Delete Grid.java
+
+[33mcommit c2190e06893c72b72099d1513fca95bf6f8279bc[m
+Author: navdhaagarwal <navdha16250@iiitd.ac.in>
+Date:   Sat Oct 21 09:21:38 2017 +0530
+
+    Add files via upload
+
+[33mcommit ea1441e9c33e46178765fee9b548c9b3d592b126[m
+Author: Anish Madan <anish16223@iiitd.ac.in>
+Date:   Fri Oct 20 02:07:03 2017 +0530
+
+    Completed basic gui of initial page
+
+[33mcommit 900c3b174dac32925515cf4e76517c46278b9379[m
+Author: Anish Madan <anish16223@iiitd.ac.in>
+Date:   Fri Oct 20 01:14:26 2017 +0530
+
+    Coded the rough initial page of game
+
+[33mcommit 65c4bce05e74885db528e075701c69e4d4650396[m
+Author: Anish Madan <anish16223@iiitd.ac.in>
+Date:   Thu Oct 19 17:54:53 2017 +0530
+
+    Added GUI class which displays 1 orb in each cell
+
+[33mcommit c55dfa73d4e12751c09b440371fb5fe2b138ac2a[m
+Author: Anish Madan <anish16223@iiitd.ac.in>
+Date:   Wed Oct 11 00:32:52 2017 +0530
+
+    Created Cell and Board classes
+
+[33mcommit 87f9c39fe7dd982cfc6f6eb4373f30aa8749a29a[m
+Author: Anish Madan <anish16223@iiitd.ac.in>
+Date:   Sat Oct 7 20:24:58 2017 +0530
+
+    Initial commit
