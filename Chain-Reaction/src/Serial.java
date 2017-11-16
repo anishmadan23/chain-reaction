@@ -6,17 +6,19 @@ public class Serial implements Serializable
     int row;
     int column;
     int array[][];
-    int next_player_index;
+    int mouse;
+    int players_in_game;
     String player_color_grid[][];
-    int mouse_clicks;
-//    int dummy = 1;
+    int dummy = 1;
 
-    public Serial(int row, int column, String color[][], int a[][] )
+    public Serial(int row, int column, String color[][], int a[][] ,  int mouse, int players_in_game)
     {
         this.row=row;
         this.column=column;
         array= new int[column][row];
         player_color_grid= new String[row][column];
+        this.mouse=mouse;
+        this.players_in_game=players_in_game;
         initialize_color(color);
         initialize(a);
     }

@@ -26,6 +26,7 @@ public class Cell implements Serializable {
 //    public int cols = 10;
     public Cell[][] grid;
 
+
     public Cell(int orbs1) {
         this.orbs = orbs1;
     }
@@ -117,9 +118,8 @@ public class Cell implements Serializable {
                 if (g.root1[i][j].getChildren().size() > 0) {
                     Sphere x = (Sphere) g.root1[i][j].getChildren().get(0);
                     PhongMaterial ph = (PhongMaterial) x.getMaterial();
-                    System.out.println("Blue1 = "+ph.getDiffuseColor().getBlue());
-                    System.out.println("Red1 = "+ph.getDiffuseColor().getRed());
-                    System.out.println("Green1 = "+ph.getDiffuseColor().getGreen());
+//
+
                     if (ph.getDiffuseColor().getBlue() != color.getBlue() || ph.getDiffuseColor().getRed() != color.getRed()
                             || ph.getDiffuseColor().getGreen() != color.getGreen() ) {
                         System.out.println("Not Same");
@@ -170,44 +170,46 @@ public class Cell implements Serializable {
 
     public int explosion(int i, int j, Grid g,int rows, int cols, int playerIndex, Players[] p,GUI gr)
     {
+
+
         System.out.println("Inside explosion " + this.grid[i][j].getOrbs() + " " + "Coord " + i + " " + j);
 //        this.grid[i][j].setOrbs(this.grid[i][j].getOrbs()+1);
 
-        if (this.grid[i][j].getOrbs() == 0){
+        if (this.grid[i][j].getOrbs() == 0)
+        {
             this.grid = g.createSphere(j,i,p,playerIndex,this);
-//            this.grid[i][j].setOrbs(this.grid[i][j].getOrbs()+1);
+
             return 1;
         }
-        else if (this.grid[i][j].getOrbs() < getCriticalMass(i, j,rows,cols) -1) {
-
-
-
-                Sphere x = (Sphere) g.root1[i][j].getChildren().get(0);
-                PhongMaterial ph = (PhongMaterial)x.getMaterial();
-
-                if(p[playerIndex].getColor().equals(ph.getDiffuseColor())){
-                    this.grid = g.createSphere(j, i, p, playerIndex, this);
-//             this.grid[i][j].setOrbs(this.grid[i][j].getOrbs() + 1);
-                    return 1;}
-
-
-                else{
-                    return 0;
-                }
-         }
-
-        else {
-
+        else if (this.grid[i][j].getOrbs() < getCriticalMass(i, j,rows,cols) -1)
+        {
             Sphere x = (Sphere) g.root1[i][j].getChildren().get(0);
             PhongMaterial ph = (PhongMaterial)x.getMaterial();
-            if(p[playerIndex].getColor().equals(ph.getDiffuseColor())){
-//                this.grid[i][j].setOrbs(this.grid[i][j].getOrbs()+1);
 
+            if(p[playerIndex].getColor().equals(ph.getDiffuseColor()))
+            {
+                this.grid = g.createSphere(j, i, p, playerIndex, this);
 
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
+
+        }
+
+        else
+        {
+            Sphere x = (Sphere) g.root1[i][j].getChildren().get(0);
+            PhongMaterial ph = (PhongMaterial)x.getMaterial();
+            if(p[playerIndex].getColor().equals(ph.getDiffuseColor()))
+            {
                 System.out.println(this.grid[i][j].getOrbs()+"Sfsdfsfesfsdsed");
                 Queue<Coordinates> queue = getNeighbours(i, j,rows, cols);
                 ArrayList<Coordinates> a = new ArrayList<>(queue);
-                for (int f = 0; f < a.size(); f++) {
+                for (int f = 0; f < a.size(); f++)
+                {
                     System.out.println("Neighbours " + a.get(f).getX() + " " + a.get(f).getY());
                 }
                 int length = queue.size();
@@ -217,62 +219,81 @@ public class Cell implements Serializable {
                     Coordinates cxy = queue.poll();
                     g.shiftOrbs(i,j,cxy.getX(),cxy.getY(),p,playerIndex,this);
                     this.grid[i][j].setOrbs(0);
-                    g.animation1.setOnFinished(new EventHandler<ActionEvent>()
+                    System.out.println(l+" asdsjadashdkahdad ");
+                    g.animation1.setOnFinished(event ->
                     {
-                        @Override
-                        public void handle(ActionEvent event)
+                        System.out.println(cxy.getX()+"   "+cxy.getY());
+                        System.out.println(g.root1[cxy.getX()][cxy.getY()].getChildren().remove(0));
+                        for(int i1 = 0; i1 <g.root1[cxy.getX()][cxy.getY()].getChildren().size(); i1++)
                         {
-                            System.out.println(cxy.getX()+"   "+cxy.getY());
-                            System.out.println(g.root1[cxy.getX()][cxy.getY()].getChildren().remove(0));
-                            for(int i = 0;i<g.root1[cxy.getX()][cxy.getY()].getChildren().size();i++){
-                                Sphere x = (Sphere) g.root1[cxy.getX()][cxy.getY()].getChildren().get(i);
-                                PhongMaterial ph = new PhongMaterial();
-                                ph.setDiffuseColor(p[playerIndex].getColor());
-                                x.setMaterial(ph);
-                            }
-//                        g.root1[cxy.getX()][cxy.getY()].getChildren().remove(g.sphere11);
-                            //g.root1[cxy.getX()][cxy.getY()].getChildren().remove(g.line);
-                            if( gr.mouseClicks>1 && checkIfWon(g,p,playerIndex,rows,cols)==2) {
-//                                gr.pstage.initModality(Modality.NONE);
-                                Platform.runLater(new Runnable() {
-                                    @Override
-                                    public void run() throws IllegalStateException{
-
-
-                                       setupAlert(p,playerIndex);
-                                        result = showAlert();
-                                        if (result.get() == b1) {
-                                            gr.mouseClicks = 0;
-                                            gr.playerIndex1 = 0;
-                                            gr.colorIndex1 = 0;
-                                            gr.r  = 1;
-                                            try {
-                                                gr.scene2 = gr.Grid_GUI();
-                                            } catch (IOException e) {
-                                                e.printStackTrace();
-                                            } catch (ClassNotFoundException e) {
-                                                e.printStackTrace();
-                                            }
-                                            gr.pstage.setScene(gr.scene2);
-                                            return;
-
-                                        } else {
-                                            System.exit(0);
-                                        }
-                                    }
-
-                                });
-                            }
-                            else{
-                            explosion(cxy.getX(), cxy.getY(), g, rows, cols, playerIndex, p, gr);}
-
+                            Sphere x1 = (Sphere) g.root1[cxy.getX()][cxy.getY()].getChildren().get(i1);
+                            PhongMaterial ph1 = new PhongMaterial();
+                            ph1.setDiffuseColor(p[playerIndex].getColor());
+                            x1.setMaterial(ph1);
                         }
-                    });
+                        if( gr.mouseClicks>1 && checkIfWon(g,p,playerIndex,rows,cols)==2)
+                        {
+                            Platform.runLater(() -> {
+                                setupAlert(p,playerIndex);
+                                result = showAlert();
+                                if (result.get() == b1)
+                                {
+                                    gr.mouseClicks = 0;
+                                    gr.playerIndex1 = 0;
+                                    gr.colorIndex1 = 0;
+                                    gr.r  = 1;
+                                    try
+                                    {
+                                        gr.scene2 = gr.Grid_GUI();
+                                    }
+                                    catch (IOException e)
+                                    {
+                                        e.printStackTrace();
+                                    }
+                                    catch (ClassNotFoundException e)
+                                    {
+                                        e.printStackTrace();
+                                    }
+                                    gr.pstage.setScene(gr.scene2);
+                                    return;
 
+                                }
+                                else
+                                {
+                                    System.exit(0);
+                                }
+                            });
+                        }
+                        else
+                        {
+                            explosion(cxy.getX(), cxy.getY(), g, rows, cols, playerIndex, p, gr);
+                        }
+
+                        for(int i1 = 0; i1 <rows; i1++)
+                        {
+                            for(int j1 = 0; j1 <cols ; j1++)
+                            {
+                                gr.array_after_explosion[i1][j1]=grid[i1][j1].getOrbs();
+                                System.out.print(g.array[j1][i1]+" ");
+                            }
+                            System.out.println();
+                        }
+                        String[][] colorsOfPlayers = g.color(rows,cols);
+                        try {
+                            gr.serialize(rows, cols,g.array,colorsOfPlayers, gr.mouseClicks, gr.playersInGame);
+                            System.out.println("Serialized");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                    });
+                    System.out.println("left 1");
                 }
+                System.out.println("left 2");
                 return 1;
             }
-            else{
+            else
+            {
                 return 0;
             }
         }
