@@ -9,7 +9,7 @@ public class Serial implements Serializable
     int next_player_index;
     String player_color_grid[][];
     int mouse_clicks;
-    int dummy = 1;
+//    int dummy = 1;
 
     public Serial(int row, int column, String color[][], int a[][] )
     {

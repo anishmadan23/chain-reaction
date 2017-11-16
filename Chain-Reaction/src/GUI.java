@@ -532,7 +532,7 @@ public class GUI extends Application
     public static void serialize(int rows, int cols,String[][] c,int [][] a)throws IOException
     {
         Serial serial1= new Serial(rows,cols, c,a);
-        serial1.dummy =2;
+//        serial1.dummy =2;
         ObjectOutputStream out1= new ObjectOutputStream( new FileOutputStream("out.txt"));
             out1.writeObject(serial1);
             out1.close();
