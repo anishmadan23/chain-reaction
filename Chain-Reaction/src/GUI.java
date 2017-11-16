@@ -23,6 +23,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.input.MouseEvent;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Optional;
 
 
@@ -40,6 +41,7 @@ public class GUI extends Application
     boolean initialisedTextFields = false;
     boolean initalisedColorPicker = false;
     boolean initialisedPlayers = false;
+    boolean initialisedInGamePlayers = false;
     public Serial s1,s2;
     int array_after_explosion[][];
 
@@ -60,7 +62,8 @@ public class GUI extends Application
     public Button resumeBtn, playGame,settingsBtn,backToMenuBtn;
     public Stage pstage;
     public Label[] playerSettings;
-    public Players[] playersForSettings = new Players[8];
+    public ArrayList<Players> playersForSettings = new ArrayList<>(8);
+    public ArrayList<Players> playersInGameArray = new ArrayList<>();
     public Color[] defaultColorList = {Color.RED,Color.GREEN,Color.BLUE,Color.YELLOW,Color.PINK,Color.LIGHTCYAN,
             Color.ORANGE, Color.WHITE};
 //    public Label[] playerName = new Label[8];
@@ -142,11 +145,11 @@ public class GUI extends Application
             saveNameBtn.setOnMouseClicked(e->
                                 {
                                     System.out.println(index);
-                                    playersForSettings[index].setName(playerNameInputs[index].getText());//fix null pointer issue here
-                                    playerNameInputs[index].setText(playersForSettings[index].getName());
+                                    playersForSettings.get(index).setName(playerNameInputs[index].getText());//fix null pointer issue here
+                                    playerNameInputs[index].setText(playersForSettings.get(index).getName());
                                     System.out.println(playerNameInputs[index].getText());
 
-                                    playersForSettings[index].setColor(colorPickers[index].getValue());
+                                    playersForSettings.get(index).setColor(colorPickers[index].getValue());
                                     pstage.setScene(scene3);
                                 });
             //define onclick
@@ -224,9 +227,10 @@ public class GUI extends Application
 
     public Scene makeInitialPage()
     {
-        initialisePlayers();
+        initialiseSettingsPlayers();
         initialiseTextFields();
         initialiseColorPicker();
+
 
         StackPane rootpane = new StackPane();
         GridPane  pageContents = new GridPane();
@@ -464,7 +468,9 @@ public class GUI extends Application
             colorIndex1 = 0;
             r  = 1;
             try {
-                playersInGame = spinner.getValue();         //playersInGame receiving value correctly
+                playersInGame = spinner.getValue(); //playersInGame receiving value correctly
+                initialisedInGamePlayers = false;
+                initialiseInGamePlayers(playersInGame);
                 scene2 = Grid_GUI();
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
@@ -507,7 +513,7 @@ public class GUI extends Application
             }
         }
         Grid g = new Grid(rows,cols);
-        g.createGrid(rows,cols,playersForSettings[0].getColor());
+        g.createGrid(rows,cols,playersInGameArray.get(0).getColor());
         int dummy_array[][]= new int[cols][rows];
         for(int i=0; i<rows; i++)
         {
@@ -535,7 +541,7 @@ public class GUI extends Application
         playersInGame=obj.players_in_game;
         playerIndex1=  (mouseClicks)%(playersInGame);
         colorIndex1 = (mouseClicks)%playersInGame;
-        g.changeGridColor(playersForSettings[colorIndex1].getColor());
+        g.changeGridColor(playersInGameArray.get(colorIndex1).getColor());
 
         scene2 = new Scene(g.root, 720, 720);
         scene2.setFill(Color.BLACK);
@@ -551,17 +557,21 @@ public class GUI extends Application
             if(g.comboBox.getValue().equals("New Game")){
                 try {
                     playersInGame= spinner.getValue();
+                    initialisedInGamePlayers = false;
+                    initialiseInGamePlayers(playersInGame);
+
                     scene2 = Grid_GUI();
+                    pstage.setScene(scene2);
+                    mouseClicks = 0;
+                    playerIndex1 = 0;
+                    colorIndex1 = 0;
+                    r  = 1;
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 } catch (ClassNotFoundException e1) {
                     e1.printStackTrace();
                 }
-                pstage.setScene(scene2);
-                mouseClicks = 0;
-                playerIndex1 = 0;
-                colorIndex1 = 0;
-                r  = 1;
+
             }
             else if(g.comboBox.getValue().equals("Go to Main Menu")){
 //                scene1 = makeInitialPage();
@@ -598,14 +608,12 @@ public class GUI extends Application
 
         scene2.setOnMouseClicked(event -> {
             try {
-
-
                 explosionEvent(event, g, c);
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
-            }
+            }initialiseInGamePlayers(playersInGame);
         });
 
     }
@@ -616,7 +624,7 @@ public class GUI extends Application
 
 
         Grid g = new Grid(rows,cols);
-        g.createGrid(rows,cols,playersForSettings[0].getColor());
+        g.createGrid(rows,cols,playersInGameArray.get(0).getColor());
         System.out.println("Rows "+rows+" Cols "+cols);
         Cell[][] cellsArray = new Cell[rows][cols];
         System.out.println(rows+" "+cols);
@@ -689,13 +697,15 @@ public class GUI extends Application
 
 
 //            g.changeGridColor(playersForSettings[colorIndex1].getColor());
-            System.out.println(playerIndex1+" "+playersForSettings[playerIndex1].getColor());
+            System.out.println(playerIndex1+" "+playersInGameArray.get(playerIndex1).getColor());
             System.out.println("this" + (int) x + " " + (int) y);
             System.out.println(rows+" "+cols);
 
 //            System.out.println("Checking "+checkIfWon(g,playersForSettings,playerIndex1));
 
-            r = c.explosion((int) y, (int) x,g,rows,cols,playerIndex1, playersForSettings,this);
+            r = c.explosion((int) y, (int) x,g,rows,cols,playerIndex1, playersInGameArray,this);
+            c.matchExistingOrbsToPlayers(playerIndex1,playersInGameArray,this,rows,cols,g,mouseClicks);
+            System.out.println("Final players = "+playersInGame);
 
 
    //         serial1.initialize(g.array);
@@ -703,7 +713,7 @@ public class GUI extends Application
             mouseClicks+=r;
             playerIndex1=  (mouseClicks)%(playersInGame);
             colorIndex1 = (mouseClicks)%playersInGame;
-            g.changeGridColor(playersForSettings[colorIndex1].getColor());
+            g.changeGridColor(playersInGameArray.get(colorIndex1).getColor());
             System.out.println("r = "+r);
             System.out.println("MouseClicks on addition of balls= "+mouseClicks);
 
@@ -730,13 +740,23 @@ public class GUI extends Application
     }
 
 
-    public void initialisePlayers() {
+    public void initialiseSettingsPlayers() {
         if (!initialisedPlayers) {
             for (int i = 0; i < 8; i++) {
                 String x = "Player " + String.valueOf(i + 1);
-                playersForSettings[i] = new Players(x, defaultColorList[i]);
+                playersForSettings.add(new Players(x, defaultColorList[i]));
             }
             initialisedPlayers = true;
+        }
+    }
+
+    public void initialiseInGamePlayers(int playerNumber) {
+        if (!initialisedInGamePlayers) {
+            playersInGameArray = new ArrayList<>();
+            for (int i = 0; i < playerNumber; i++) {
+                playersInGameArray.add(playersForSettings.get(i));
+            }
+            initialisedInGamePlayers = true;
         }
     }
 

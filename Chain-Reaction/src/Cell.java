@@ -85,7 +85,7 @@ public class Cell implements Serializable {
     }
 
     @SuppressWarnings("Duplicates")
-    public int checkIfWon(Grid g, Players[] p,int playerIndex,int rows, int cols){
+    public int checkIfWon(Grid g, ArrayList<Players> p,int playerIndex,int rows, int cols){
         int c = 0;int sum =0;
         Color color = null;
         for(int i = 0;i<rows;i++){
@@ -134,16 +134,54 @@ public class Cell implements Serializable {
 
     }
 
+    public void matchExistingOrbsToPlayers(int playerIndex, ArrayList<Players> p,GUI gui, int rows , int cols, Grid g, int mouseclicks ) {
+        int k;
+        for(k = 0;k<p.size();k++) {
+//            if (playerIndex == p.size() - 1)
+//                k = 0;
+//            else
+//                k = playerIndex + 1;
+
+            Color c = p.get(k).getColor();
+            System.out.println("MouseClicks in matching " + mouseclicks);
+            if (!checkOrbsByColor(c, rows, cols, g) && mouseclicks >= gui.playersInGame - 1) {
+                p.remove(k);
+                gui.playersInGame--;
+                System.out.println(p.size() + " =Size");
+
+            } else {
+                System.out.println("No removal");
+            }
+        }
+    }
+
+    public boolean checkOrbsByColor(Color c, int rows , int cols, Grid g) {
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (g.root1[i][j].getChildren().size() > 0) {
+                    Sphere x = (Sphere) g.root1[i][j].getChildren().get(0);
+                    PhongMaterial ph = (PhongMaterial) x.getMaterial();
+                    if(ph.getDiffuseColor().getBlue()==c.getBlue() && ph.getDiffuseColor().getGreen() == c.getGreen()
+                            && ph.getDiffuseColor().getRed()==c.getRed()){
+                        return true;
+                    }
+
+                }
+            }
+        }
+        return false;
+    }
+
 
 
     public Optional<ButtonType> showAlert() throws IllegalStateException{
         return alert.showAndWait();
     }
 
-    public void setupAlert(Players[] p, int playerIndex){
+    public void setupAlert(ArrayList<Players> p, int playerIndex){
         alert.setTitle("You Won!");
         alert.setHeaderText(null);
-        alert.setContentText(p[playerIndex].getName()+" won!");
+        alert.setContentText(p.get(playerIndex).getName()+" won!");
         b1 = new ButtonType("New Game");
         ButtonType buttonTypeCancel = new ButtonType("Exit", ButtonBar.ButtonData.CANCEL_CLOSE);
         alert.getButtonTypes().setAll(b1,buttonTypeCancel);
@@ -164,7 +202,7 @@ public class Cell implements Serializable {
         return queue;
     }
 
-    public int explosion(int i, int j, Grid g,int rows, int cols, int playerIndex, Players[] p,GUI gr)
+    public int explosion(int i, int j, Grid g,int rows, int cols, int playerIndex, ArrayList<Players> p,GUI gr)
     {
 
 
@@ -182,7 +220,7 @@ public class Cell implements Serializable {
             Sphere x = (Sphere) g.root1[i][j].getChildren().get(0);
             PhongMaterial ph = (PhongMaterial)x.getMaterial();
 
-            if(p[playerIndex].getColor().equals(ph.getDiffuseColor()))
+            if(p.get(playerIndex).getColor().equals(ph.getDiffuseColor()))
             {
                 this.grid = g.createSphere(j, i, p, playerIndex, this);
 
@@ -199,7 +237,7 @@ public class Cell implements Serializable {
         {
             Sphere x = (Sphere) g.root1[i][j].getChildren().get(0);
             PhongMaterial ph = (PhongMaterial)x.getMaterial();
-            if(p[playerIndex].getColor().equals(ph.getDiffuseColor()))
+            if(p.get(playerIndex).getColor().equals(ph.getDiffuseColor()))
             {
                 System.out.println(this.grid[i][j].getOrbs()+"Sfsdfsfesfsdsed");
                 Queue<Coordinates> queue = getNeighbours(i, j,rows, cols);
@@ -224,7 +262,7 @@ public class Cell implements Serializable {
                         {
                             Sphere x1 = (Sphere) g.root1[cxy.getX()][cxy.getY()].getChildren().get(i1);
                             PhongMaterial ph1 = new PhongMaterial();
-                            ph1.setDiffuseColor(p[playerIndex].getColor());
+                            ph1.setDiffuseColor(p.get(playerIndex).getColor());
                             x1.setMaterial(ph1);
                         }
                         explosion(cxy.getX(), cxy.getY(), g, rows, cols, playerIndex, p, gr);
@@ -235,12 +273,15 @@ public class Cell implements Serializable {
                                 result = showAlert();
                                 if (result.get() == b1)
                                 {
+                                    gr.initialisedInGamePlayers = false;
                                     gr.mouseClicks = 0;
                                     gr.playerIndex1 = 0;
                                     gr.colorIndex1 = 0;
                                     gr.r  = 1;
                                     try
                                     {
+                                        gr.playersInGame= gr.spinner.getValue();
+                                        gr.initialiseInGamePlayers(gr.playersInGame);
                                         gr.scene2 = gr.Grid_GUI();
                                     }
                                     catch (IOException e)

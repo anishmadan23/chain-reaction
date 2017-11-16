@@ -27,6 +27,8 @@ import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
+
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 public class Grid
@@ -94,7 +96,7 @@ public class Grid
 		return t;
 	}
 
-	public void move(int inX, int inY, int toX, int toY,Players[] p, int playerIndex)
+	public void move(int inX, int inY, int toX, int toY,ArrayList<Players> p, int playerIndex)
 	{
 		line= new Line();
 		line.setStartX((inY + 1) * cellSize);
@@ -108,7 +110,7 @@ public class Grid
 		sphere11.setTranslateX((inX + 1) * cellSize);
 		sphere11.setTranslateY((inY + 1) * cellSize + (cellSize / 2));
 		PhongMaterial p1 = new PhongMaterial();
-		p1.setDiffuseColor(p[playerIndex].getColor());
+		p1.setDiffuseColor(p.get(playerIndex).getColor());
 		sphere11.setMaterial(p1);
 		
 		root1[toX][toY].getChildren().add(sphere11);
@@ -122,7 +124,7 @@ public class Grid
 
 	}
 
-	public void shiftOrbs(int inX, int inY, int toX, int toY,Players[] p, int playerIndex,Cell c)
+	public void shiftOrbs(int inX, int inY, int toX, int toY,ArrayList<Players> p, int playerIndex,Cell c)
 	{
 
 		move(inX, inY,toX,toY,p,playerIndex);
@@ -239,7 +241,7 @@ public class Grid
         return c.grid;
     }
 
-	public Cell[][] createSphere(double x, double y,Players[] p, int playerIndex,Cell c)
+	public Cell[][] createSphere(double x, double y, ArrayList<Players> p, int playerIndex, Cell c)
 	{
 		if(c.grid[(int)y][(int)x].getOrbs()==c.getCriticalMass((int)y,(int)x,rows,cols))
 			DURATION = Duration.seconds(2);
@@ -249,7 +251,7 @@ public class Grid
 		Sphere sphere = new Sphere();
 		sphere.setRadius(9);
 		PhongMaterial ph = new PhongMaterial();
-		ph.setDiffuseColor(p[playerIndex].getColor());
+		ph.setDiffuseColor(p.get(playerIndex).getColor());
 		sphere.setMaterial(ph);
 		
 		if (array[(int) x][(int) y] == 0) 
