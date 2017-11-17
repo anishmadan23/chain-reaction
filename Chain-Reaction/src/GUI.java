@@ -447,22 +447,27 @@ public class GUI extends Application
         //Grid g=new Grid(rows,cols);
         if(event.getSource()==resumeBtn)
         {
-            if(mouseClicks>0)
-            {
-                try {
-                    s1 = deserialize();
-                } catch (IOException | ClassNotFoundException e) {
+            try {initialisedInGamePlayers = false;
+                initialiseInGamePlayers(playersInGame);
+                s1 = deserialize();
+//                   initialiseInGamePlayers(s1.players_in_game);
+            } catch (IOException | ClassNotFoundException e) {
                     e.printStackTrace();
                 }
-                scene2 = Grid_resume(rows, cols, s1);
-            }
-            else
-                try {
-                    scene2 = Grid_GUI();
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
-            pstage.setScene(scene2);
+                finally{
+                    scene2 = Grid_resume(rows, cols, s1);
+
+
+//            else
+//                try {
+//                    initialisedInGamePlayers = false;
+//                    initialiseInGamePlayers(playersInGame);
+//                    scene2 = Grid_GUI();
+//
+//                } catch (ClassNotFoundException e) {
+//                    e.printStackTrace();
+//                }
+            pstage.setScene(scene2);}
         }
         else if(event.getSource()==playGame){
             mouseClicks = 0;
@@ -718,6 +723,8 @@ public class GUI extends Application
                 System.out.println();
             }
 
+//            for(int i =0 ;i<1000000000;i++);
+
 
             System.out.println("After animation");
 //            if(mouseClicks==4){
@@ -725,7 +732,7 @@ public class GUI extends Application
 //                PhongMaterial ppp = (PhongMaterial)sph.getMaterial();
 //                System.out.println("Color of i 1 j 0 = "+ppp.getDiffuseColor().getRed()+" "+ppp.getDiffuseColor().getGreen()+
 //                                    " "+ppp.getDiffuseColor().getBlue());}
-            c.matchExistingOrbsToPlayers(playerIndex1, playersInGameArray, this, rows, cols, g, mouseClicks);
+            c.matchExistingOrbsToPlayers(playerIndex1, playersInGameArray, this, rows, cols, g);
 //            System.out.println("Final players = "+playersInGame);
 
 
