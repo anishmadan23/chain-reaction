@@ -478,6 +478,7 @@ public class GUI extends Application
         //Grid g=new Grid(rows,cols);
         if(event.getSource()==resumeBtn)
         {
+
             try {initialisedInGamePlayers = false;
                 initialiseInGamePlayers(playersInGame);
                 s1 = deserialize();
@@ -499,6 +500,7 @@ public class GUI extends Application
 //                    e.printStackTrace();
 //                }
             pstage.setScene(scene2);}
+
         }
         else if(event.getSource()==playGame){
             mouseClicks = 0;
@@ -551,6 +553,7 @@ public class GUI extends Application
             }
         }
         Grid g = new Grid(rows,cols);
+        System.out.println(playersInGameArray.get(0).getColor());
         g.createGrid(rows,cols,playersInGameArray.get(0).getColor());
         int dummy_array[][]= new int[cols][rows];
         for(int i=0; i<rows; i++)
