@@ -152,6 +152,7 @@ public class Cell implements Serializable {
                     gui.playersInGame--;
                     System.out.println("Players in Game = "+gui.playersInGame);
                     System.out.println(p.size() + " =Size");
+                    gui.mouseClicks--;
 
                 } else {
                     System.out.println("No removal");
