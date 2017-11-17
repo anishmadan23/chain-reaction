@@ -44,6 +44,7 @@ public class GUI extends Application
     boolean initialisedInGamePlayers = false;
     public Serial s1,s2;
     int array_after_explosion[][];
+    int undo_click=0;
 
 
     public GUI() {
@@ -429,6 +430,7 @@ public class GUI extends Application
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            undo_click=1;
         });
 
 
@@ -531,7 +533,7 @@ public class GUI extends Application
 
         String[][] colorsOfPlayers = g.color(rows,cols);
         try {
-            serialize(rows,cols,g.array,colorsOfPlayers, mouseClicks-1, playersInGame);
+            serialize(rows,cols,g.array,colorsOfPlayers, mouseClicks, playersInGame);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -581,26 +583,31 @@ public class GUI extends Application
         });
 
         g.undoBtn.setOnAction(event -> {
-            if(mouseClicks>1) {
-                System.out.println("mouseClicks1 "+mouseClicks);
-                scene2 = Grid_resume(rows, cols, s2);
-                pstage.setScene(scene2);
+            if(undo_click==0)
+            {
+                if(mouseClicks>1) {
+                    //System.out.println("mouseClicks1 "+mouseClicks);
+                    mouseClicks-=1;
+                    scene2 = Grid_resume(rows, cols, s2);
+                    pstage.setScene(scene2);
 
-            }
-            else {
-                Scene scene_start = null;
-                try {
-                    scene_start = Grid_GUI();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
                 }
-                pstage.setScene(scene_start);
-                mouseClicks = 0;
-                playerIndex1 = 0;
-                colorIndex1 = 0;
-                r  = 1;
+                else {
+                    Scene scene_start = null;
+                    try {
+                        scene_start = Grid_GUI();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    pstage.setScene(scene_start);
+                    mouseClicks = 0;
+                    playerIndex1 = 0;
+                    colorIndex1 = 0;
+                    r  = 1;
+                }
+                undo_click=1;
             }
 
         });
@@ -709,6 +716,8 @@ public class GUI extends Application
 
 
    //         serial1.initialize(g.array);
+            if(r==1)
+                undo_click=0;
 
             mouseClicks+=r;
             playerIndex1=  (mouseClicks)%(playersInGame);
