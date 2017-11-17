@@ -447,26 +447,7 @@ public class GUI extends Application
         //Grid g=new Grid(rows,cols);
         if(event.getSource()==resumeBtn)
         {
-<<<<<<< HEAD
-//            if(mouseClicks>0)
-//            {
-            System.out.println("jhgfghj");
-            try {
-                s1 = deserialize();
-                System.out.println("mouseClicks1 " + s1.mouse);
-            } catch (IOException | ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-            scene2 = Grid_resume(rows, cols, s1);
-            //}
-//            else
-//                try {
-//                    scene2 = Grid_GUI();
-//                } catch (ClassNotFoundException e) {
-//                    e.printStackTrace();
-//                }
-            pstage.setScene(scene2);
-=======
+
             try {initialisedInGamePlayers = false;
                 initialiseInGamePlayers(playersInGame);
                 s1 = deserialize();
@@ -488,7 +469,7 @@ public class GUI extends Application
 //                    e.printStackTrace();
 //                }
             pstage.setScene(scene2);}
->>>>>>> 08a4bbefa18dce1b4b9305ca7b34ebe77d88c2e9
+
         }
         else if(event.getSource()==playGame){
             mouseClicks = 0;
