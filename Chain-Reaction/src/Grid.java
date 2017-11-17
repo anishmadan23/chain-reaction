@@ -115,11 +115,8 @@ public class Grid
 		
 		root1[toX][toY].getChildren().add(sphere11);
 
-		for(int i = 0;i<root1[toX][toY].getChildren().size();i++){
-			Sphere s = (Sphere) root1[toX][toY].getChildren().get(i);
-			s.setMaterial(p1);
-		}
 
+		updateColorOfOrbsAfterExplosion(toX,toY,p,playerIndex);
 
 		//root1[toX][toY].getChildren().add(line);
 
@@ -127,6 +124,15 @@ public class Grid
 		animation1.play();
 
 
+	}
+
+	public void updateColorOfOrbsAfterExplosion(int toX, int toY, ArrayList<Players> p, int playerIndex){
+		PhongMaterial p1 = new PhongMaterial();
+		p1.setDiffuseColor(p.get(playerIndex).getColor());
+		for(int i = 0;i<root1[toX][toY].getChildren().size();i++){
+			Sphere s = (Sphere) root1[toX][toY].getChildren().get(i);
+			s.setMaterial(p1);
+		}
 	}
 
 	public void shiftOrbs(int inX, int inY, int toX, int toY,ArrayList<Players> p, int playerIndex,Cell c)

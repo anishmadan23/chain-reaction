@@ -711,6 +711,7 @@ public class GUI extends Application
 //            System.out.println("Checking "+checkIfWon(g,playersForSettings,playerIndex1));
 
             r = c.explosion((int) y, (int) x,g,rows,cols,playerIndex1, playersInGameArray,this);
+            System.out.println("After animation");
 //            if(mouseClicks==4){
 //                Sphere sph = (Sphere)g.root1[1][0].getChildren().get(0);
 //                PhongMaterial ppp = (PhongMaterial)sph.getMaterial();

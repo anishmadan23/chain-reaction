@@ -147,8 +147,9 @@ public class Cell implements Serializable {
                 System.out.println();
                 System.out.println(c.getRed() + " " + c.getGreen() + " " + c.getBlue());
                 System.out.println("MouseClicks in matching " + mouseclicks);
-                if (!checkOrbsByColor(c, rows, cols, g) && mouseclicks >= gui.playersInGame ) {
+                if (!checkOrbsByColor(c, rows, cols, g) && mouseclicks >= gui.playersInGame-1 ) {
                     p.remove(k);
+                    k--;
                     gui.playersInGame--;
                     System.out.println("Players in Game = "+gui.playersInGame);
                     System.out.println(p.size() + " =Size");
@@ -265,15 +266,17 @@ public class Cell implements Serializable {
 //                    System.out.println(l+" asdsjadashdkahdad ");
                     g.animation1.setOnFinished(event ->
                     {
-                        System.out.println(cxy.getX()+"   "+cxy.getY());
-                        System.out.println(g.root1[cxy.getX()][cxy.getY()].getChildren().remove(0));
-                        for(int i1 = 0; i1 <g.root1[cxy.getX()][cxy.getY()].getChildren().size(); i1++)
-                        {
-                            Sphere x1 = (Sphere) g.root1[cxy.getX()][cxy.getY()].getChildren().get(i1);
-                            PhongMaterial ph1 = new PhongMaterial();
-                            ph1.setDiffuseColor(p.get(playerIndex).getColor());
-                            x1.setMaterial(ph1);
-                        }
+                        System.out.println(cxy.getX()+"   "+cxy.getY()+" shifted coords");
+                        System.out.println(g.root1[cxy.getX()][cxy.getY()].getChildren().size()+" size after explosion");
+//                        g.updateColorOfOrbsAfterExplosion(cxy.getX(),cxy.getY(),p,playerIndex);
+//                        System.out.println(g.root1[cxy.getX()][cxy.getY()].getChildren().remove(0));
+//                        for(int i1 = 0; i1 <g.root1[cxy.getX()][cxy.getY()].getChildren().size(); i1++)
+//                        {
+//                            Sphere x1 = (Sphere) g.root1[cxy.getX()][cxy.getY()].getChildren().get(i1);
+//                            PhongMaterial ph1 = new PhongMaterial();
+//                            ph1.setDiffuseColor(p.get(playerIndex).getColor());
+//                            x1.setMaterial(ph1);
+//                        }
                         explosion(cxy.getX(), cxy.getY(), g, rows, cols, playerIndex, p, gr);
                         if( gr.mouseClicks>1 && checkIfWon(g,p,playerIndex,rows,cols)==2)
                         {
@@ -331,6 +334,14 @@ public class Cell implements Serializable {
                         }
 
                     });
+//                    PhongMaterial p1 = new PhongMaterial();
+//                    p1.setDiffuseColor(p.get(playerIndex).getColor());
+//                    for(int h = 0;h<g.root1[cxy.getX()][cxy.getY()].getChildren().size();h++){
+//                        Sphere s = (Sphere) g.root1[cxy.getX()][cxy.getY()].getChildren().get(h);
+//                        s.setMaterial(p1);
+//                    }
+
+
 //                    this.matchExistingOrbsToPlayers(gr.playerIndex1,gr.playersInGameArray,gr,rows,cols,g,gr.mouseClicks);
 
                     System.out.println("left 1");
