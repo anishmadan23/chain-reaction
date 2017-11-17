@@ -447,21 +447,23 @@ public class GUI extends Application
         //Grid g=new Grid(rows,cols);
         if(event.getSource()==resumeBtn)
         {
-            if(mouseClicks>0)
-            {
-                try {
-                    s1 = deserialize();
-                } catch (IOException | ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
-                scene2 = Grid_resume(rows, cols, s1);
+//            if(mouseClicks>0)
+//            {
+            System.out.println("jhgfghj");
+            try {
+                s1 = deserialize();
+                System.out.println("mouseClicks1 " + s1.mouse);
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
             }
-            else
-                try {
-                    scene2 = Grid_GUI();
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
+            scene2 = Grid_resume(rows, cols, s1);
+            //}
+//            else
+//                try {
+//                    scene2 = Grid_GUI();
+//                } catch (ClassNotFoundException e) {
+//                    e.printStackTrace();
+//                }
             pstage.setScene(scene2);
         }
         else if(event.getSource()==playGame){
@@ -515,6 +517,7 @@ public class GUI extends Application
             }
         }
         Grid g = new Grid(rows,cols);
+        System.out.println(playersInGameArray.get(0).getColor());
         g.createGrid(rows,cols,playersInGameArray.get(0).getColor());
         int dummy_array[][]= new int[cols][rows];
         for(int i=0; i<rows; i++)
