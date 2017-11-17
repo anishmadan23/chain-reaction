@@ -711,8 +711,13 @@ public class GUI extends Application
 //            System.out.println("Checking "+checkIfWon(g,playersForSettings,playerIndex1));
 
             r = c.explosion((int) y, (int) x,g,rows,cols,playerIndex1, playersInGameArray,this);
+            if(mouseClicks==4){
+                Sphere sph = (Sphere)g.root1[1][0].getChildren().get(0);
+                PhongMaterial ppp = (PhongMaterial)sph.getMaterial();
+                System.out.println("Color of i 1 j 0 = "+ppp.getDiffuseColor().getRed()+" "+ppp.getDiffuseColor().getGreen()+
+                                    " "+ppp.getDiffuseColor().getBlue());}
             c.matchExistingOrbsToPlayers(playerIndex1,playersInGameArray,this,rows,cols,g,mouseClicks);
-            System.out.println("Final players = "+playersInGame);
+//            System.out.println("Final players = "+playersInGame);
 
 
    //         serial1.initialize(g.array);

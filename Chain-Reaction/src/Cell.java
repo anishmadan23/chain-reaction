@@ -137,33 +137,41 @@ public class Cell implements Serializable {
     public void matchExistingOrbsToPlayers(int playerIndex, ArrayList<Players> p,GUI gui, int rows , int cols, Grid g, int mouseclicks ) {
         int k;
         for(k = 0;k<p.size();k++) {
+
 //            if (playerIndex == p.size() - 1)
 //                k = 0;
 //            else
 //                k = playerIndex + 1;
 
-            Color c = p.get(k).getColor();
-            System.out.println("MouseClicks in matching " + mouseclicks);
-            if (!checkOrbsByColor(c, rows, cols, g) && mouseclicks >= gui.playersInGame - 1) {
-                p.remove(k);
-                gui.playersInGame--;
-                System.out.println(p.size() + " =Size");
+                Color c = p.get(k).getColor();
+                System.out.println();
+                System.out.println(c.getRed() + " " + c.getGreen() + " " + c.getBlue());
+                System.out.println("MouseClicks in matching " + mouseclicks);
+                if (!checkOrbsByColor(c, rows, cols, g) && mouseclicks >= gui.playersInGame ) {
+                    p.remove(k);
+                    gui.playersInGame--;
+                    System.out.println("Players in Game = "+gui.playersInGame);
+                    System.out.println(p.size() + " =Size");
 
-            } else {
-                System.out.println("No removal");
+                } else {
+                    System.out.println("No removal");
+                }
             }
-        }
+
     }
 
     public boolean checkOrbsByColor(Color c, int rows , int cols, Grid g) {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 if (g.root1[i][j].getChildren().size() > 0) {
+                    System.out.println("i "+i+" j "+j);
                     Sphere x = (Sphere) g.root1[i][j].getChildren().get(0);
                     PhongMaterial ph = (PhongMaterial) x.getMaterial();
+                    System.out.println(ph.getDiffuseColor()+" color");
                     if(ph.getDiffuseColor().getBlue()==c.getBlue() && ph.getDiffuseColor().getGreen() == c.getGreen()
                             && ph.getDiffuseColor().getRed()==c.getRed()){
                         return true;
+
                     }
 
                 }
@@ -206,7 +214,7 @@ public class Cell implements Serializable {
     {
 
 
-        System.out.println("Inside explosion " + this.grid[i][j].getOrbs() + " " + "Coord " + i + " " + j);
+//        System.out.println("Inside explosion " + this.grid[i][j].getOrbs() + " " + "Coord " + i + " " + j);
 //        this.grid[i][j].setOrbs(this.grid[i][j].getOrbs()+1);
 
         if (this.grid[i][j].getOrbs() == 0)
@@ -239,21 +247,21 @@ public class Cell implements Serializable {
             PhongMaterial ph = (PhongMaterial)x.getMaterial();
             if(p.get(playerIndex).getColor().equals(ph.getDiffuseColor()))
             {
-                System.out.println(this.grid[i][j].getOrbs()+"Sfsdfsfesfsdsed");
+//                System.out.println(this.grid[i][j].getOrbs()+"Sfsdfsfesfsdsed");
                 Queue<Coordinates> queue = getNeighbours(i, j,rows, cols);
                 ArrayList<Coordinates> a = new ArrayList<>(queue);
-                for (int f = 0; f < a.size(); f++)
-                {
-                    System.out.println("Neighbours " + a.get(f).getX() + " " + a.get(f).getY());
-                }
+//                for (int f = 0; f < a.size(); f++)
+//                {
+//                    System.out.println("Neighbours " + a.get(f).getX() + " " + a.get(f).getY());
+//                }
                 int length = queue.size();
-                System.out.println("Size : " + length);
+//                System.out.println("Size : " + length);
                 for (int l = 0; l < length; l++)
                 {
                     Coordinates cxy = queue.poll();
                     g.shiftOrbs(i,j,cxy.getX(),cxy.getY(),p,playerIndex,this);
                     this.grid[i][j].setOrbs(0);
-                    System.out.println(l+" asdsjadashdkahdad ");
+//                    System.out.println(l+" asdsjadashdkahdad ");
                     g.animation1.setOnFinished(event ->
                     {
                         System.out.println(cxy.getX()+"   "+cxy.getY());
@@ -322,6 +330,8 @@ public class Cell implements Serializable {
                         }
 
                     });
+//                    this.matchExistingOrbsToPlayers(gr.playerIndex1,gr.playersInGameArray,gr,rows,cols,g,gr.mouseClicks);
+
                     System.out.println("left 1");
                 }
                 System.out.println("left 2");

@@ -115,6 +115,11 @@ public class Grid
 		
 		root1[toX][toY].getChildren().add(sphere11);
 
+		for(int i = 0;i<root1[toX][toY].getChildren().size();i++){
+			Sphere s = (Sphere) root1[toX][toY].getChildren().get(i);
+			s.setMaterial(p1);
+		}
+
 
 		//root1[toX][toY].getChildren().add(line);
 
