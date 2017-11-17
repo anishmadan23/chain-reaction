@@ -697,43 +697,51 @@ public class GUI extends Application
         y = Math.floor(y);
 
         if (x < cols + 1 && y < rows + 1) {
-            if(mouseClicks>0) {
+            if (mouseClicks > 0) {
                 s2 = deserialize();
                 System.out.println("Deserialized");
             }
 
 
 //            g.changeGridColor(playersForSettings[colorIndex1].getColor());
-            System.out.println(playerIndex1+" "+playersInGameArray.get(playerIndex1).getColor());
+            System.out.println(playerIndex1 + " " + playersInGameArray.get(playerIndex1).getColor());
             System.out.println("this" + (int) x + " " + (int) y);
-            System.out.println(rows+" "+cols);
+            System.out.println(rows + " " + cols);
 
 //            System.out.println("Checking "+checkIfWon(g,playersForSettings,playerIndex1));
 
-            r = c.explosion((int) y, (int) x,g,rows,cols,playerIndex1, playersInGameArray,this);
+            r = c.explosion((int) y, (int) x, g, rows, cols, playerIndex1, playersInGameArray, this);
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < cols; j++) {
+                    System.out.print(g.array[j][i] + "      ");
+                }
+                System.out.println();
+            }
+
+
             System.out.println("After animation");
 //            if(mouseClicks==4){
 //                Sphere sph = (Sphere)g.root1[1][0].getChildren().get(0);
 //                PhongMaterial ppp = (PhongMaterial)sph.getMaterial();
 //                System.out.println("Color of i 1 j 0 = "+ppp.getDiffuseColor().getRed()+" "+ppp.getDiffuseColor().getGreen()+
 //                                    " "+ppp.getDiffuseColor().getBlue());}
-            c.matchExistingOrbsToPlayers(playerIndex1,playersInGameArray,this,rows,cols,g,mouseClicks);
+            c.matchExistingOrbsToPlayers(playerIndex1, playersInGameArray, this, rows, cols, g, mouseClicks);
 //            System.out.println("Final players = "+playersInGame);
 
 
-   //         serial1.initialize(g.array);
-            if(r==1)
-                undo_click=0;
+            //         serial1.initialize(g.array);
+            if (r == 1)
+                undo_click = 0;
 
-            mouseClicks+=r;
-            playerIndex1=  (mouseClicks)%(playersInGame);
-            colorIndex1 = (mouseClicks)%playersInGame;
+            mouseClicks += r;
+            playerIndex1 = (mouseClicks) % (playersInGame);
+            colorIndex1 = (mouseClicks) % playersInGame;
             g.changeGridColor(playersInGameArray.get(colorIndex1).getColor());
-            System.out.println("r = "+r);
-            System.out.println("MouseClicks on addition of balls= "+mouseClicks);
+            System.out.println("r = " + r);
+            System.out.println("MouseClicks on addition of balls= " + mouseClicks);
 
-            String[][] colorsOfPlayers = g.color(rows,cols);
-            serialize(rows,cols,g.array,colorsOfPlayers, mouseClicks, playersInGame);
+            String[][] colorsOfPlayers = g.color(rows, cols);
+            serialize(rows, cols, g.array, colorsOfPlayers, mouseClicks, playersInGame);
             System.out.println("Serialized");
 
         }
@@ -744,12 +752,12 @@ public class GUI extends Application
 
 
 
-        for(int i = 0;i<rows;i++){
-            for(int j = 0; j<cols ;j++){
-                System.out.print(g.array[j][i]+"      ");
-            }
-            System.out.println();
-        }
+//        for(int i = 0;i<rows;i++){
+//            for(int j = 0; j<cols ;j++){
+//                System.out.print(g.array[j][i]+"      ");
+//            }
+//            System.out.println();
+//        }
 
 
     }

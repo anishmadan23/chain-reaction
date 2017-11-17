@@ -269,7 +269,7 @@ public class Cell implements Serializable {
                         System.out.println(cxy.getX()+"   "+cxy.getY()+" shifted coords");
                         System.out.println(g.root1[cxy.getX()][cxy.getY()].getChildren().size()+" size after explosion");
 //                        g.updateColorOfOrbsAfterExplosion(cxy.getX(),cxy.getY(),p,playerIndex);
-//                        System.out.println(g.root1[cxy.getX()][cxy.getY()].getChildren().remove(0));
+                        System.out.println(g.root1[cxy.getX()][cxy.getY()].getChildren().remove(0));
                         for(int i1 = 0; i1 <g.root1[cxy.getX()][cxy.getY()].getChildren().size(); i1++)
                         {
                             Sphere x1 = (Sphere) g.root1[cxy.getX()][cxy.getY()].getChildren().get(i1);
