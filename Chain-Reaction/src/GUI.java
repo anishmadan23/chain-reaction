@@ -447,6 +447,7 @@ public class GUI extends Application
         //Grid g=new Grid(rows,cols);
         if(event.getSource()==resumeBtn)
         {
+<<<<<<< HEAD
 //            if(mouseClicks>0)
 //            {
             System.out.println("jhgfghj");
@@ -465,6 +466,29 @@ public class GUI extends Application
 //                    e.printStackTrace();
 //                }
             pstage.setScene(scene2);
+=======
+            try {initialisedInGamePlayers = false;
+                initialiseInGamePlayers(playersInGame);
+                s1 = deserialize();
+//                   initialiseInGamePlayers(s1.players_in_game);
+            } catch (IOException | ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                finally{
+                    scene2 = Grid_resume(rows, cols, s1);
+
+
+//            else
+//                try {
+//                    initialisedInGamePlayers = false;
+//                    initialiseInGamePlayers(playersInGame);
+//                    scene2 = Grid_GUI();
+//
+//                } catch (ClassNotFoundException e) {
+//                    e.printStackTrace();
+//                }
+            pstage.setScene(scene2);}
+>>>>>>> 08a4bbefa18dce1b4b9305ca7b34ebe77d88c2e9
         }
         else if(event.getSource()==playGame){
             mouseClicks = 0;
@@ -721,6 +745,8 @@ public class GUI extends Application
                 System.out.println();
             }
 
+//            for(int i =0 ;i<1000000000;i++);
+
 
             System.out.println("After animation");
 //            if(mouseClicks==4){
@@ -728,7 +754,7 @@ public class GUI extends Application
 //                PhongMaterial ppp = (PhongMaterial)sph.getMaterial();
 //                System.out.println("Color of i 1 j 0 = "+ppp.getDiffuseColor().getRed()+" "+ppp.getDiffuseColor().getGreen()+
 //                                    " "+ppp.getDiffuseColor().getBlue());}
-            c.matchExistingOrbsToPlayers(playerIndex1, playersInGameArray, this, rows, cols, g, mouseClicks);
+            c.matchExistingOrbsToPlayers(playerIndex1, playersInGameArray, this, rows, cols, g);
 //            System.out.println("Final players = "+playersInGame);
 
 
