@@ -34,6 +34,8 @@ public class GUI extends Application
     public int cols;
     public int playersInGame  = 2;
 
+    public Alert alert = new Alert(Alert.AlertType.WARNING);
+
     public int mouseClicks = 0;
     public int playerIndex1 = 0;
     public int colorIndex1 = 0;
@@ -88,6 +90,12 @@ public class GUI extends Application
 
     }
 
+    public void setupAlert(){
+        alert.setTitle("Same Color Warning!");
+        alert.setHeaderText(null);
+        alert.setContentText("Another player has chosen the same color! Choose a different one or default will be set.");
+        alert.showAndWait();}
+
     public  void initialiseTextFields(){
         if(!initialisedTextFields) {
             for (int i = 0; i < 8; i++) {
@@ -96,6 +104,17 @@ public class GUI extends Application
             }
             initialisedTextFields = true;
         }
+    }
+    public boolean colorException(Color c , int index){
+        for(int i = 0;i<8;i++){
+            if(i!=index){
+                Color playerColor = playersForSettings.get(i).getColor();
+                if(c.getRed()==playerColor.getRed() && c.getGreen()==playerColor.getGreen() && c.getBlue()==playerColor.getBlue()){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public static void main(String[] args)
@@ -150,8 +169,20 @@ public class GUI extends Application
                                     playerNameInputs[index].setText(playersForSettings.get(index).getName());
                                     System.out.println(playerNameInputs[index].getText());
 
-                                    playersForSettings.get(index).setColor(colorPickers[index].getValue());
+
+                                    if(colorException(colorPickers[index].getValue(),index)){
+                                        setupAlert();
+                                        colorPickers[index] = new ColorPicker(defaultColorList[index]);
+
+                                    }
+                                    else{
+                                        playersForSettings.get(index).setColor(colorPickers[index].getValue());
+
+                                    }
+
+
                                     pstage.setScene(scene3);
+
                                 });
             //define onclick
 

@@ -147,13 +147,13 @@ public class Cell implements Serializable {
                 System.out.println();
                 System.out.println(c.getRed() + " " + c.getGreen() + " " + c.getBlue());
                 System.out.println("MouseClicks in matching " + gui.mouseClicks);
-                for(int i = 0;i<rows;i++){
-                    for(int j = 0;j<cols;j++){
-                        if(this.grid[i][j].getOrbs()!=g.root1[i][j].getChildren().size()){
-                            System.out.println("i "+i+" j "+j+" orbs "+this.grid[i][j].getOrbs()+" child "+g.root1[i][j].getChildren().size());
-                        }
-                    }
-                }
+//                for(int i = 0;i<rows;i++){
+//                    for(int j = 0;j<cols;j++){
+//                        if(this.grid[i][j].getOrbs()!=g.root1[i][j].getChildren().size()){
+//                            System.out.println("i "+i+" j "+j+" orbs "+this.grid[i][j].getOrbs()+" child "+g.root1[i][j].getChildren().size());
+//                        }
+//                    }
+//                }
                 if (!checkOrbsByColorExist(c, rows, cols, g) && gui.mouseClicks >= gui.playersInGame-1 ) {
                     p.remove(k);
                     k--;
@@ -175,18 +175,16 @@ public class Cell implements Serializable {
             for (int j = 0; j < cols; j++) {
                 if (g.root1[i][j].getChildren().size() > 0) {
 //                    System.out.println("i "+i+" j "+j);
-                    for(int l = 0;l<g.root1[i][j].getChildren().size();l++) {
-                        Sphere x = (Sphere) g.root1[i][j].getChildren().get(l);
-                        PhongMaterial ph = (PhongMaterial) x.getMaterial();
-//                        System.out.println(ph.getDiffuseColor() + " color");
-                        if (ph.getDiffuseColor().getBlue() == c.getBlue() && ph.getDiffuseColor().getGreen() == c.getGreen()
-                                && ph.getDiffuseColor().getRed() == c.getRed()) {
-                            return true;
+                    Sphere x = (Sphere) g.root1[i][j].getChildren().get(0);
+                    PhongMaterial ph = (PhongMaterial) x.getMaterial();
+                    System.out.println(ph.getDiffuseColor() + " color");
+                    if (ph.getDiffuseColor().getBlue() == c.getBlue() && ph.getDiffuseColor().getGreen() == c.getGreen()
+                            && ph.getDiffuseColor().getRed() == c.getRed()) {
+                        return true;
                         }
                     }
                 }
             }
-        }
         return false;
     }
 
@@ -342,7 +340,7 @@ public class Cell implements Serializable {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-                        this.matchExistingOrbsToPlayers(gr.playerIndex1, gr.playersInGameArray, gr, rows, cols, g);
+//                        this.matchExistingOrbsToPlayers(gr.playerIndex1, gr.playersInGameArray, gr, rows, cols, g);
                         explosion(cxy.getX(), cxy.getY(), g, rows, cols, playerIndex, p, gr);
 
 
