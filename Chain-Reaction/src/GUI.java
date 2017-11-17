@@ -138,14 +138,28 @@ public class GUI extends Application
             Label playerName = new Label("Player Name");
             playerName.setFont(Font.font("Cambria",FontWeight.BOLD,20));
             playerName.setPadding(new Insets(0,0,0,10));
+            playerName.setStyle(
+                    "-fx-background-insets: 5 5 5 5, 5 5 5 5, 1;"+
+                    "-fx-padding: 5px;"+
+                    "-fx-background-radius: 5px;"+
+                    "-fx-font: 20px \"Cambria\";" +
+                    "-fx-border-radius: 5px;"+
+                    "-fx-text-fill: white");
             GridPane.setHalignment(playerName,HPos.CENTER);
             GridPane.setMargin(playerName,new Insets(20,20,0,0));
             GridPane.setColumnSpan(playerName,2);
 
 
             System.out.println(playerNameInputs[i].getText());
-            playerNameInputs[i].setMinHeight(40);
+            playerNameInputs[i].setMinHeight(50);
             playerNameInputs[i].setPadding(new Insets(0,20,0,10));
+            playerNameInputs[i].setStyle(
+                    "-fx-background-insets: 5 5 5 5, 5 5 5 5, 1;"+
+                    "-fx-background-radius: 5px;"+
+                    "-fx-font: 15px \"Cambria\";" +
+                    "-fx-border-radius: 5px;"+
+                    "-fx-text-fill: black;"+
+                    "-fx-border-color: #181818");
             GridPane.setHalignment(playerNameInputs[i],HPos.LEFT);
             GridPane.setMargin(playerNameInputs[i],new Insets(20,20,0,20));
             GridPane.setColumnSpan(playerNameInputs[i],2);
@@ -161,6 +175,15 @@ public class GUI extends Application
             Button saveNameBtn = new Button("Save");
             saveNameBtn.setPrefSize(Double.MAX_VALUE,Double.MAX_VALUE);
             saveNameBtn.setFont(new Font("Arial",20));
+            saveNameBtn.setStyle("-fx-background-color: rgba(0,0,0,0.75),\n" +
+                    "                           rgba(255,255,255,0.75),\n" +
+                    "                           linear-gradient(to bottom,#383838 0%,#181818 100%);"+
+                    "-fx-background-insets: 5 5 5 5, 5 5 5 5, 1;"+
+                    "-fx-padding: 5px;"+
+                    "-fx-background-radius: 5px;"+
+                    "-fx-font: 20px \"Cambria\";" +
+                    "-fx-border-radius: 5px;"+
+                    "-fx-text-fill: white");
             GridPane.setMargin(saveNameBtn, new Insets(10,10,10,10));
             GridPane.setHalignment(saveNameBtn, HPos.CENTER);
 //            Players p = playersForSettings[i];
@@ -192,6 +215,13 @@ public class GUI extends Application
             Label orbColor = new Label("Colour of Orb");
             orbColor.setFont(Font.font("Cambria",FontWeight.BOLD,20));
             orbColor.setPadding(new Insets(0,0,0,20));
+            orbColor.setStyle(
+                    "-fx-background-insets: 5 5 5 5, 5 5 5 5, 1;"+
+                    "-fx-padding: 5px;"+
+                    "-fx-background-radius: 5px;"+
+                    "-fx-font: 20px \"Cambria\";" +
+                    "-fx-border-radius: 5px;"+
+                    "-fx-text-fill: white");
             GridPane.setColumnSpan(orbColor,2);
             GridPane.setHalignment(orbColor,HPos.CENTER);
 
@@ -199,13 +229,30 @@ public class GUI extends Application
             GridPane.setMargin(backToSettings, new Insets(10,10,10,10));
             backToSettings.setPrefSize(Double.MAX_VALUE,Double.MAX_VALUE);
             backToSettings.setFont(new Font("Arial",20));
+            backToSettings.setStyle("-fx-background-color: rgba(0,0,0,0.75),\n" +
+                    "                           rgba(255,255,255,0.75),\n" +
+                    "                           linear-gradient(to bottom,#383838 0%,#181818 100%);"+
+                    "-fx-background-insets: 5 5 5 5, 5 5 5 5, 1;"+
+                    "-fx-padding: 5px;"+
+                    "-fx-background-radius: 5px;"+
+                    "-fx-font: 20px \"Cambria\";" +
+                    "-fx-border-radius: 5px;"+
+                    "-fx-text-fill: white");
             GridPane.setHalignment(backToMenuBtn, HPos.CENTER);
             backToSettings.setOnMouseClicked(e->{
                 pstage.setScene(scene3);
             });
 
-            headingSettings = new Label("Chain Reaction Settings");
+            headingSettings = new Label("Player "+(i+1)+" Settings");
             headingSettings.setFont(Font.font("Cambria",FontWeight.BOLD,20));
+            headingSettings.setStyle(
+                    "-fx-background-insets: 5 5 5 5, 5 5 5 5, 1;"+
+                    "-fx-padding: 5px;"+
+                    "-fx-background-radius: 5px;"+
+                    "-fx-font: 20px \"Cambria\";" +
+                            "-fx-font-weight: bold;"+
+                    "-fx-border-radius: 5px;"+
+                    "-fx-text-fill: white");
             GridPane.setHalignment(headingSettings, HPos.CENTER);
             GridPane.setColumnSpan(headingSettings,2);
 
@@ -251,9 +298,11 @@ public class GUI extends Application
 
 
 
-
-        nameAndColorPickerScenes[i] = new Scene(nameAndColorPicker,720,720);
-        nameAndColorPickerScenes[i].setFill(Color.BLACK);
+            StackPane root = new StackPane();
+            root.setStyle("-fx-background-color: black");
+            root.getChildren().add(nameAndColorPicker);
+        nameAndColorPickerScenes[i] = new Scene(root,720,720);
+//        nameAndColorPickerScenes[i].setFill(Color.BLACK);
         }
 
         return nameAndColorPickerScenes;
@@ -528,14 +577,14 @@ public class GUI extends Application
         else if(event.getSource()==settingsBtn){
             scene3 = makeSettingsPage();
             pstage.setScene(scene3);
-            settingsView.getChildren().get(1).setOnMouseClicked(e -> LabelClick(e,0));
-            settingsView.getChildren().get(2).setOnMouseClicked(e -> LabelClick(e,1));
-            settingsView.getChildren().get(3).setOnMouseClicked(e -> LabelClick(e,2));
-            settingsView.getChildren().get(4).setOnMouseClicked(e -> LabelClick(e,3));
-            settingsView.getChildren().get(5).setOnMouseClicked(e -> LabelClick(e,4));
-            settingsView.getChildren().get(6).setOnMouseClicked(e -> LabelClick(e,5));
-            settingsView.getChildren().get(7).setOnMouseClicked(e -> LabelClick(e,6));
-            settingsView.getChildren().get(8).setOnMouseClicked(e -> LabelClick(e,7));
+            settingsView.getChildren().get(2).setOnMouseClicked(e -> LabelClick(e,0));
+            settingsView.getChildren().get(3).setOnMouseClicked(e -> LabelClick(e,1));
+            settingsView.getChildren().get(4).setOnMouseClicked(e -> LabelClick(e,2));
+            settingsView.getChildren().get(5).setOnMouseClicked(e -> LabelClick(e,3));
+            settingsView.getChildren().get(6).setOnMouseClicked(e -> LabelClick(e,4));
+            settingsView.getChildren().get(7).setOnMouseClicked(e -> LabelClick(e,5));
+            settingsView.getChildren().get(8).setOnMouseClicked(e -> LabelClick(e,6));
+            settingsView.getChildren().get(9).setOnMouseClicked(e -> LabelClick(e,7));
         }
         else if(event.getSource()==backToMenuBtn){
             System.out.println(event.getSource());

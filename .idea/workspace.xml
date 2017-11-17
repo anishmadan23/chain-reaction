@@ -15,8 +15,8 @@
       <file leaf-file-name="GUI.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Chain-Reaction/src/GUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="852" column="45" lean-forward="false" selection-start-line="852" selection-start-column="45" selection-end-line="852" selection-end-column="45" />
+            <state relative-caret-position="122">
+              <caret line="245" column="51" lean-forward="false" selection-start-line="245" selection-start-column="51" selection-end-line="245" selection-end-column="51" />
               <folding />
             </state>
           </provider>
@@ -63,6 +63,7 @@
       <find>mouseClicks</find>
       <find>resumeBtn</find>
       <find>settings</find>
+      <find>LabelClick</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -269,7 +270,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8072000" />
+    <option name="totallyTimeSpent" value="9391000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="676" y="0" width="1368" height="773" extended-state="6" />
@@ -683,8 +684,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Chain-Reaction/src/GUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="852" column="45" lean-forward="false" selection-start-line="852" selection-start-column="45" selection-end-line="852" selection-end-column="45" />
+        <state relative-caret-position="122">
+          <caret line="245" column="51" lean-forward="false" selection-start-line="245" selection-start-column="51" selection-end-line="245" selection-end-column="51" />
           <folding />
         </state>
       </provider>
