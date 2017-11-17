@@ -16,6 +16,8 @@ import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.Sphere;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
 import javafx.event.ActionEvent;
@@ -25,6 +27,7 @@ import javafx.scene.input.MouseEvent;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.function.DoubleBinaryOperator;
 
 
 public class GUI extends Application
@@ -470,6 +473,7 @@ public class GUI extends Application
 //        rootpane.setStyle("-fx-background-color: #000;");
         scene1 = new Scene(rootpane,720,720);       //scene1 -> initial page
         rootpane.setStyle("-fx-background-color: #000000");
+
         return scene1;
     }
 
@@ -482,12 +486,15 @@ public class GUI extends Application
             try {initialisedInGamePlayers = false;
                 initialiseInGamePlayers(playersInGame);
                 s1 = deserialize();
+//                if(s1.mouse==0){
+//                    resumeBtn.setDisable(true);}
+                scene2 = Grid_resume(rows, cols, s1);
 //                   initialiseInGamePlayers(s1.players_in_game);
             } catch (IOException | ClassNotFoundException e) {
                     e.printStackTrace();
                 }
-                finally{
-                    scene2 = Grid_resume(rows, cols, s1);
+
+//                    scene2 = Grid_resume(rows, cols, s1);
 
 
 //            else
@@ -501,7 +508,7 @@ public class GUI extends Application
 //                }
             pstage.setScene(scene2);}
 
-        }
+
         else if(event.getSource()==playGame){
             mouseClicks = 0;
             playerIndex1 = 0;
@@ -831,19 +838,34 @@ public class GUI extends Application
         settingsView = new GridPane();
 
         ColumnConstraints col1 = new ColumnConstraints();
-        col1.setPercentWidth(100);
-        settingsView.getColumnConstraints().add(col1);
+        col1.setPercentWidth(20);
+
+        ColumnConstraints col2 = new ColumnConstraints();
+        col2.setPercentWidth(80);
+        settingsView.getColumnConstraints().addAll(col1,col2);
 
         RowConstraints[] playerRows = new RowConstraints[9];
-        for(int i = 0; i<9;i++){
+        playerRows[0] = new RowConstraints();
+        playerRows[0].setPercentHeight(5);
+        settingsView.getRowConstraints().add(playerRows[0]);
+        for(int i = 1; i<9;i++){
             playerRows[i] = new RowConstraints();
-            playerRows[i].setPercentHeight(100.0/9);
+            playerRows[i].setPercentHeight(96/8);
             settingsView.getRowConstraints().add(playerRows[i]);
         }
 
         backToMenuBtn = new Button("Back To Menu");
-        backToMenuBtn.setPrefSize(150,30);
-        backToMenuBtn.setFont(new Font("Cambria",13));
+        backToMenuBtn.setPrefSize(Double.MAX_VALUE, Double.MAX_VALUE);
+//        backToMenuBtn.setFont(new Font("Cambria",13));
+        backToMenuBtn.setStyle("-fx-background-color: #181818;"+
+                "-fx-padding: 5px;"+
+                "-fx-background-radius: 0px;"+
+                "-fx-font: 14px \"Cambria\";" +
+                "-fx-border-radius: 0px;"+
+                "-fx-text-fill: white;"+
+                "-fx-border-color: #282828;"+
+                "-fx-border-width: 2px;"+
+                "-fx-font-weight : 300");
         backToMenuBtn.setOnAction(e -> {
             try {
                 ButtonClick(e);
@@ -851,10 +873,23 @@ public class GUI extends Application
                 e1.printStackTrace();
             }
         });
+
         GridPane.setHalignment(backToMenuBtn, HPos.LEFT);
 //        GridPane.setHalignment(resumeBtn, HPos.CENTER);
         settingsView.add(backToMenuBtn,0,0);
-        GridPane.setMargin(backToMenuBtn,new Insets(0,0,0,20));
+//        GridPane.setMargin(backToMenuBtn,new Insets(5,0,5,20));
+
+        Label preferences = new Label("                    Chain Reaction Preferences");
+        preferences.setStyle("-fx-background-color: #181818;"+
+                "-fx-background-radius: 2px;"+
+                "-fx-font: 20px \"Cambria\";" +
+                "-fx-border-radius: 0px;"+
+                "-fx-text-alignment: center;"+
+                "-fx-text-fill: red;"+
+                "-fx-font-weight: 700");
+        preferences.setPrefSize(Double.MAX_VALUE,Double.MAX_VALUE);
+        GridPane.setHalignment(preferences,HPos.CENTER);
+        settingsView.add(preferences,1,0);
 
 
 
@@ -864,16 +899,35 @@ public class GUI extends Application
             playerSettings[i].setPrefSize(Double.MAX_VALUE,Double.MAX_VALUE);
             settingsView.add(playerSettings[i],0,i+1);
             playerSettings[i].setFont(Font.font("Cambria", FontWeight.SEMI_BOLD, 20));
-            playerSettings[i].setPadding(new Insets(0,0,0,20));
+//            playerSettings[i].setPadding(new Insets(0,0,0,20));
+//            playerSettings[i].setTextFill(Color.WHITE);
+//            playerSettings[i].setStyle("-fx-border-color : white");
+            playerSettings[i].setStyle("-fx-background-color: rgba(0,0,0,0.75),\n" +
+                    "                           rgba(255,255,255,0.75),\n" +
+                    "                           linear-gradient(to bottom,#282828 0%,#181818 100%);"+
+                    "-fx-background-insets: 5 5 5 5, 5 5 5 5, 1;"+
+                    "-fx-padding: 0px 0px 0px 20px;"+
+                    "-fx-background-radius: 5px;"+
+                    "-fx-font: 20px \"Cambria\";" +
+                    "-fx-border-radius: 2px;"+
+                    "-fx-text-fill: white;"+
+                    "-fx-border-colot : white");
             GridPane.setFillHeight(playerSettings[i],true);
             GridPane.setFillWidth(playerSettings[i],true);
+            GridPane.setColumnSpan(playerSettings[i],2);
           
 //            playerSettings[i].setStyle("-fx-border-color: black");
         }
-        settingsView.setGridLinesVisible(true);
-        scene3 = new Scene(settingsView,720,720);
-        scene3.setFill(Color.BLACK);
+//        settingsView.setGridLinesVisible(true);
+//        settingsView.set
+//        settingsView.getStyleClass().add("myGridStyle");
 
+
+//        scene3.setFill(Color.BLACK);
+        StackPane rootpane = new StackPane();
+        rootpane.getChildren().add(settingsView);
+        rootpane.setStyle("-fx-background-color: #000000");
+        scene3 = new Scene(rootpane,720,720);
         return scene3;
     }
 

@@ -288,6 +288,11 @@ public class Cell implements Serializable {
 //                        explosion(cxy.getX(), cxy.getY(), g, rows, cols, playerIndex, p, gr);
                         if( gr.mouseClicks>1 && checkIfWon(g,p,playerIndex,rows,cols)==2)
                         {
+//                            try {
+//                                Thread.sleep(1000);
+//                            } catch (InterruptedException e) {
+//                                e.printStackTrace();
+//                            }
                             Platform.runLater(() -> {
                                 setupAlert(p,playerIndex);
                                 result = showAlert();
