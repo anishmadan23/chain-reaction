@@ -270,13 +270,13 @@ public class Cell implements Serializable {
                         System.out.println(g.root1[cxy.getX()][cxy.getY()].getChildren().size()+" size after explosion");
 //                        g.updateColorOfOrbsAfterExplosion(cxy.getX(),cxy.getY(),p,playerIndex);
 //                        System.out.println(g.root1[cxy.getX()][cxy.getY()].getChildren().remove(0));
-//                        for(int i1 = 0; i1 <g.root1[cxy.getX()][cxy.getY()].getChildren().size(); i1++)
-//                        {
-//                            Sphere x1 = (Sphere) g.root1[cxy.getX()][cxy.getY()].getChildren().get(i1);
-//                            PhongMaterial ph1 = new PhongMaterial();
-//                            ph1.setDiffuseColor(p.get(playerIndex).getColor());
-//                            x1.setMaterial(ph1);
-//                        }
+                        for(int i1 = 0; i1 <g.root1[cxy.getX()][cxy.getY()].getChildren().size(); i1++)
+                        {
+                            Sphere x1 = (Sphere) g.root1[cxy.getX()][cxy.getY()].getChildren().get(i1);
+                            PhongMaterial ph1 = new PhongMaterial();
+                            ph1.setDiffuseColor(p.get(playerIndex).getColor());
+                            x1.setMaterial(ph1);
+                        }
                         explosion(cxy.getX(), cxy.getY(), g, rows, cols, playerIndex, p, gr);
                         if( gr.mouseClicks>1 && checkIfWon(g,p,playerIndex,rows,cols)==2)
                         {

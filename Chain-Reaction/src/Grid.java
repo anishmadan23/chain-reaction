@@ -116,7 +116,7 @@ public class Grid
 		root1[toX][toY].getChildren().add(sphere11);
 
 
-		updateColorOfOrbsAfterExplosion(toX,toY,p,playerIndex);
+//		updateColorOfOrbsAfterExplosion(toX,toY,p,playerIndex);
 
 		//root1[toX][toY].getChildren().add(line);
 
