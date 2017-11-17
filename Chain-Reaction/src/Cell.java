@@ -134,9 +134,10 @@ public class Cell implements Serializable {
 
     }
 
-    public void matchExistingOrbsToPlayers(int playerIndex, ArrayList<Players> p,GUI gui, int rows , int cols, Grid g, int mouseclicks ) {
+    public void matchExistingOrbsToPlayers(int playerIndex, ArrayList<Players> p,GUI gui, int rows , int cols, Grid g ) {
         int k;
         for(k = 0;k<p.size();k++) {
+
 
 //            if (playerIndex == p.size() - 1)
 //                k = 0;
@@ -146,12 +147,14 @@ public class Cell implements Serializable {
                 Color c = p.get(k).getColor();
                 System.out.println();
                 System.out.println(c.getRed() + " " + c.getGreen() + " " + c.getBlue());
-                System.out.println("MouseClicks in matching " + mouseclicks);
-                if (!checkOrbsByColor(c, rows, cols, g) && mouseclicks >= gui.playersInGame ) {
+                System.out.println("MouseClicks in matching " + gui.mouseClicks);
+                if (!checkOrbsByColor(c, rows, cols, g) && gui.mouseClicks >= gui.playersInGame ) {
                     p.remove(k);
+                    k--;
                     gui.playersInGame--;
                     System.out.println("Players in Game = "+gui.playersInGame);
                     System.out.println(p.size() + " =Size");
+                    gui.mouseClicks--;
 
                 } else {
                     System.out.println("No removal");
@@ -270,10 +273,14 @@ public class Cell implements Serializable {
                         {
                             Sphere x1 = (Sphere) g.root1[cxy.getX()][cxy.getY()].getChildren().get(i1);
                             PhongMaterial ph1 = new PhongMaterial();
+//                            System.out.println(" Colour is "+p.get(playerIndex).getColor());
                             ph1.setDiffuseColor(p.get(playerIndex).getColor());
                             x1.setMaterial(ph1);
                         }
                         explosion(cxy.getX(), cxy.getY(), g, rows, cols, playerIndex, p, gr);
+
+
+
                         if( gr.mouseClicks>1 && checkIfWon(g,p,playerIndex,rows,cols)==2)
                         {
                             Platform.runLater(() -> {
@@ -324,12 +331,13 @@ public class Cell implements Serializable {
                         String[][] colorsOfPlayers = g.color(rows,cols);
                         try {
                             gr.serialize(rows, cols,g.array,colorsOfPlayers, gr.mouseClicks, gr.playersInGame);
-                            System.out.println("Serialized");
+//                            System.out.println("Serialized");
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
 
                     });
+
 //                    this.matchExistingOrbsToPlayers(gr.playerIndex1,gr.playersInGameArray,gr,rows,cols,g,gr.mouseClicks);
 
                     System.out.println("left 1");

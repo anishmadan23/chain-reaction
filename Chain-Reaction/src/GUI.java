@@ -1,3 +1,4 @@
+import javafx.animation.Animation;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -447,13 +448,14 @@ public class GUI extends Application
         //Grid g=new Grid(rows,cols);
         if(event.getSource()==resumeBtn)
         {
-            if(mouseClicks>0)
+            if(mouseClicks>=0)
             {
                 try {
                     s1 = deserialize();
                 } catch (IOException | ClassNotFoundException e) {
                     e.printStackTrace();
                 }
+
                 scene2 = Grid_resume(rows, cols, s1);
             }
             else
@@ -515,6 +517,8 @@ public class GUI extends Application
             }
         }
         Grid g = new Grid(rows,cols);
+//        System.out.println("Players present "+playersInGame);
+        initialiseInGamePlayers(playersInGame);
         g.createGrid(rows,cols,playersInGameArray.get(0).getColor());
         int dummy_array[][]= new int[cols][rows];
         for(int i=0; i<rows; i++)
@@ -704,19 +708,26 @@ public class GUI extends Application
 
 
 //            g.changeGridColor(playersForSettings[colorIndex1].getColor());
-            System.out.println(playerIndex1+" "+playersInGameArray.get(playerIndex1).getColor());
-            System.out.println("this" + (int) x + " " + (int) y);
-            System.out.println(rows+" "+cols);
+//            System.out.println(playerIndex1+" "+playersInGameArray.get(playerIndex1).getColor());
+//            System.out.println("this" + (int) x + " " + (int) y);
+//            System.out.println(rows+" "+cols);
 
 //            System.out.println("Checking "+checkIfWon(g,playersForSettings,playerIndex1));
 
             r = c.explosion((int) y, (int) x,g,rows,cols,playerIndex1, playersInGameArray,this);
-            if(mouseClicks==4){
-                Sphere sph = (Sphere)g.root1[1][0].getChildren().get(0);
-                PhongMaterial ppp = (PhongMaterial)sph.getMaterial();
-                System.out.println("Color of i 1 j 0 = "+ppp.getDiffuseColor().getRed()+" "+ppp.getDiffuseColor().getGreen()+
-                                    " "+ppp.getDiffuseColor().getBlue());}
-            c.matchExistingOrbsToPlayers(playerIndex1,playersInGameArray,this,rows,cols,g,mouseClicks);
+
+//            if(g.animation1!=null){
+//                while(g.animation1.getStatus()== Animation.Status.RUNNING){
+//                    int xx = 1;
+//                    xx -=1;
+//                }
+//            }
+//            if(mouseClicks==4){
+//                Sphere sph = (Sphere)g.root1[1][0].getChildren().get(0);
+//                PhongMaterial ppp = (PhongMaterial)sph.getMaterial();
+//                System.out.println("Color of i 1 j 0 = "+ppp.getDiffuseColor().getRed()+" "+ppp.getDiffuseColor().getGreen()+
+//                                    " "+ppp.getDiffuseColor().getBlue());}
+            c.matchExistingOrbsToPlayers(playerIndex1,playersInGameArray,this,rows,cols,g);
 //            System.out.println("Final players = "+playersInGame);
 
 
@@ -729,7 +740,7 @@ public class GUI extends Application
             colorIndex1 = (mouseClicks)%playersInGame;
             g.changeGridColor(playersInGameArray.get(colorIndex1).getColor());
             System.out.println("r = "+r);
-            System.out.println("MouseClicks on addition of balls= "+mouseClicks);
+//            System.out.println("MouseClicks on addition of balls= "+mouseClicks);
 
             String[][] colorsOfPlayers = g.color(rows,cols);
             serialize(rows,cols,g.array,colorsOfPlayers, mouseClicks, playersInGame);
