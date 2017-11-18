@@ -1,6 +1,17 @@
+
+/**
+ * This class is used to easily manipulate coordinates.
+ */
+
 public class Coordinates {
 
+    /**
+     * X-Coordinate
+     */
     private int x;
+    /**
+     * Y-Coordinate
+     */
     private int y;
 
     public Coordinates(int x1, int y1){

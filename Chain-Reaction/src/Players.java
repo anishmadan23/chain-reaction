@@ -1,10 +1,30 @@
 import javafx.scene.paint.Color;
 
+
+/**
+ * This class holds information about players in the game
+ */
 public class Players {
+
+    /**
+     * Name of player
+     */
     private String name;
+    /**
+     * Red Component of color
+     */
     private double red;
+    /**
+     * Green Component of color
+     */
     private double green;
+    /**
+     * Blue Component of color
+     */
     private double blue;
+    /**
+     * Color of orb
+     */
     private Color color;
     private boolean visited;
 

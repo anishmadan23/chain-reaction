@@ -12,17 +12,36 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.Sphere;
 
+/**
+ * This class is symbolic of the features of a cell in the grid displayed in the game.
+ */
 public class Cell implements Serializable {
 
-
+    /**
+     * Number of Orbs
+     */
     private int orbs;
+    /**
+     * Alert if a player has won the game.
+     */
     public Alert alert = new Alert(Alert.AlertType.INFORMATION);
+
+    /**
+     * Holds result of game
+     */
     Optional<ButtonType> result;
+    /**
+     * Button for starting a new game
+     */
     ButtonType b1;
     private int X_Coordinate;
     private int Y_Coordinate;
     //    public int rows = 15;
 //    public int cols = 10;
+
+    /**
+     * 2d array which acts as backend of grid displayed
+     */
     public Cell[][] grid;
 
 
@@ -54,14 +73,23 @@ public class Cell implements Serializable {
         this.orbs = 0;
     }
 
+    /**
+     * Getter()
+     */
     public int getOrbs() {
         return orbs;
     }
 
+    /**
+     * Setter()
+     */
     public void setOrbs(int orbs) {
         this.orbs = orbs;
     }
 
+    /**
+     * Returns Critical mass of orb at (i,j)
+     */
     public int getCriticalMass(int i, int j,int rows,int cols) {
         if (isCorner(i, j,rows, cols)){System.out.println("In corner");
             return 2;}
@@ -71,20 +99,33 @@ public class Cell implements Serializable {
             return 4;
     }
 
+    /**
+     * Evaluates if (i,j) is a corner
+     */
     private boolean isCorner(int i, int j,int rows, int cols) {
         return ((i == 0 && j == 0) || (i == rows - 1 && j == 0) || (i == 0 && j == cols - 1) ||
                 (i == rows - 1 && j == cols - 1));
     }
 
+    /**
+     * Evaluates if (i,j) is an edge
+     */
     private boolean isEdge(int i, int j,int rows, int cols) {
         return ((i == 0) || (j == 0) || (i == rows - 1) || (j == cols - 1));
     }
 
+    /**
+     * Evaluates if (i,j) is a valid neighbour
+     */
     public boolean isValidNeighbour(int i, int j,int rows, int  cols) {
         return (i >= 0 && i < rows && j >= 0 && j < cols);
     }
 
     @SuppressWarnings("Duplicates")
+
+    /**
+     * Checks if the player has won the game.
+     */
     public int checkIfWon(Grid g, ArrayList<Players> p,int playerIndex,int rows, int cols){
         int c = 0;int sum =0;
         Color color = null;
@@ -134,6 +175,10 @@ public class Cell implements Serializable {
 
     }
 
+
+    /**
+     * Checks if player has no orb in the game then remove the player from the game.
+     */
     public void matchExistingOrbsToPlayers(int playerIndex, ArrayList<Players> p,GUI gui, int rows , int cols, Grid g ) {
         int k;
         for(k = 0;k<p.size();k++) {
@@ -170,6 +215,10 @@ public class Cell implements Serializable {
 
     }
 
+
+    /**
+     * Checks if a player's orb exists in the game.
+     */
     public boolean checkOrbsByColorExist(Color c, int rows , int cols, Grid g) {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
@@ -190,10 +239,17 @@ public class Cell implements Serializable {
 
 
 
+    /**
+     * Shows alert if game is won
+     */
     public Optional<ButtonType> showAlert() throws IllegalStateException{
         return alert.showAndWait();
     }
 
+
+    /**
+     * Sets up alert if the game is won
+     */
     public void setupAlert(ArrayList<Players> p, int playerIndex){
         alert.setTitle("You Won!");
         alert.setHeaderText(null);
@@ -205,6 +261,10 @@ public class Cell implements Serializable {
 
     }
 
+
+    /**
+     * Finds the valid neighbours for (i,j) and returns them in a queue.
+     */
     public Queue<Coordinates> getNeighbours(int i, int j,int rows, int cols) {
         Deque<Coordinates> queue = new LinkedList<>();
         if (isValidNeighbour(i + 1, j,rows,cols))
@@ -218,6 +278,10 @@ public class Cell implements Serializable {
         return queue;
     }
 
+
+    /**
+     * Determines the state of the grid if an explosion occurs via its recursive definition
+     */
     public int explosion(int i, int j, Grid g,int rows, int cols, int playerIndex, ArrayList<Players> p,GUI gr)
     {
 

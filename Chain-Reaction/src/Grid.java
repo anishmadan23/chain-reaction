@@ -34,12 +34,31 @@ import java.util.concurrent.TimeUnit;
 public class Grid
 {
 
+	/**
+	 * Drop down menu
+	 */
 	ComboBox<String> comboBox;
+
+	/**
+	 * Parameters for positioning of grid
+	 */
 	public int cellOffset, xLeftShift, yBottomShift,xGridStart,yGridStart,cellSize;
 	PathTransition path1,path2,path3;
+
+	/**
+	 * Each cell has a group of orbs in root1[][]
+	 */
 	Group[][] root1;
 	Group root = new Group();
+
+	/**
+	 * Contains grid lines and orbs
+	 */
 	ObservableList<Node> list;
+
+	/**
+	 * Contains backend of grid displayed
+	 */
 	int array[][];
 
 	GUI grc = new GUI();
@@ -62,6 +81,9 @@ public class Grid
 	}
 
 
+	/**
+	 * Calculates parameters for displaying grid
+	 */
 	public void calculateOffsetsForGrid(int rows, int cols){
 		if(rows == 9 && cols == 6){
 			cellSize = 50;
@@ -87,6 +109,9 @@ public class Grid
 	Sphere sphere11;
 	Line line;
 
+	/**
+	 * Returns the transition required after explosion
+	 */
 	Transition createTransition1(Shape path, Sphere node)
 	{
 		PathTransition t = new PathTransition(Duration.seconds(0.4), path, node);
@@ -96,6 +121,9 @@ public class Grid
 		return t;
 	}
 
+	/**
+	 * Uses PathTransition to move orbs along a straight line form one coordinate to another
+	 */
 	public void move(int inX, int inY, int toX, int toY,ArrayList<Players> p, int playerIndex)
 	{
 		line= new Line();
@@ -135,6 +163,9 @@ public class Grid
 		}
 	}
 
+	/**
+	 * Shifts orbs from one coordinate to another
+	 */
 	public void shiftOrbs(int inX, int inY, int toX, int toY,ArrayList<Players> p, int playerIndex,Cell c)
 	{
 
@@ -165,6 +196,10 @@ public class Grid
 
 
     //Serial serial= new Serial(rows, cols);
+
+	/**
+	 * Stores color of orbs in a 2d array
+	 */
 	public String[][] color(int rows, int cols)
     {
         String color_name[][]= new String[rows][cols];
@@ -186,6 +221,10 @@ public class Grid
         return color_name;
     }
 
+
+	/**
+	 * Used to undo the creation of a sphere
+	 */
     public Cell[][] createSphere_undo(double x, double y,Cell c, int array1[][], String col[][])
     {
 
@@ -252,6 +291,9 @@ public class Grid
         return c.grid;
     }
 
+	/**
+	 * Used to create a sphere at a coordinate
+	 */
 	public Cell[][] createSphere(double x, double y, ArrayList<Players> p, int playerIndex, Cell c)
 	{
 		if(c.grid[(int)y][(int)x].getOrbs()==c.getCriticalMass((int)y,(int)x,rows,cols))
@@ -307,6 +349,10 @@ public class Grid
 		return c.grid;
 	}
 
+
+	/**
+	 * Used for animation such as rotation and translation
+	 */
 	public void animate(int x, int y, Sphere sphere, int array[][])
 		{
 
@@ -345,6 +391,10 @@ public class Grid
 		}
 
 
+
+	/**
+	 * Changes gridColor with every turn
+	 */
 	public void changeGridColor(Color color){
 		for(int i = 0;i<list.size();i++){
 			if(list.get(i) instanceof Line){
@@ -353,8 +403,15 @@ public class Grid
 		}
 	}
 
+	/**
+	 * Undo Button
+	 */
 	public Button undoBtn;
 
+
+	/**
+	 * Creates grid using Lines
+	 */
 	public void createGrid(int rows, int cols,Color color1)
 	{	undoBtn  = new Button("Undo");
 		undoBtn.setPrefSize(120,40);
