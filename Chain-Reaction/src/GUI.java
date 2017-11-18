@@ -111,6 +111,7 @@ public class GUI extends Application
      * checks if undo is possible
      */
     int undo_click=0;
+    String serial_color[];
 
 
     public GUI() {
@@ -691,6 +692,18 @@ public class GUI extends Application
                 cellsArray[i][j] = new Cell(0);
             }
         }
+        String change_color[]=obj.player_color;
+        for(int i=0; i<playersInGame; i++)
+        {
+            String s=change_color[i];
+
+            String bgr[]=s.split(" ");
+            double b1 = Double.parseDouble(bgr[0]);
+            double g1 = Double.parseDouble(bgr[1]);
+            double r1 = Double.parseDouble(bgr[2]);
+            Color c1= new Color(r1,g1,b1,1);
+            playersInGameArray.get(i).setColor(c1);
+        }
         Grid g = new Grid(rows,cols);
         System.out.println(playersInGameArray.get(0).getColor());
         g.createGrid(rows,cols,playersInGameArray.get(0).getColor());
@@ -708,7 +721,7 @@ public class GUI extends Application
                 }
             }
         }
-
+        serial_color=obj.player_color;
         String[][] colorsOfPlayers = g.color(rows,cols);
         try {
 //            for(int i=0; i<rows; i++) {
@@ -717,7 +730,7 @@ public class GUI extends Application
 //                }
 //                System.out.println();
 //            }
-            serialize(rows,cols,g.array,colorsOfPlayers, mouseClicks, playersInGame);
+            serialize(rows,cols,g.array,colorsOfPlayers, mouseClicks, playersInGame, serial_color);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -841,9 +854,9 @@ public class GUI extends Application
     /**
      * Used to serialize the state of the game.
      */
-    public static void serialize(int rows, int cols, int[][] c, String[][] a, int mouseClicks, int playersInGame)throws IOException
+    public static void serialize(int rows, int cols, int[][] c, String[][] a, int mouseClicks, int playersInGame, String[] serial_color)throws IOException
     {
-        Serial serial1= new Serial(rows,cols, a,c, mouseClicks,playersInGame );
+        Serial serial1= new Serial(rows,cols, a,c, mouseClicks,playersInGame, serial_color );
         serial1.dummy =2;
         ObjectOutputStream out1= new ObjectOutputStream( new FileOutputStream("out.txt"));
             out1.writeObject(serial1);
@@ -934,7 +947,7 @@ public class GUI extends Application
             System.out.println("MouseClicks on addition of balls= " + mouseClicks);
 
             String[][] colorsOfPlayers = g.color(rows, cols);
-            serialize(rows, cols, g.array, colorsOfPlayers, mouseClicks, playersInGame);
+            serialize(rows, cols, g.array, colorsOfPlayers, mouseClicks, playersInGame, serial_color);
             System.out.println("Serialized");
 
         }
@@ -962,8 +975,11 @@ public class GUI extends Application
     public void initialiseInGamePlayers(int playerNumber) {
         if (!initialisedInGamePlayers) {
             playersInGameArray = new ArrayList<>();
+            serial_color= new String[playerNumber];
             for (int i = 0; i < playerNumber; i++) {
                 playersInGameArray.add(playersForSettings.get(i));
+                Color co=playersForSettings.get(i).getColor();
+                serial_color[i]=co.getBlue()+" "+co.getGreen()+" "+co.getRed();
             }
             initialisedInGamePlayers = true;
         }
