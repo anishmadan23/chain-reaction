@@ -118,6 +118,8 @@ public class GUI extends Application
      */
     private Alert alertInfo = new Alert(Alert.AlertType.INFORMATION);
 
+    private Alert alertNewGame = new Alert(Alert.AlertType.INFORMATION);
+
 
 
     public GUI() {
@@ -204,6 +206,13 @@ public class GUI extends Application
         alert.setHeaderText(null);
         alert.setContentText("Another player has chosen the same color! Choose a different one or default will be set.");
         alert.showAndWait();}
+
+    public void setupAlertNewGame(){
+        alert.setTitle("No game to resume!");
+        alert.setHeaderText(null);
+        alert.setContentText("There is no game to resume. Select New Game in menu to start a New Game.");
+        alert.showAndWait();
+    }
 
     /**
      * Initialises TextFields For player Names
@@ -705,6 +714,9 @@ public class GUI extends Application
                     initialiseInGamePlayers(s1.players_in_game);
                     scene2 = Grid_resume(rows, cols, s1);
                     pstage.setScene(scene2);
+                }
+                else{
+                    setupAlertNewGame();
                 }
 
             } catch (IOException | ClassNotFoundException e) {
