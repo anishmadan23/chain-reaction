@@ -25,9 +25,10 @@ public class Serial implements Serializable
      * Color of players in grid.
      */
     String player_color_grid[][];
+    String player_color[];
     int dummy = 1;
 
-    public Serial(int row, int column, String color[][], int a[][] ,  int mouse, int players_in_game)
+    public Serial(int row, int column, String color[][], int a[][] ,  int mouse, int players_in_game, String[] co)
     {
         this.row=row;
         this.column=column;
@@ -35,8 +36,10 @@ public class Serial implements Serializable
         player_color_grid= new String[row][column];
         this.mouse=mouse;
         this.players_in_game=players_in_game;
+        player_color=new String[players_in_game];
         initialize_color(color);
         initialize(a);
+        initialize_player_color(co);
     }
 
     /**
@@ -50,6 +53,16 @@ public class Serial implements Serializable
             {
                 array[i][j]=a[i][j];
             }
+        }
+
+
+    }
+
+    public void initialize_player_color(String[] co)
+    {
+        for(int i=0; i<players_in_game; i++)
+        {
+            player_color[i]=co[i];
         }
 
 
