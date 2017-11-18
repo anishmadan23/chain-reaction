@@ -113,6 +113,9 @@ public class GUI extends Application
     int undo_click=0;
     String serial_color[];
 
+    private Alert alertInfo = new Alert(Alert.AlertType.INFORMATION);
+
+
 
     public GUI() {
 
@@ -165,6 +168,8 @@ public class GUI extends Application
     private GridPane settingsView;
     private Button backToSettings;
     private Label headingSettings;
+    ButtonType b1;
+    Optional<ButtonType> result;
 
 
     /**
@@ -413,6 +418,28 @@ public class GUI extends Application
 
     }
 
+
+    public Optional<ButtonType> setupAlertInfo(){
+        alertInfo.setResizable(true);
+        alertInfo.getDialogPane().setPrefSize(400,250);
+        alertInfo.setTitle("Game Info");
+        alertInfo.setHeaderText(null);
+        alertInfo.setContentText("Players take it in turns to place their orbs in a cell. " +
+                        "Once a cell has reached a specific number of orbs, the cell explodes " +
+                        "adding each orb to the adjacent cells and claiming these cells for that " +
+                        "player.\n \t Players may only place their orbs in a blank cell or in a cell that" +
+                        " contains orbs of his own colour. As soon as a player eliminates all his " +
+                        "opponent's orbs wins the game.");
+        b1 = new ButtonType("See video");
+
+        alertInfo.getButtonTypes().add(b1);
+
+        return alertInfo.showAndWait();}
+
+
+
+
+
     /**
      * Returns scene with layout of the home screen of the game.
      */
@@ -452,11 +479,32 @@ public class GUI extends Application
 
         Label infoLabel = new Label();
 
-        Image image = new Image("info1.png");
+        Image image = new Image("white_info.png");
         ImageView img = new ImageView(image);
-        img.setFitHeight(40);
-        img.setFitWidth(40);
+        img.setFitHeight(50);
+        img.setFitWidth(50);
         infoLabel.setGraphic(img);
+        infoLabel.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            result = setupAlertInfo();
+            HBox hbox = new HBox();
+            final WebView browser = new WebView();
+            final WebEngine webEngine = browser.getEngine();
+            hbox.getChildren().add(browser);
+            Scene scene = new Scene(hbox,720,720);
+            Hyperlink hp = new Hyperlink();
+            hp.setText("https://www.youtube.com/watch?v=L15TaZbLUo0");
+             if(result.get()==b1){
+//                 hp.setOnAction(new EventHandler<ActionEvent>() {
+//                     @Override
+//                     public void handle(ActionEvent e) {
+                         webEngine.load(hp.getText());
+                         pstage.setScene(scene);
+                     }
+//                 });
+//             }
+
+        });
+
 
 
         pageContents.add(gameName,0,0);
