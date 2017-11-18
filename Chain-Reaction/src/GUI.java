@@ -112,6 +112,9 @@ public class GUI extends Application
      */
     int undo_click=0;
 
+    /**
+     * Info about rules of the game
+     */
     private Alert alertInfo = new Alert(Alert.AlertType.INFORMATION);
 
 
@@ -141,7 +144,7 @@ public class GUI extends Application
     /**
      * different scenes for multiple screens.
      */
-    public Scene scene1 =null,scene2=null,scene3=null,scene4;
+    public Scene scene1 =null,scene2=null,scene3=null,scene=null;
     private Scene[] nameAndColorPickerScenes = new Scene[8];
     private Button resumeBtn, playGame,settingsBtn,backToMenuBtn;
     /**
@@ -167,7 +170,15 @@ public class GUI extends Application
     private GridPane settingsView;
     private Button backToSettings;
     private Label headingSettings;
+
+    /**
+     * Button to see video
+     */
     ButtonType b1;
+
+    /**
+     * result of buttons in alertInfo stored here
+     */
     Optional<ButtonType> result;
 
 
@@ -486,21 +497,32 @@ public class GUI extends Application
         infoLabel.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             result = setupAlertInfo();
             HBox hbox = new HBox();
+
             final WebView browser = new WebView();
             final WebEngine webEngine = browser.getEngine();
             hbox.getChildren().add(browser);
-            Scene scene = new Scene(hbox,720,720);
+            scene = new Scene(hbox,720,720);
             Hyperlink hp = new Hyperlink();
             hp.setText("https://www.youtube.com/watch?v=L15TaZbLUo0");
              if(result.get()==b1){
 //                 hp.setOnAction(new EventHandler<ActionEvent>() {
 //                     @Override
 //                     public void handle(ActionEvent e) {
-                         webEngine.load(hp.getText());
-                         pstage.setScene(scene);
+                 pstage.setScene(scene);
+                 webEngine.load(hp.getText());
+//                 pstage.setScene(scene1);
+
+
+
+
+//                         browser.setOnMouseExited(e->{
+//                             pstage.setScene(scene1);
+//                         });
                      }
+//                     pstage.setScene(scene1);
 //                 });
 //             }
+
 
         });
 
@@ -916,9 +938,9 @@ public class GUI extends Application
     public void explosionEvent(MouseEvent event,Grid g, Cell c) throws IOException, ClassNotFoundException {
         int cellSize, xGridStart, yGridStart;
         if (rows == 9 && cols == 6) {
-            cellSize = 70;
+            cellSize = 60;
             xGridStart = 20;
-            yGridStart = 70;
+            yGridStart = 60;
         } else {
             cellSize = 44;
             xGridStart = 20;

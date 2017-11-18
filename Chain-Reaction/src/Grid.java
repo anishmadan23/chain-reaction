@@ -88,13 +88,13 @@ public class Grid
 	 */
 	public void calculateOffsetsForGrid(int rows, int cols){
 		if(rows == 9 && cols == 6){
-			cellSize = 70;
+			cellSize = 60;
 			xGridStart = 20;
-			yGridStart = 70;
+			yGridStart = 60;
 			xLeftShift = 12;
 			yBottomShift = 18;
 			cellOffset = 4;
-			radius = 15;
+			radius = 12;
 
 		}
 		else
@@ -437,8 +437,8 @@ public class Grid
 		comboBox.setLayoutY(0);
 		comboBox.getItems().addAll("New Game","Go to Main Menu");
 		comboBox.setValue("Options");
-		comboBox.setPrefSize(120,36);
-		comboBox.setStyle("-fx-background-color:  #181818;"+
+		comboBox.setPrefSize(150,34);
+		comboBox.setStyle("-fx-background-color:  #ffffff;"+
 				"-fx-border-color: #383838;"+
 				"-fx-border-width: 2px;"+
 				"-fx-text-fill: white;"+
