@@ -34,17 +34,37 @@ import java.util.concurrent.TimeUnit;
 public class Grid
 {
 
+	/**
+	 * Drop down menu
+	 */
 	ComboBox<String> comboBox;
+
+	/**
+	 * Parameters for positioning of grid
+	 */
 	public int cellOffset, xLeftShift, yBottomShift,xGridStart,yGridStart,cellSize;
 	PathTransition path1,path2,path3;
+
+	/**
+	 * Each cell has a group of orbs in root1[][]
+	 */
 	Group[][] root1;
 	Group root = new Group();
+
+	/**
+	 * Contains grid lines and orbs
+	 */
 	ObservableList<Node> list;
+
+	/**
+	 * Contains backend of grid displayed
+	 */
 	int array[][];
 
 	GUI grc = new GUI();
 	int rows = grc.rows;
 	int cols = grc.cols;
+	int radius = 9;
 
 	public Grid(int rows, int cols){
 	    this.cols=cols;
@@ -63,21 +83,25 @@ public class Grid
 
 	}
 
-
+	/**
+	 * Calculates parameters for displaying grid
+	 */
 	public void calculateOffsetsForGrid(int rows, int cols){
 		if(rows == 9 && cols == 6){
-			cellSize = 50;
+			cellSize = 70;
 			xGridStart = 20;
-			yGridStart = 50;
+			yGridStart = 70;
 			xLeftShift = 12;
 			yBottomShift = 18;
 			cellOffset = 4;
+			radius = 15;
+
 		}
 		else
 		{
-			cellSize = 42;
+			cellSize = 44;
 			xGridStart = 20;
-			yGridStart = 42;
+			yGridStart = 44;
 			xLeftShift = 10;
 			yBottomShift = 16;	
 			cellOffset =2;	//xLeftShift, yBottomShift and CellOffset are proportional, eg XL=15,YBS=24,CO=3
@@ -89,6 +113,9 @@ public class Grid
 	Sphere sphere11;
 	Line line;
 
+	/**
+	 * Returns the transition required after explosion
+	 */
 	Transition createTransition1(Shape path, Sphere node)
 	{
 		PathTransition t = new PathTransition(Duration.seconds(0.4), path, node);
@@ -98,6 +125,9 @@ public class Grid
 		return t;
 	}
 
+	/**
+	 * Uses PathTransition to move orbs along a straight line form one coordinate to another
+	 */
 	public void move(int inX, int inY, int toX, int toY,ArrayList<Players> p, int playerIndex)
 	{
 		line= new Line();
@@ -108,7 +138,7 @@ public class Grid
     	line.setStroke(Color.TRANSPARENT);
 
     	sphere11 = new Sphere();
-		sphere11.setRadius(9);
+		sphere11.setRadius(radius);
 		sphere11.setTranslateX((inX + 1) * cellSize);
 		sphere11.setTranslateY((inY + 1) * cellSize + (cellSize / 2));
 		PhongMaterial p1 = new PhongMaterial();
@@ -117,14 +147,12 @@ public class Grid
 		
 		root1[toX][toY].getChildren().add(sphere11);
 
-
 //		updateColorOfOrbsAfterExplosion(toX,toY,p,playerIndex);
 
 		//root1[toX][toY].getChildren().add(line);
 
     	animation1 = new ParallelTransition(createTransition1(line, sphere11));
 		animation1.play();
-
 
 	}
 
@@ -137,6 +165,9 @@ public class Grid
 		}
 	}
 
+	/**
+	 * Shifts orbs from one coordinate to another
+	 */
 	public void shiftOrbs(int inX, int inY, int toX, int toY,ArrayList<Players> p, int playerIndex,Cell c)
 	{
 
@@ -167,6 +198,10 @@ public class Grid
 
 
     //Serial serial= new Serial(rows, cols);
+
+	/**
+	 * Stores color of orbs in a 2d array
+	 */
 	public String[][] color(int rows, int cols)
     {
         String color_name[][]= new String[rows][cols];
@@ -188,11 +223,15 @@ public class Grid
         return color_name;
     }
 
+
+	/**
+	 * Used to undo the creation of a sphere
+	 */
     public Cell[][] createSphere_undo(double x, double y,Cell c, int array1[][], String col[][])
     {
 
         Sphere sphere = new Sphere();
-        sphere.setRadius(9);
+        sphere.setRadius(radius);
         String s=col[(int)y][(int)x];
 
         String bgr[]=s.split(" ");
@@ -254,6 +293,9 @@ public class Grid
         return c.grid;
     }
 
+	/**
+	 * Used to create a sphere at a coordinate
+	 */
 	public Cell[][] createSphere(double x, double y, ArrayList<Players> p, int playerIndex, Cell c)
 	{
 		if(c.grid[(int)y][(int)x].getOrbs()==c.getCriticalMass((int)y,(int)x,rows,cols))
@@ -262,7 +304,7 @@ public class Grid
 			DURATION = Duration.seconds(4);
 		
 		Sphere sphere = new Sphere();
-		sphere.setRadius(9);
+		sphere.setRadius(radius);
 		PhongMaterial ph = new PhongMaterial();
 		ph.setDiffuseColor(p.get(playerIndex).getColor());
 		sphere.setMaterial(ph);
@@ -309,6 +351,10 @@ public class Grid
 		return c.grid;
 	}
 
+
+	/**
+	 * Used for animation such as rotation and translation
+	 */
 	public void animate(int x, int y, Sphere sphere, int array[][])
 		{
 
@@ -347,6 +393,10 @@ public class Grid
 		}
 
 
+
+	/**
+	 * Changes gridColor with every turn
+	 */
 	public void changeGridColor(Color color){
 		for(int i = 0;i<list.size();i++){
 			if(list.get(i) instanceof Line){
@@ -355,23 +405,50 @@ public class Grid
 		}
 	}
 
+	/**
+	 * Undo Button
+	 */
 	public Button undoBtn;
 
+
+	/**
+	 * Creates grid using Lines
+	 */
 	public void createGrid(int rows, int cols,Color color1)
 	{	undoBtn  = new Button("Undo");
 		undoBtn.setPrefSize(120,40);
-		undoBtn.setFont(Font.font("Arial", FontWeight.SEMI_BOLD,18));
-		undoBtn.setLayoutX(500);
-		undoBtn.setLayoutY(100);
+//		undoBtn.setFont(Font.font("Arial", FontWeight.SEMI_BOLD,18));
+		undoBtn.setStyle("-fx-background-color: rgba(0,0,0,0.75),\n" +
+				"                           rgba(255,255,255,0.75),\n" +
+				"                           linear-gradient(to bottom,#383838 0%,#181818 100%);"+
+				"-fx-background-insets: 5 5 5 5, 5 5 5 5, 1;"+
+				"-fx-padding: 5px;"+
+				"-fx-background-radius: 5px;"+
+				"-fx-font: 15px \"Cambria\";" +
+				"-fx-font-weight: 500;"+
+				"-fx-border-radius: 2px;"+
+				"-fx-text-fill: white");
+		undoBtn.setLayoutX(400);
+		undoBtn.setLayoutY(0);
 		list.add(undoBtn);
 
 		comboBox = new ComboBox<>();
-		comboBox.setLayoutX(500);
-		comboBox.setLayoutY(300);
+		comboBox.setLayoutX(525);
+		comboBox.setLayoutY(0);
 		comboBox.getItems().addAll("New Game","Go to Main Menu");
 		comboBox.setValue("Options");
-		comboBox.setPrefSize(150,40);
-		comboBox.setStyle("-fx-font: 15px \"Serif\";");
+		comboBox.setPrefSize(120,36);
+		comboBox.setStyle("-fx-background-color:  #181818;"+
+				"-fx-border-color: #383838;"+
+				"-fx-border-width: 2px;"+
+				"-fx-text-fill: white;"+
+				"-fx-highlight-text-fill: white;"+
+				"-fx-background-radius: 3px, 3px, 2px, 1px;"+
+				"-fx-background-insets: 5 5 5 5, 5 5 5 5, 1;"+
+				"-fx-padding: 5px;"+
+
+				"-fx-font: 15px \"Cambria\";" +
+				"-fx-border-radius: 5px");
 		list.add(comboBox);
 
 		calculateOffsetsForGrid(rows,cols);

@@ -1,13 +1,29 @@
 import java.io.*;
 import java.util.ArrayList;
 
+
+/**
+ * This class is made to serialize the non-Javafx Components of the game.
+ */
 public class Serial implements Serializable
 {
     int row;
     int column;
+    /**
+     * Backend for grid.
+     */
     int array[][];
+    /**
+     * Mouseclicks
+     */
     int mouse;
+    /**
+     * Current players in game
+     */
     int players_in_game;
+    /**
+     * Color of players in grid.
+     */
     String player_color_grid[][];
     int dummy = 1;
 
@@ -23,6 +39,9 @@ public class Serial implements Serializable
         initialize(a);
     }
 
+    /**
+     *Initialises array[][] according to grid
+     */
     public void initialize(int a[][])
     {
         for(int i=0; i<column; i++)
@@ -36,6 +55,9 @@ public class Serial implements Serializable
 
     }
 
+    /**
+     * Initialises grid[][] according to color of player
+     */
     public void initialize_color(String a[][])
     {
         for(int i=0; i<row; i++)
@@ -49,6 +71,9 @@ public class Serial implements Serializable
 
     }
 
+    /**
+     * Used to display contents of class
+     */
     public  void display()
     {
         System.out.println("color grid");

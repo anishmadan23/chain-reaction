@@ -29,26 +29,87 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.function.DoubleBinaryOperator;
 
+/**
+ This class is responsible for all the components displayed on the screen which include the initial page, the game screen,
+ settings page and individual player settings page.
 
+ */
 public class GUI extends Application
 {
-
+    /**
+     * holds the rows for the grid
+     */
     public int rows;
+
+    /**
+     * holds the column for the grid
+     */
     public int cols;
+
+    /**
+     * number of players playing the game
+
+     */
     public int playersInGame  = 2;
 
+    /**
+     * Warning alert defined to signal if same color chosen by 2 players
+     */
     public Alert alert = new Alert(Alert.AlertType.WARNING);
 
+    /**
+     * mouseClicks calculate color and turn of player
+     */
     public int mouseClicks = 0;
+
+    /**
+     * current player in turn
+     */
     public int playerIndex1 = 0;
+
+    /**
+     * current color in turn
+     */
     public int colorIndex1 = 0;
+
+    /**
+     * value returned after explosion of orbs
+     */
     public int  r  = 1;
+
+    /**
+     * checks if textField in Player Settings has been initialised.
+     */
     boolean initialisedTextFields = false;
+
+    /**
+     * checks if colorPicker in Player Settings has been initialised.
+     */
     boolean initalisedColorPicker = false;
+
+    /**
+     * checks if Players in Settings have been initialised.
+     */
     boolean initialisedPlayers = false;
+
+    /**
+     * checks if Current Players in Game have been initialised.
+     */
     boolean initialisedInGamePlayers = false;
+
+    /**
+     * Serialised Objects to savve state of game
+     */
     public Serial s1,s2;
+
+    /**
+     * 2d array after each explosion
+     */
     int array_after_explosion[][];
+
+    /**
+     * checks if undo is possible
+     */
     int undo_click=0;
 
 
@@ -59,30 +120,55 @@ public class GUI extends Application
         array_after_explosion= new int[this.rows][this.cols];
     }
 
+    /**
+     * List for number of players to choose.
+     */
     ObservableList<Integer> players = FXCollections.observableArrayList(2,3,4,5,6,7,8);
+
+    /**
+     * Used to select players
+     */
     Spinner<Integer> spinner ;
 
+    /**
+     * used to check grid size
+     */
     ComboBox<String> comboBox;
-    public Scene scene1 =null,scene2=null,scene3=null,scene4;      //scene3 - settings, scene4 -> Name, ColorPicker
-    Scene[] nameAndColorPickerScenes = new Scene[8];
-    public Button resumeBtn, playGame,settingsBtn,backToMenuBtn;
+
+    /**
+     * different scenes for multiple screens.
+     */
+    public Scene scene1 =null,scene2=null,scene3=null,scene4;
+    private Scene[] nameAndColorPickerScenes = new Scene[8];
+    private Button resumeBtn, playGame,settingsBtn,backToMenuBtn;
+    /**
+     * Stage similar to primaryStage
+     */
     public Stage pstage;
-    public Label[] playerSettings;
-    public ArrayList<Players> playersForSettings = new ArrayList<>(8);
-    public ArrayList<Players> playersInGameArray = new ArrayList<>();
-    public Color[] defaultColorList = {Color.RED,Color.GREEN,Color.BLUE,Color.YELLOW,Color.PINK,Color.LIGHTCYAN,
+    private Label[] playerSettings;
+    private ArrayList<Players> playersForSettings = new ArrayList<>(8);
+    private ArrayList<Players> playersInGameArray = new ArrayList<>();
+
+    /**
+     * Initial List for colour of players' orbs
+     */
+    private Color[] defaultColorList = {Color.RED,Color.GREEN,Color.BLUE,Color.YELLOW,Color.PINK,Color.LIGHTCYAN,
             Color.ORANGE, Color.WHITE};
-//    public Label[] playerName = new Label[8];
-    public TextField[] playerNameInputs = new TextField[8];
-    public ColorPicker[] colorPickers = new ColorPicker[8];
-    GridPane settingsView;
 
-    Button backToSettings;
-    Label headingSettings;
+    private TextField[] playerNameInputs = new TextField[8];
+    private ColorPicker[] colorPickers = new ColorPicker[8];
+
+    /**
+     * Grid for settings page.
+     */
+    private GridPane settingsView;
+    private Button backToSettings;
+    private Label headingSettings;
 
 
-
-
+    /**
+     * Initialises color picker with values from defaultColorList[]
+     */
     public void initialiseColorPicker(){
         if(!initalisedColorPicker){
             for(int i = 0;i<8;i++){
@@ -93,12 +179,18 @@ public class GUI extends Application
 
     }
 
+    /**
+     * Sets up warning alert if same color is chosen by two different players.
+     */
     public void setupAlert(){
         alert.setTitle("Same Color Warning!");
         alert.setHeaderText(null);
         alert.setContentText("Another player has chosen the same color! Choose a different one or default will be set.");
         alert.showAndWait();}
 
+    /**
+     * Initialises TextFields For player Names
+     */
     public  void initialiseTextFields(){
         if(!initialisedTextFields) {
             for (int i = 0; i < 8; i++) {
@@ -108,6 +200,10 @@ public class GUI extends Application
             initialisedTextFields = true;
         }
     }
+
+    /**
+     * Detects same color of orbs for two players in settings.
+     */
     public boolean colorException(Color c , int index){
         for(int i = 0;i<8;i++){
             if(i!=index){
@@ -120,6 +216,10 @@ public class GUI extends Application
         return false;
     }
 
+
+    /**
+     * Launches the GUI
+     */
     public static void main(String[] args)
 
     {
@@ -127,6 +227,9 @@ public class GUI extends Application
     }
 
 
+    /**
+     * Returns scene[] with layouts of player's individual settings.
+     */
     public final Scene[] makeNameAndColorPickerPage(){
 
 
@@ -309,6 +412,9 @@ public class GUI extends Application
 
     }
 
+    /**
+     * Returns scene with layout of the home screen of the game.
+     */
     public Scene makeInitialPage()
     {
         initialiseSettingsPlayers();
@@ -511,7 +617,9 @@ public class GUI extends Application
         return scene1;
     }
 
-
+    /**
+     * Defines the functionality of each button which takes place on button click.
+     */
     public void ButtonClick(ActionEvent event) throws IOException{
         //Grid g=new Grid(rows,cols);
         if(event.getSource()==resumeBtn)
@@ -567,8 +675,9 @@ public class GUI extends Application
         }
     }
 
-
-
+    /**
+     * Returns scene with the previous saved state of the game so that players can resume play.
+     */
     public Scene Grid_resume(int rows, int cols, Serial obj)
     {
         rows=obj.row;
@@ -627,7 +736,9 @@ public class GUI extends Application
 
     }
 
-
+    /**
+     * Defines the functionality of drop down menu inside the game and the undo button
+     */
     public void after(Grid g, Cell c)
     {
         g.comboBox.setOnAction(e -> {
@@ -700,7 +811,9 @@ public class GUI extends Application
 
     }
 
-
+    /**
+     * Returns scene with layout of game.
+     */
     public Scene Grid_GUI() throws IOException, ClassNotFoundException
     {
 
@@ -725,6 +838,9 @@ public class GUI extends Application
         return scene2;
     }
 
+    /**
+     * Used to serialize the state of the game.
+     */
     public static void serialize(int rows, int cols, int[][] c, String[][] a, int mouseClicks, int playersInGame)throws IOException
     {
         Serial serial1= new Serial(rows,cols, a,c, mouseClicks,playersInGame );
@@ -732,33 +848,33 @@ public class GUI extends Application
         ObjectOutputStream out1= new ObjectOutputStream( new FileOutputStream("out.txt"));
             out1.writeObject(serial1);
             out1.close();
-
-
-
-
     }
 
+    /**
+     * Used to de-serialize the state of the game.
+     */
     public static Serial deserialize() throws IOException, ClassNotFoundException {
         ObjectInputStream in= new ObjectInputStream( new FileInputStream("out.txt"));
             Serial s1= (Serial)in.readObject();
             s1.display();
             in.close();
             return s1;
-
-
-
     }
 
+
+    /**
+     * Handles the event of explosion which might occur on a mouse click.
+     */
     public void explosionEvent(MouseEvent event,Grid g, Cell c) throws IOException, ClassNotFoundException {
         int cellSize, xGridStart, yGridStart;
         if (rows == 9 && cols == 6) {
-            cellSize = 50;
+            cellSize = 70;
             xGridStart = 20;
-            yGridStart = 50;
+            yGridStart = 70;
         } else {
-            cellSize = 43;
+            cellSize = 44;
             xGridStart = 20;
-            yGridStart = 43;
+            yGridStart = 44;
         }
         double x = event.getSceneX();
         double y = event.getSceneY();
@@ -827,7 +943,9 @@ public class GUI extends Application
 
     }
 
-
+    /**
+     * Method to initialise settings of players.
+     */
     public void initialiseSettingsPlayers() {
         if (!initialisedPlayers) {
             for (int i = 0; i < 8; i++) {
@@ -838,6 +956,9 @@ public class GUI extends Application
         }
     }
 
+    /**
+     * Method to initialise current players in the game.
+     */
     public void initialiseInGamePlayers(int playerNumber) {
         if (!initialisedInGamePlayers) {
             playersInGameArray = new ArrayList<>();
@@ -848,6 +969,9 @@ public class GUI extends Application
         }
     }
 
+    /**
+     * Returns scene with layout of Settings page.
+     */
     public Scene makeSettingsPage(){
 
 
@@ -949,14 +1073,17 @@ public class GUI extends Application
     }
 
 
-
-
-
+    /**
+     * Defines functionality of Player's Settings Label when Clicked
+     */
     public void LabelClick(MouseEvent event, int i){
         Scene[] scenes = makeNameAndColorPickerPage();
         pstage.setScene(scenes[i]);
     }
 
+    /**
+     * Sets up the primary Stage with title and initial scene.
+     */
     @Override
     public void start(Stage primaryStage) throws IOException
     {
