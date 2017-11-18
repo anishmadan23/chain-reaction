@@ -129,6 +129,14 @@ public class Cell implements Serializable {
     public int checkIfWon(Grid g, ArrayList<Players> p,int playerIndex,int rows, int cols){
         int c = 0;int sum =0;
         Color color = null;
+//        for(int i = 0;i<rows;i++)
+//        {
+//            for (int j = 0; j < cols; j++)
+//            {
+//                System.out.print(g.root1[i][j].getChildren().size());
+//            }
+//            System.out.println();
+//        }
         for(int i = 0;i<rows;i++){
             for(int j = 0;j<cols;j++){
                 if(g.root1[i][j].getChildren().size()>0){
@@ -322,19 +330,14 @@ public class Cell implements Serializable {
 //                System.out.println(this.grid[i][j].getOrbs()+"Sfsdfsfesfsdsed");
                 Queue<Coordinates> queue = getNeighbours(i, j,rows, cols);
                 ArrayList<Coordinates> a = new ArrayList<>(queue);
-//                for (int f = 0; f < a.size(); f++)
-//                {
-//                    System.out.println("Neighbours " + a.get(f).getX() + " " + a.get(f).getY());
-//                }
+//
                 int length = queue.size();
-//                System.out.println("Size : " + length);
+                System.out.println("length of the neighbour array is "+length);
                 for (int l = 0; l < length; l++)
                 {
                     Coordinates cxy = queue.poll();
                     g.shiftOrbs(i,j,cxy.getX(),cxy.getY(),p,playerIndex,this);
                     this.grid[i][j].setOrbs(0);
-//                    System.out.println(l+" asdsjadashdkahdad ");
-//                    explosion(cxy.getX(), cxy.getY(), g, rows, cols, playerIndex, p, gr);
 
                     g.animation1.setOnFinished(event ->
                     {
@@ -350,13 +353,21 @@ public class Cell implements Serializable {
                             x1.setMaterial(ph1);
                         }
 //                        explosion(cxy.getX(), cxy.getY(), g, rows, cols, playerIndex, p, gr);
+                        System.out.println("Final Array");
+                        for(int i1 = 0; i1 <rows; i1++)
+                        {
+                            for(int j1 = 0; j1 <cols ; j1++)
+                            {
+                                //System.out.println(gr.array_after_explosion.length+" "+grid.length);
+                                gr.array_after_explosion[i1][j1]=grid[i1][j1].getOrbs();
+                                //System.out.print(grid[i1][j1].getOrbs()+" ");
+                            }
+                            //System.out.println();
+                        }
+                        explosion(cxy.getX(), cxy.getY(), g, rows, cols, playerIndex, p, gr);
                         if( gr.mouseClicks>1 && checkIfWon(g,p,playerIndex,rows,cols)==2)
                         {
-//                            try {
-//                                Thread.sleep(1000);
-//                            } catch (InterruptedException e) {
-//                                e.printStackTrace();
-//                            }
+                            System.out.println("entered the checkifwon");
                             Platform.runLater(() -> {
                                 setupAlert(p,playerIndex);
                                 result = showAlert();
@@ -392,7 +403,7 @@ public class Cell implements Serializable {
                             });
                         }
 
-
+                        System.out.println("Final Array");
                         for(int i1 = 0; i1 <rows; i1++)
                         {
                             for(int j1 = 0; j1 <cols ; j1++)
@@ -402,6 +413,7 @@ public class Cell implements Serializable {
                             }
                             System.out.println();
                         }
+
                         String[][] colorsOfPlayers = g.color(rows,cols);
                         try {
                             gr.serialize(rows, cols,g.array,colorsOfPlayers, gr.mouseClicks, gr.playersInGame);
@@ -409,23 +421,13 @@ public class Cell implements Serializable {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-//                        this.matchExistingOrbsToPlayers(gr.playerIndex1, gr.playersInGameArray, gr, rows, cols, g);
-                        explosion(cxy.getX(), cxy.getY(), g, rows, cols, playerIndex, p, gr);
+
 
 
 
                     });
 
 
-//                    PhongMaterial p1 = new PhongMaterial();
-//                    p1.setDiffuseColor(p.get(playerIndex).getColor());
-//                    for(int h = 0;h<g.root1[cxy.getX()][cxy.getY()].getChildren().size();h++){
-//                        Sphere s = (Sphere) g.root1[cxy.getX()][cxy.getY()].getChildren().get(h);
-//                        s.setMaterial(p1);
-//                    }
-
-
-//                    this.matchExistingOrbsToPlayers(gr.playerIndex1,gr.playersInGameArray,gr,rows,cols,g,gr.mouseClicks);
 
                     System.out.println("left 1");
                 }

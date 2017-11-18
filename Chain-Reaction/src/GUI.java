@@ -569,28 +569,13 @@ public class GUI extends Application
 
             "-fx-font: 20px \"Cambria\";" +
             "-fx-border-radius: 5px");
-//        comboBox.setStyle("-fx-background-color: rgba(0,0,0,0.75),\n" +
-//            "                           rgba(255,255,255,0.75),\n" +
-//            "                           linear-gradient(to bottom,#484848 0%,#181818 100%);"+
-//            "-fx-background-insets: 5 5 5 5, 5 5 5 5, 1;"+
-//            "-fx-padding: 5px;"+
-//            "-fx-background-radius: 5px;"+
-//            "-fx-font: 20px \"Cambria\";" +
-//            "-fx-border-radius: 5px;"+
-//            "-fx-text-fill: white");
-//        comboBox.setTextFill(Color.WHITE);
-//        comboBox.setStyle(
-//                        "-fx-font: 20px \"Serif\";"+
-//                        "-fx-background-color: #383838;"+
-//                        "-fx-text-fill: white");
-
-//        comboBox.setStyle("-fx-background-color: #383838");
         GridPane.setHalignment(comboBox, HPos.CENTER);
         pageContents.add(comboBox,1,2);
         comboBox.setOnAction(e -> {
                     if (comboBox.getValue().equals("Big")) {
                         rows = 15;
                         cols = 10;
+                        array_after_explosion=new int[15][10];
 //                        if(Grid.list!=null){
 //                        Grid.list.remove(0,Grid.list.size());}
                     }
@@ -690,6 +675,7 @@ public class GUI extends Application
 
             try {initialisedInGamePlayers = false;
                 initialiseInGamePlayers(playersInGame);
+                System.out.println("playersInGame "+playersInGame);
                 s1 = deserialize();
 //                if(s1.mouse==0){
 //                    resumeBtn.setDisable(true);}
@@ -699,18 +685,6 @@ public class GUI extends Application
                     e.printStackTrace();
                 }
 
-//                    scene2 = Grid_resume(rows, cols, s1);
-
-
-//            else
-//                try {
-//                    initialisedInGamePlayers = false;
-//                    initialiseInGamePlayers(playersInGame);
-//                    scene2 = Grid_GUI();
-//
-//                } catch (ClassNotFoundException e) {
-//                    e.printStackTrace();
-//                }
             pstage.setScene(scene2);}
 
 
@@ -785,6 +759,12 @@ public class GUI extends Application
 
         String[][] colorsOfPlayers = g.color(rows,cols);
         try {
+//            for(int i=0; i<rows; i++) {
+//                for (int j = 0; j < cols; j++) {
+//                    System.out.print(g.array[j][i]);
+//                }
+//                System.out.println();
+//            }
             serialize(rows,cols,g.array,colorsOfPlayers, mouseClicks, playersInGame);
         } catch (IOException e) {
             e.printStackTrace();
@@ -986,7 +966,7 @@ public class GUI extends Application
 //                PhongMaterial ppp = (PhongMaterial)sph.getMaterial();
 //                System.out.println("Color of i 1 j 0 = "+ppp.getDiffuseColor().getRed()+" "+ppp.getDiffuseColor().getGreen()+
 //                                    " "+ppp.getDiffuseColor().getBlue());}
-            c.matchExistingOrbsToPlayers(playerIndex1, playersInGameArray, this, rows, cols, g);
+            //c.matchExistingOrbsToPlayers(playerIndex1, playersInGameArray, this, rows, cols, g);
 //            System.out.println("Final players = "+playersInGame);
 
 
@@ -1007,18 +987,6 @@ public class GUI extends Application
 
         }
 
-
-
-        //int[][] arrayOfPlayerIndices = g.array;
-
-
-
-//        for(int i = 0;i<rows;i++){
-//            for(int j = 0; j<cols ;j++){
-//                System.out.print(g.array[j][i]+"      ");
-//            }
-//            System.out.println();
-//        }
 
 
     }
@@ -1174,34 +1142,6 @@ public class GUI extends Application
 
 
         primaryStage.setScene(scene1);
-//        settingsBtn.setOnAction(event -> {
-//            try {
-//                ButtonClick(event);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        });
-//
-//        playGame.setOnAction(event -> {
-//            try {
-//                ButtonClick(event);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        });
-//        resumeBtn.setOnAction(event -> {
-//            try {
-//                ButtonClick(event);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        });
-
-//        if(primaryStage.getScene()==scene3) {
-
-//        }
-//        System.out.println(primaryStage.getScene()==scene3);
-
 
 
         primaryStage.getIcons().add(new Image("https://lh5.ggpht.com/xUefJ0Wrh0pyUuRnCAkRggnJbCGcMoKzARwxtGN1rZEK8cUvwHCLh7DPZbUv059aoA=w300"));

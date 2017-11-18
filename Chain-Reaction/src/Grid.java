@@ -67,6 +67,8 @@ public class Grid
 	int radius = 9;
 
 	public Grid(int rows, int cols){
+	    this.cols=cols;
+	    this.rows=rows;
 		root1 = new Group[rows][cols];
 		list = root.getChildren();
 		array = new int[cols][rows];
