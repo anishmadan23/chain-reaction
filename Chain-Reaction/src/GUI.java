@@ -888,13 +888,13 @@ public class GUI extends Application
     public void explosionEvent(MouseEvent event,Grid g, Cell c) throws IOException, ClassNotFoundException {
         int cellSize, xGridStart, yGridStart;
         if (rows == 9 && cols == 6) {
-            cellSize = 50;
+            cellSize = 70;
             xGridStart = 20;
-            yGridStart = 50;
+            yGridStart = 70;
         } else {
-            cellSize = 43;
+            cellSize = 44;
             xGridStart = 20;
-            yGridStart = 43;
+            yGridStart = 44;
         }
         double x = event.getSceneX();
         double y = event.getSceneY();

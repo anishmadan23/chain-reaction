@@ -64,6 +64,7 @@ public class Grid
 	GUI grc = new GUI();
 	int rows = grc.rows;
 	int cols = grc.cols;
+	int radius = 9;
 
 	public Grid(int rows, int cols){
 		root1 = new Group[rows][cols];
@@ -80,24 +81,25 @@ public class Grid
 
 	}
 
-
 	/**
 	 * Calculates parameters for displaying grid
 	 */
 	public void calculateOffsetsForGrid(int rows, int cols){
 		if(rows == 9 && cols == 6){
-			cellSize = 50;
+			cellSize = 70;
 			xGridStart = 20;
-			yGridStart = 50;
+			yGridStart = 70;
 			xLeftShift = 12;
 			yBottomShift = 18;
 			cellOffset = 4;
+			radius = 15;
+
 		}
 		else
 		{
-			cellSize = 42;
+			cellSize = 44;
 			xGridStart = 20;
-			yGridStart = 42;
+			yGridStart = 44;
 			xLeftShift = 10;
 			yBottomShift = 16;	
 			cellOffset =2;	//xLeftShift, yBottomShift and CellOffset are proportional, eg XL=15,YBS=24,CO=3
@@ -134,7 +136,7 @@ public class Grid
     	line.setStroke(Color.TRANSPARENT);
 
     	sphere11 = new Sphere();
-		sphere11.setRadius(9);
+		sphere11.setRadius(radius);
 		sphere11.setTranslateX((inX + 1) * cellSize);
 		sphere11.setTranslateY((inY + 1) * cellSize + (cellSize / 2));
 		PhongMaterial p1 = new PhongMaterial();
@@ -143,14 +145,12 @@ public class Grid
 		
 		root1[toX][toY].getChildren().add(sphere11);
 
-
 //		updateColorOfOrbsAfterExplosion(toX,toY,p,playerIndex);
 
 		//root1[toX][toY].getChildren().add(line);
 
     	animation1 = new ParallelTransition(createTransition1(line, sphere11));
 		animation1.play();
-
 
 	}
 
@@ -229,7 +229,7 @@ public class Grid
     {
 
         Sphere sphere = new Sphere();
-        sphere.setRadius(9);
+        sphere.setRadius(radius);
         String s=col[(int)y][(int)x];
 
         String bgr[]=s.split(" ");
@@ -302,7 +302,7 @@ public class Grid
 			DURATION = Duration.seconds(4);
 		
 		Sphere sphere = new Sphere();
-		sphere.setRadius(9);
+		sphere.setRadius(radius);
 		PhongMaterial ph = new PhongMaterial();
 		ph.setDiffuseColor(p.get(playerIndex).getColor());
 		sphere.setMaterial(ph);
@@ -415,18 +415,38 @@ public class Grid
 	public void createGrid(int rows, int cols,Color color1)
 	{	undoBtn  = new Button("Undo");
 		undoBtn.setPrefSize(120,40);
-		undoBtn.setFont(Font.font("Arial", FontWeight.SEMI_BOLD,18));
-		undoBtn.setLayoutX(500);
-		undoBtn.setLayoutY(100);
+//		undoBtn.setFont(Font.font("Arial", FontWeight.SEMI_BOLD,18));
+		undoBtn.setStyle("-fx-background-color: rgba(0,0,0,0.75),\n" +
+				"                           rgba(255,255,255,0.75),\n" +
+				"                           linear-gradient(to bottom,#383838 0%,#181818 100%);"+
+				"-fx-background-insets: 5 5 5 5, 5 5 5 5, 1;"+
+				"-fx-padding: 5px;"+
+				"-fx-background-radius: 5px;"+
+				"-fx-font: 15px \"Cambria\";" +
+				"-fx-font-weight: 500;"+
+				"-fx-border-radius: 2px;"+
+				"-fx-text-fill: white");
+		undoBtn.setLayoutX(400);
+		undoBtn.setLayoutY(0);
 		list.add(undoBtn);
 
 		comboBox = new ComboBox<>();
-		comboBox.setLayoutX(500);
-		comboBox.setLayoutY(300);
+		comboBox.setLayoutX(525);
+		comboBox.setLayoutY(0);
 		comboBox.getItems().addAll("New Game","Go to Main Menu");
 		comboBox.setValue("Options");
-		comboBox.setPrefSize(150,40);
-		comboBox.setStyle("-fx-font: 15px \"Serif\";");
+		comboBox.setPrefSize(120,36);
+		comboBox.setStyle("-fx-background-color:  #181818;"+
+				"-fx-border-color: #383838;"+
+				"-fx-border-width: 2px;"+
+				"-fx-text-fill: white;"+
+				"-fx-highlight-text-fill: white;"+
+				"-fx-background-radius: 3px, 3px, 2px, 1px;"+
+				"-fx-background-insets: 5 5 5 5, 5 5 5 5, 1;"+
+				"-fx-padding: 5px;"+
+
+				"-fx-font: 15px \"Cambria\";" +
+				"-fx-border-radius: 5px");
 		list.add(comboBox);
 
 		calculateOffsetsForGrid(rows,cols);
