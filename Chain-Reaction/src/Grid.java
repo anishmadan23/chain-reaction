@@ -47,6 +47,8 @@ public class Grid
 	int cols = grc.cols;
 
 	public Grid(int rows, int cols){
+	    this.cols=cols;
+	    this.rows=rows;
 		root1 = new Group[rows][cols];
 		list = root.getChildren();
 		array = new int[cols][rows];
