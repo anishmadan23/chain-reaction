@@ -36,6 +36,7 @@ public class Cell implements Serializable {
     ButtonType b1;
     private int X_Coordinate;
     private int Y_Coordinate;
+    static boolean check_freeze=false;
     //    public int rows = 15;
 //    public int cols = 10;
 
@@ -169,6 +170,7 @@ public class Cell implements Serializable {
                     if (ph.getDiffuseColor().getBlue() != color.getBlue() || ph.getDiffuseColor().getRed() != color.getRed()
                             || ph.getDiffuseColor().getGreen() != color.getGreen() ) {
                         System.out.println("Not Same");
+                        check_freeze=false;
                         c = 1;
                         break;
                     }
@@ -176,8 +178,13 @@ public class Cell implements Serializable {
             }
         }
         if(c==0 && sum>=2){
+            check_freeze=true;
             System.out.println("Same");
             c=2;
+        }
+        else
+        {
+            check_freeze=false;
         }
         return c;
 
