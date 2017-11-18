@@ -18,12 +18,15 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="GUI.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GUI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Chain-Reaction/src/GUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="733" column="33" lean-forward="true" selection-start-line="733" selection-start-column="33" selection-end-line="733" selection-end-column="33" />
-              <folding />
+            <state relative-caret-position="153">
+              <caret line="703" column="35" lean-forward="false" selection-start-line="703" selection-start-column="35" selection-end-line="703" selection-end-column="35" />
+              <folding>
+                <element signature="e#6070#6071#0" expanded="true" />
+                <element signature="e#6098#6099#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -31,7 +34,7 @@
       <file leaf-file-name="Players.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Chain-Reaction/src/Players.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-593">
+            <state relative-caret-position="-340">
               <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
               <folding />
             </state>
@@ -48,11 +51,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Cell.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Cell.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Chain-Reaction/src/Cell.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="369">
-              <caret line="418" column="126" lean-forward="false" selection-start-line="418" selection-start-column="126" selection-end-line="418" selection-end-column="126" />
+            <state relative-caret-position="187">
+              <caret line="172" column="43" lean-forward="false" selection-start-line="172" selection-start-column="43" selection-end-line="172" selection-end-column="43" />
               <folding />
             </state>
           </provider>
@@ -62,7 +65,7 @@
         <entry file="file://$PROJECT_DIR$/Chain-Reaction/src/Grid.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="223">
-              <caret line="241" column="37" lean-forward="true" selection-start-line="234" selection-start-column="8" selection-end-line="241" selection-end-column="37" />
+              <caret line="241" column="37" lean-forward="true" selection-start-line="241" selection-start-column="37" selection-end-line="241" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -71,8 +74,8 @@
       <file leaf-file-name="Serial.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Chain-Reaction/src/Serial.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="73">
-              <caret line="41" column="0" lean-forward="false" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+            <state relative-caret-position="187">
+              <caret line="30" column="122" lean-forward="false" selection-start-line="30" selection-start-column="122" selection-end-line="30" selection-end-column="122" />
               <folding />
             </state>
           </provider>
@@ -82,12 +85,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>deseri</find>
-      <find>resu</find>
-      <find>re</find>
-      <find>resumeb</find>
-      <find>mouseClicks</find>
-      <find>players</find>
       <find>getva</find>
       <find>initia</find>
       <find>initial</find>
@@ -105,7 +102,19 @@
       <find>scene1</find>
       <find>initialpage</find>
       <find>serial_colo</find>
+      <find>playersingame</find>
+      <find>playersInGameArray</find>
       <find>resume</find>
+      <find>player</find>
+      <find>players</find>
+      <find>settings</find>
+      <find>result</find>
+      <find>free</find>
+      <find>setupAlert</find>
+      <find>initialiseInGamePlayers</find>
+      <find>showAlert</find>
+      <find>check_</find>
+      <find>seri</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -318,7 +327,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.050713155" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32488114" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -350,7 +359,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="35" column="3" lean-forward="true" selection-start-line="35" selection-start-column="3" selection-end-line="35" selection-end-column="3" />
-          <folding />
+          <folding>
+            <element signature="e#6070#6071#0" expanded="true" />
+            <element signature="e#6098#6099#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -390,7 +402,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="7344">
           <caret line="461" column="19" lean-forward="false" selection-start-line="461" selection-start-column="19" selection-end-line="461" selection-end-column="19" />
-          <folding />
+          <folding>
+            <element signature="e#6070#6071#0" expanded="true" />
+            <element signature="e#6098#6099#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -438,7 +453,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#6070#6071#0" expanded="true" />
+            <element signature="e#6098#6099#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -478,7 +496,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#6070#6071#0" expanded="true" />
+            <element signature="e#6098#6099#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -510,7 +531,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="30" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="783" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#6070#6071#0" expanded="true" />
+            <element signature="e#6098#6099#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -561,42 +585,45 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Chain-Reaction/src/Cell.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="369">
-          <caret line="418" column="126" lean-forward="false" selection-start-line="418" selection-start-column="126" selection-end-line="418" selection-end-column="126" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Chain-Reaction/src/Grid.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="223">
-          <caret line="241" column="37" lean-forward="true" selection-start-line="234" selection-start-column="8" selection-end-line="241" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Chain-Reaction/src/Players.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-593">
-          <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+          <caret line="241" column="37" lean-forward="true" selection-start-line="241" selection-start-column="37" selection-end-line="241" selection-end-column="37" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Chain-Reaction/src/Serial.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="73">
-          <caret line="41" column="0" lean-forward="false" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+        <state relative-caret-position="187">
+          <caret line="30" column="122" lean-forward="false" selection-start-line="30" selection-start-column="122" selection-end-line="30" selection-end-column="122" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Chain-Reaction/src/Players.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-340">
+          <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Chain-Reaction/src/GUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="733" column="33" lean-forward="true" selection-start-line="733" selection-start-column="33" selection-end-line="733" selection-end-column="33" />
+        <state relative-caret-position="153">
+          <caret line="703" column="35" lean-forward="false" selection-start-line="703" selection-start-column="35" selection-end-line="703" selection-end-column="35" />
+          <folding>
+            <element signature="e#6070#6071#0" expanded="true" />
+            <element signature="e#6098#6099#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Chain-Reaction/src/Cell.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="172" column="43" lean-forward="false" selection-start-line="172" selection-start-column="43" selection-end-line="172" selection-end-column="43" />
           <folding />
         </state>
       </provider>

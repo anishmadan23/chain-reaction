@@ -670,11 +670,12 @@ public class GUI extends Application
             }
         });
         resumeBtn.setOnAction(event -> {
-            try {
-                ButtonClick(event);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+                try {
+                    ButtonClick(event);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
             undo_click=1;
         });
 
@@ -697,18 +698,20 @@ public class GUI extends Application
         {
 
             try {initialisedInGamePlayers = false;
-                initialiseInGamePlayers(playersInGame);
+
                 System.out.println("playersInGame "+playersInGame);
                 s1 = deserialize();
-//                if(s1.mouse==0){
-//                    resumeBtn.setDisable(true);}
-                scene2 = Grid_resume(rows, cols, s1);
-//                   initialiseInGamePlayers(s1.players_in_game);
+                if(s1.freeze==false) {
+                    initialiseInGamePlayers(s1.players_in_game);
+                    scene2 = Grid_resume(rows, cols, s1);
+                    pstage.setScene(scene2);
+                }
+
             } catch (IOException | ClassNotFoundException e) {
                     e.printStackTrace();
                 }
 
-            pstage.setScene(scene2);}
+            }
 
 
         else if(event.getSource()==playGame){
@@ -762,6 +765,14 @@ public class GUI extends Application
                 cellsArray[i][j] = new Cell(0);
             }
         }
+
+        mouseClicks=obj.mouse;
+        playersInGame=obj.players_in_game;
+        playerIndex1=  (mouseClicks)%(playersInGame);
+        colorIndex1 = (mouseClicks)%playersInGame;
+
+        System.out.println(playersInGameArray.size()+" size");
+
         String change_color[]=obj.player_color;
         for(int i=0; i<playersInGame; i++)
         {
@@ -774,6 +785,8 @@ public class GUI extends Application
             Color c1= new Color(r1,g1,b1,1);
             playersInGameArray.get(i).setColor(c1);
         }
+
+
         Grid g = new Grid(rows,cols);
         System.out.println(playersInGameArray.get(0).getColor());
         g.createGrid(rows,cols,playersInGameArray.get(0).getColor());
@@ -794,22 +807,14 @@ public class GUI extends Application
         serial_color=obj.player_color;
         String[][] colorsOfPlayers = g.color(rows,cols);
         try {
-//            for(int i=0; i<rows; i++) {
-//                for (int j = 0; j < cols; j++) {
-//                    System.out.print(g.array[j][i]);
-//                }
-//                System.out.println();
-//            }
+
             serialize(rows,cols,g.array,colorsOfPlayers, mouseClicks, playersInGame, serial_color);
         } catch (IOException e) {
             e.printStackTrace();
         }
         System.out.println("Serialized1");
 
-        mouseClicks=obj.mouse;
-        playersInGame=obj.players_in_game;
-        playerIndex1=  (mouseClicks)%(playersInGame);
-        colorIndex1 = (mouseClicks)%playersInGame;
+
         g.changeGridColor(playersInGameArray.get(colorIndex1).getColor());
 
         scene2 = new Scene(g.root, 720, 720);
@@ -926,8 +931,8 @@ public class GUI extends Application
      */
     public static void serialize(int rows, int cols, int[][] c, String[][] a, int mouseClicks, int playersInGame, String[] serial_color)throws IOException
     {
-        Serial serial1= new Serial(rows,cols, a,c, mouseClicks,playersInGame, serial_color );
-        serial1.dummy =2;
+        Serial serial1= new Serial(rows,cols, a,c, mouseClicks,playersInGame, serial_color ,Cell.check_freeze);
+        //serial1.dummy =2;
         ObjectOutputStream out1= new ObjectOutputStream( new FileOutputStream("out.txt"));
             out1.writeObject(serial1);
             out1.close();
@@ -996,6 +1001,7 @@ public class GUI extends Application
 
 
             System.out.println("After animation");
+            System.out.println(playersInGame);
 //            if(mouseClicks==4){
 //                Sphere sph = (Sphere)g.root1[1][0].getChildren().get(0);
 //                PhongMaterial ppp = (PhongMaterial)sph.getMaterial();
